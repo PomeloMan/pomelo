@@ -1,0 +1,18 @@
+.wrapper .flex {
+    display: flex;
+}
+.wrapper .flex .flex-spacer {
+    /* This fills the remaining space, by using flexbox. 
+       Every toolbar row uses a flexbox row layout. */
+    flex: 1 1 auto;
+}
+.wrapper .flex.layout-row {
+    flex-wrap: nowrap;
+    flex-direction: row;
+}
+.wrapper .flex.layout-row .layout-item {
+    flex: 1;
+    text-align: center;
+    align-items: center;
+    padding: 8px;
+}

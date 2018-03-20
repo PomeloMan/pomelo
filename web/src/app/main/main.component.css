@@ -1,0 +1,46 @@
+/* header */
+.navbar-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: auto;
+  z-index: 2;
+  padding: 4px 16px;
+  align-items: center;
+}
+.navbar-header.flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+.navbar-header.flex .flex-spacer {
+  /* This fills the remaining space, by using flexbox. 
+     Every toolbar row uses a flexbox row layout. */
+  flex: 1 1 auto;
+}
+
+/* container */
+.container {
+  position: absolute;
+  top: 48px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+/* sidenav */
+.sidenav {
+  align-items: center;
+  justify-content: center;
+}
+
+/* cdk-overlay */
+.theme-item.mat-menu-item {
+  padding: 0;
+  width: 48px;
+}
+.theme-item.mat-menu-item mat-icon {
+  margin: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+}

@@ -5,8 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 
-import { MainModule } from './main/main.module';
-
 import { AppComponent } from './app.component';
 
 import { StorageService } from './service/storage.service';
@@ -23,8 +21,7 @@ import { StorageService } from './service/storage.service';
     BrowserAnimationsModule,
     HttpModule,
     HttpClientModule,
-    AppRoutingModule,
-    MainModule
+    AppRoutingModule
   ],
   declarations: [
     AppComponent

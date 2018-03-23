@@ -14,7 +14,6 @@ import { MainRoutingModule } from './main-routing.module';
 
 import { MainComponent } from './main.component';
 
-import { UserService } from '../user/user.service';
 import { WindowService } from '../service/window.sevice';
 
 @NgModule({
@@ -31,6 +30,6 @@ import { WindowService } from '../service/window.sevice';
         MainRoutingModule
     ],
     declarations: [MainComponent],
-    providers: [UserService, WindowService]
+    providers: [WindowService]
 })
 export class MainModule { }

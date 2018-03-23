@@ -13,7 +13,6 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
-import { CalendarModule } from '../../common/calendar/calendar.module';
 
 import { DashboardComponent } from './dashboard.component';
 

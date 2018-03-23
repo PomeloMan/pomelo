@@ -1,13 +1,16 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppRoutingModule } from './app-routing.module';
-import { HttpModule } from '@angular/http';
-import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core'
+import { BrowserModule } from '@angular/platform-browser'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { HttpClientModule } from '@angular/common/http'
 
-import { AppComponent } from './app.component';
+import { Router } from '@angular/router'
 
-import { StorageService } from './service/storage.service';
+import { AppRoutingModule } from './app-routing.module'
+import { AppComponent } from './app.component'
+
+import { StorageService } from './service/storage.service'
+import { AuthService } from './service/auth.service'
+import { httpInterceptorProviders } from './http-interceptors/index'
 
 // {@link https://www.angular.cn/guide/ngmodule}
 // declarations - 声明本模块中拥有的视图类。Angular 有三种视图类：组件、指令和管道。
@@ -19,7 +22,6 @@ import { StorageService } from './service/storage.service';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    HttpModule,
     HttpClientModule,
     AppRoutingModule
   ],
@@ -27,7 +29,15 @@ import { StorageService } from './service/storage.service';
     AppComponent
   ],
   exports: [],
-  providers: [StorageService],
+  providers: [
+    StorageService,
+    AuthService,
+    httpInterceptorProviders
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(router: Router) {
+    console.log('Routes: ', JSON.stringify(router.config, undefined, 2));
+  }
+}

@@ -3,19 +3,22 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class StorageService {
 
+    storage: Storage
+
     constructor() {
-        //
+        this.storage = localStorage;
+        // this.storage = sessionStorage;
     }
 
     public setData(key: string, value: any) {
-        localStorage.setItem(key, JSON.stringify(value));
+        this.storage.setItem(key, JSON.stringify(value));
     }
 
     public getData(key: string) {
-        return JSON.parse(localStorage.getItem(key));
+        return JSON.parse(this.storage.getItem(key));
     }
 
     public removeData(key: string) {
-        localStorage.removeItem(key);
+        this.storage.removeItem(key);
     }
 }

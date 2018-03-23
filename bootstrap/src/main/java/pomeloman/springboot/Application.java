@@ -9,6 +9,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+/**
+ * @author Chao
+ *
+ */
 @EnableScheduling
 @EnableTransactionManagement
 @EnableJpaRepositories("pomeloman.springboot.core.*.persistence.repo")

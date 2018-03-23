@@ -5,7 +5,7 @@ import { OverlayContainer } from '@angular/cdk/overlay';
 
 import { WindowService } from '../service/window.sevice';
 
-interface Theme { color: string, class: string }
+class Theme { color: string; class: string; }
 
 @Component({
     selector: 'app-main',

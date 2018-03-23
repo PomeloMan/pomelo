@@ -1,13 +1,22 @@
 import { Injectable } from '@angular/core';
 
+import { Observable } from 'rxjs/Observable';
+
 @Injectable()
 export class StorageService {
 
-    storage: Storage
+    storage: Storage;
 
     constructor() {
-        this.storage = localStorage;
-        // this.storage = sessionStorage;
+    }
+
+    public setDefault() {
+        this.setStorage(localStorage);
+        this.setStorage(sessionStorage);
+    }
+
+    public setStorage(storage: Storage) {
+        this.storage = storage;
     }
 
     public setData(key: string, value: any) {

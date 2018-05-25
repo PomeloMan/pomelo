@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>pomeloman</groupId>
-	<artifactId>pomelo</artifactId>
+	<artifactId>pomelo-core</artifactId>
 	<version>0.0.1</version>
 	<packaging>jar</packaging>
 

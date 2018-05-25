@@ -1,0 +1,31 @@
+[
+	{
+		"username": "administrator",
+		"password": "administrator",
+		"displayName": "administrator",
+		"status": "Valid",
+		"creator": "system",
+		"modifier": "system",
+		"roles": [
+			{
+				"name": "ADMIN"
+			},
+			{
+				"name": "USER"
+			}
+		]
+	},
+	{
+		"username": "user",
+		"password": "user",
+		"displayName": "user",
+		"status": "Valid",
+		"creator": "system",
+		"modifier": "system",
+		"roles": [
+			{
+				"name": "USER"
+			}
+		]
+	}
+]

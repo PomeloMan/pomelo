@@ -1,0 +1,14 @@
+[
+	{
+		"name": "SYSTEM",
+		"status": "Valid",
+		"creator": "system",
+		"modifier": "system"
+	},
+	{
+		"name": "GUEST",
+		"status": "Valid",
+		"creator": "system",
+		"modifier": "system"
+	}
+]

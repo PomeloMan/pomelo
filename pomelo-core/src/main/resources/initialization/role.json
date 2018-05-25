@@ -1,0 +1,27 @@
+[
+	{
+		"name": "ADMIN",
+		"status": "Valid",
+		"creator": "system",
+		"modifier": "system",
+		"authorities": [
+			{
+				"name": "SYSTEM"
+			},
+			{
+				"name": "USER"
+			}
+		]
+	},
+	{
+		"name": "USER",
+		"status": "Valid",
+		"creator": "system",
+		"modifier": "system",
+		"authorities": [
+			{
+				"name": "GUEST"
+			}
+		]
+	}
+]

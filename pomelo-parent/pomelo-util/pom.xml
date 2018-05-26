@@ -1,0 +1,106 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>pomelo-util</artifactId>
+	<packaging>jar</packaging>
+
+	<name>pomelo-util</name>
+	<url>http://maven.apache.org</url>
+
+	<parent>
+		<groupId>pomeloman</groupId>
+		<artifactId>pomelo-parent</artifactId>
+		<version>${pomelo.version}</version>
+	</parent>
+
+	<properties>
+		<bcprov.version>1.57</bcprov.version>
+		<httpclient.version>4.5.4</httpclient.version>
+		<poi.version>3.17</poi.version>
+		<gson.version>2.8.2</gson.version>
+		<adal4j.version>1.3.0</adal4j.version>
+		<jjwt.version>0.9.0</jjwt.version>
+		<jgit.version>4.10.0.201712302008-r</jgit.version>
+		<!-- maven plugins -->
+		<maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
+		<maven-surefire-plugin.version>2.20.1</maven-surefire-plugin.version>
+	</properties>
+
+	<dependencies>
+		<!-- org.bouncycastle.jce -->
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcprov-jdk15on</artifactId>
+			<version>${bcprov.version}</version>
+		</dependency>
+		<!-- org.apache.httpcomponents -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+		</dependency>
+		<!-- org.apache.poi -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>${poi.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>${poi.version}</version>
+		</dependency>
+		<!-- com.google.code.gson -->
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+		</dependency>
+		<!-- Microsoft Azure Active Directory Authentication Library (ADAL) for 
+			Java -->
+		<!-- https://github.com/AzureAD/azure-activedirectory-library-for-java/releases -->
+		<dependency>
+			<groupId>com.microsoft.azure</groupId>
+			<artifactId>adal4j</artifactId>
+			<version>${adal4j.version}</version>
+		</dependency>
+		<!-- jwt -->
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>${jjwt.version}</version>
+		</dependency>
+		<!-- jgit -->
+		<dependency>
+			<groupId>org.eclipse.jgit</groupId>
+			<artifactId>org.eclipse.jgit</artifactId>
+			<version>${jgit.version}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>${project.artifactId}</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<!-- <version>${maven-compiler-plugin.version}</version> -->
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<!-- <version>${maven-surefire-plugin.version}</version> -->
+				<configuration>
+					<!-- 不但跳过单元测试的运行，也跳过测试代码的编译。 -->
+					<skip>true</skip>
+					<!-- 跳过单元测试，但是会继续编译。 -->
+					<!-- <skipTests>true</skipTests> -->
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

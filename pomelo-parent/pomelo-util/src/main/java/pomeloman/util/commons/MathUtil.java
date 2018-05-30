@@ -1,6 +1,7 @@
 package pomeloman.util.commons;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
 /**
@@ -117,7 +118,7 @@ public class MathUtil {
 	public static double divide(Object obj1, Object obj2, int scale) {
 		BigDecimal v1 = new BigDecimal(obj1.toString());
 		BigDecimal v2 = new BigDecimal(obj2.toString());
-		return v1.divide(v2, scale, BigDecimal.ROUND_HALF_UP).doubleValue();
+		return v1.divide(v2, scale, RoundingMode.HALF_UP).doubleValue();
 	}
 
 	/**
@@ -131,7 +132,7 @@ public class MathUtil {
 	public static double round(Object obj, int scale) {
 		BigDecimal value = new BigDecimal(obj.toString());
 		BigDecimal one = new BigDecimal("1");
-		return value.divide(one, scale, BigDecimal.ROUND_HALF_UP).doubleValue();
+		return value.divide(one, scale, RoundingMode.HALF_UP).doubleValue();
 	}
 
 }

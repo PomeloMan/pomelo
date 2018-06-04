@@ -20,6 +20,7 @@ public interface UserRepository extends CrudRepository<User, String>, JpaSpecifi
 
 	/**
 	 * 悲观锁
+	 * 行锁，查询不会阻塞；主键相同，写操作会阻塞；主键不同，写操作不会阻塞。
 	 * 场景：在无法避免或者经常发生读写冲突的情况下使用
 	 * 缺点： 损失性能换取数据的绝对安全（不可能脏读）
 	 * 注意：需要以主键作为查询条件（行锁），否则执行的为表锁。

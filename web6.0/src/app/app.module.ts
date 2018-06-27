@@ -20,8 +20,8 @@ import { HTTP_INTERCEPTOR_PROVIDERS } from './http-interceptors';
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
+    BrowserAnimationsModule,//animation
+    HttpClientModule,//http
     AppRoutingModule
   ],
   providers: [
@@ -29,7 +29,7 @@ import { HTTP_INTERCEPTOR_PROVIDERS } from './http-interceptors';
     ApiService,
     AuthService,
     AuthGuard,
-    HTTP_INTERCEPTOR_PROVIDERS// http拦截器
+    HTTP_INTERCEPTOR_PROVIDERS//http拦截器
   ],
   bootstrap: [AppComponent]
 })

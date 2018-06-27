@@ -6,12 +6,12 @@
     <!-- This fills the remaining space of the current row -->
     <span class="flex-spacer"></span>
     <button mat-icon-button [matMenuTriggerFor]="ThemeMenu">
-        <i class="material-icons">format_color_fill</i>
+        <mat-icon>format_color_fill</mat-icon>
     </button>
     <mat-menu #ThemeMenu="matMenu" class="theme-menu">
         <mat-grid-list cols="2" rowHeight="1:1">
             <mat-grid-tile *ngFor="let item of themes">
-                <button mat-menu-item class="theme-item">
+                <button mat-icon-button class="theme-item">
                     <mat-icon class="md-48" [style.color]="item.color" (click)="setTheme(item.class)">lens</mat-icon>
                 </button>
             </mat-grid-tile>
@@ -27,10 +27,41 @@
                     <mat-icon class="mat-primary">dashboard</mat-icon>
                 </mat-list-item>
             </a>
-            <a routerLink="/main/user">
+            <a [matMenuTriggerFor]="SystemMenu" class="parent-menu">
                 <mat-list-item matTooltip="Dashboard" matTooltipPosition="after">
                     <mat-icon class="mat-primary">dashboard</mat-icon>
                 </mat-list-item>
+                <mat-menu #SystemMenu="matMenu" [overlapTrigger]="false" x-position="after">
+                    <mat-list role="list">
+                        <mat-list-item role="listitem">Item 1</mat-list-item>
+                        <mat-list-item role="listitem">Item 2</mat-list-item>
+                        <mat-list-item role="listitem">Item 3</mat-list-item>
+                    </mat-list>
+                </mat-menu>
+            </a>
+            <a [matMenuTriggerFor]="SystemMenu" class="parent-menu">
+                <mat-list-item matTooltip="Dashboard" matTooltipPosition="after">
+                    <mat-icon class="mat-primary">dashboard</mat-icon>
+                </mat-list-item>
+                <mat-menu #SystemMenu="matMenu" [overlapTrigger]="false" x-position="after">
+                    <mat-list role="list">
+                        <mat-list-item role="listitem">Item 1</mat-list-item>
+                        <mat-list-item role="listitem">Item 2</mat-list-item>
+                        <mat-list-item role="listitem">Item 3</mat-list-item>
+                    </mat-list>
+                </mat-menu>
+            </a>
+            <a [matMenuTriggerFor]="SystemMenu" class="parent-menu">
+                <mat-list-item matTooltip="Dashboard" matTooltipPosition="after">
+                    <mat-icon class="mat-primary">dashboard</mat-icon>
+                </mat-list-item>
+                <mat-menu #SystemMenu="matMenu" x-position="after">
+                    <mat-list role="list">
+                        <mat-list-item role="listitem">Item 1</mat-list-item>
+                        <mat-list-item role="listitem">Item 2</mat-list-item>
+                        <mat-list-item role="listitem">Item 3</mat-list-item>
+                    </mat-list>
+                </mat-menu>
             </a>
         </mat-nav-list>
     </mat-sidenav>

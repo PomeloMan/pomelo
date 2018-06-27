@@ -1,5 +1,6 @@
+<div (click)="toggle()" [@toggle]="state"></div>
 <mat-grid-list cols="4" rowHeight="100px">
-    <mat-grid-tile *ngFor="let tile of tiles">
+    <mat-grid-tile *ngFor="let tile of tiles" [@flyInOut]="'in'">
         <div style="width:90%">
             <mat-card class="card">
                 <p>{{tile}}</p>

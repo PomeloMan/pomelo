@@ -10,11 +10,11 @@ const routes: Routes = [
         component: MainComponent,
         children: [
             {
-                path: 'dashboard',
-                loadChildren: "./dashboard/dashboard.module#DashboardModule"
+                path: 'system/authority',
+                loadChildren: "./system/authority/authority.module#AuthorityModule"
             },
             {
-                path: 'user',
+                path: 'system/user',
                 canActivate: [AuthGuard],
                 loadChildren: "./user/user.module#UserModule"
             }

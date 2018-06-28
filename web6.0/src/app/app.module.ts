@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
+import { PageNotFoundComponent } from './page/not-found/not-found.component';
 
 import { StorageService } from './config/storage.service';
 import { ApiService } from './config/api.service';
@@ -16,7 +17,8 @@ import { HTTP_INTERCEPTOR_PROVIDERS } from './http-interceptors';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

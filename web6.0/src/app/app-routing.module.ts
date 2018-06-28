@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { SelectivePreloadingStrategy } from './config/selective-preloading-strategy';
+import { PageNotFoundComponent } from './page/not-found/not-found.component';
 
 const routes: Routes = [
     {
@@ -17,6 +18,10 @@ const routes: Routes = [
     {
         path: 'main',
         loadChildren: './page/main/main.module#MainModule'
+    },
+    {
+        path: '**',
+        component: PageNotFoundComponent
     }
 ];
 

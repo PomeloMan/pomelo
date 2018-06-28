@@ -30,6 +30,16 @@
   .sidenav {
     align-items: center;
     justify-content: center;
+    .forward {
+      position: absolute;
+      right: 0;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+  }
+  mat-sidenav-content {
+    padding: 10px;
   }
 }
 

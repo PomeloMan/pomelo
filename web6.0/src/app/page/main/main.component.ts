@@ -12,6 +12,8 @@ export class MainComponent implements OnInit {
 
     @HostBinding('class') class = 'default-theme';
 
+    menus: any = [];//菜单
+
     /**
      * 主题列表
      */
@@ -31,6 +33,7 @@ export class MainComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.initMenus();
     }
 
     /**
@@ -45,9 +48,22 @@ export class MainComponent implements OnInit {
     }
 
     /**
-     * 初始化权限模块
+     * 初始化模块
      */
-    initAuthority() {
-
+    initMenus() {
+        this.menus = menus;
     }
 }
+
+const menus = [
+    { name: 'Dashboard', link: '/main/dashboard', icon: 'dashboard' },
+    {
+        name: 'User Management', link: '', icon: 'supervisor_account',
+        children: [
+            { name: 'Users', link: '/main/system/user', icon: 'account_circle' },
+            { name: 'Security', link: '/main/system/authority', icon: 'security' }
+        ]
+    },
+
+    { name: 'User Profile', link: '/main/dashboard', icon: 'face' },
+]

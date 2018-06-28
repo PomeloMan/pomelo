@@ -27,7 +27,9 @@ import { MainComponent } from './main.component';
         MatTooltipModule,
         MainRoutingModule
     ],
-    declarations: [MainComponent],
+    declarations: [
+        MainComponent
+    ],
     providers: []
 })
 export class MainModule { }

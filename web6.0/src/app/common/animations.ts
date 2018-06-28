@@ -8,6 +8,41 @@ import {
     group
 } from '@angular/animations';
 
+export function animation(name, duration, delay) {
+}
+
+export const FADE_IN_UP = trigger('fadeInUp', [
+    state('in', style({ transform: 'translateY(0px)' })),
+    transition('void => *', [
+        animate('1s 0s ease', keyframes([
+            style({ opacity: 0, transform: 'translateY(200px)', offset: 0 }),
+            style({ opacity: 1, transform: 'translateY(0px)', offset: 1.0 })
+        ]))
+    ])
+])
+
+export const FADE_IN_DOWN = trigger('fadeInDown', [
+    state('in', style(
+        {
+            opacity: 1,
+            transform: 'translateY(0)'
+        }
+    )),
+    transition('void => *', [
+        style({
+            opacity: 0,
+            transform: 'translateY(-200px)'
+        }),
+        animate('200ms *')
+    ])
+    // transition('void => *', [
+    //     animate(500, keyframes([
+    //         style({ opacity: 0, transform: 'translateY(-200px)', offset: 0 }),
+    //         style({ opacity: 1, transform: 'translateY(0px)', offset: 1.0 })
+    //     ]))
+    // ])
+])
+
 export const toggle = trigger('toggle', [
     state('inactive', style({
         backgroundColor: '#eee',

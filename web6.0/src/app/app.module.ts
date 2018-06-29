@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
-
+import { MatProgressBarModule } from '@angular/material';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
@@ -24,6 +24,7 @@ import { HTTP_INTERCEPTOR_PROVIDERS } from './http-interceptors';
     BrowserModule,
     BrowserAnimationsModule,//animation
     HttpClientModule,//http
+    MatProgressBarModule,
     AppRoutingModule
   ],
   providers: [

@@ -10,6 +10,8 @@ import { isNullOrUndefined } from 'util';
 })
 export class ApiService {
 
+  retry: number = 3;
+
   defaultOptions: any = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
@@ -26,7 +28,7 @@ export class ApiService {
     }
     return this.http.get(url, options)
       .pipe(
-        retry(3), // retry a failed request up to 3 times
+        retry(this.retry), // retry a failed request up to 3 times
         catchError(this.handleError) // then handle the error
       );
   }
@@ -37,7 +39,7 @@ export class ApiService {
     }
     return this.http.post(url, body, options)
       .pipe(
-        retry(3), // retry a failed request up to 3 times
+        retry(this.retry), // retry a failed request up to 3 times
         catchError(this.handleError) // then handle the error
       );
   }

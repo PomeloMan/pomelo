@@ -33,7 +33,7 @@ export const FADE_IN_DOWN = trigger('fadeInDown', [
             opacity: 0,
             transform: 'translateY(-200px)'
         }),
-        animate('200ms *')
+        animate(200)
     ])
     // transition('void => *', [
     //     animate(500, keyframes([

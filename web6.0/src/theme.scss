@@ -64,3 +64,50 @@ $pink-bluegrey-theme:   mat-dark-theme($pink-bluegrey-primary, $pink-bluegrey-ac
 .unicorn-pink-bluegrey-theme {
   @include angular-material-theme($pink-bluegrey-theme);
 }
+
+.default-theme mat-sidenav-content {
+  &::-webkit-scrollbar
+  {
+    width: 4px;
+  }
+  &::-webkit-scrollbar-thumb
+  {
+    border-radius: 10px;
+    background-color: mat-color($candy-app-primary);
+  }
+}
+.unicorn-deeppurple-amber-theme mat-sidenav-content {
+  &::-webkit-scrollbar
+  {
+    width: 4px;
+  }
+  &::-webkit-scrollbar-thumb
+  {
+    border-radius: 10px;
+    background-color: mat-color($deeppurple-amber-primary);
+  }
+}
+.unicorn-purple-green-theme mat-sidenav-content {
+  &::-webkit-scrollbar
+  {
+    width: 4px;
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+  &::-webkit-scrollbar-thumb
+  {
+    border-radius: 10px;
+    background-color: mat-color($purple-green-primary);
+  }
+}
+.unicorn-pink-bluegrey-theme mat-sidenav-content {
+  &::-webkit-scrollbar
+  {
+    width: 4px;
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+  &::-webkit-scrollbar-thumb
+  {
+    border-radius: 10px;
+    background-color: mat-color($pink-bluegrey-primary);
+  }
+}

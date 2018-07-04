@@ -15,7 +15,7 @@ import { ValidatorFn, AbstractControl } from '@angular/forms';
 })
 export class UserComponent implements OnInit {
 
-  displayedColumns: string[] = ['number', 'position', 'name', 'weight', 'symbol'];
+  displayedColumns: string[] = ['number', 'position', 'name', 'weight', 'symbol', 'operation'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -26,9 +26,15 @@ export class UserComponent implements OnInit {
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-    
   }
 
+  /**
+   * 筛选
+   * @param filterValue 
+   */
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 }
 
 export interface PeriodicElement {

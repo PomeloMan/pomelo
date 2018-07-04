@@ -6,13 +6,18 @@ import {
   MatInputModule,
   MatFormFieldModule,
   MatIconModule,
-  MatButtonModule
+  MatButtonModule,
+  MatGridListModule,
+  MatTabsModule,
+  MatCardModule,
+  MatToolbarModule
 } from '@angular/material';
-
-import { UserRoutingModule } from './user-routing.module';
-import { UserComponent } from './user.component';
-import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { UserRoutingModule } from './user-routing.module';
+
+import { UserComponent } from './user.component';
+import { UserDetailComponent } from './user-detail/user-detail.component';
 import { UsernameValidatorDirective } from '../../../../common/validator/username-validator.directive';
 
 @NgModule({
@@ -21,21 +26,29 @@ import { UsernameValidatorDirective } from '../../../../common/validator/usernam
     FormsModule,
     // ReactiveFormsModule,
 
+    // layout
+    MatGridListModule,
+    // button
     MatButtonModule,
     MatIconModule,
-
+    // table
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-
+    // form
     MatFormFieldModule,
     MatInputModule,
+    // other
+    MatTabsModule,
+    MatCardModule,
+    MatToolbarModule,
 
     UserRoutingModule
   ],
   declarations: [
     UserComponent,
-    UsernameValidatorDirective
+    UserDetailComponent,
+    UsernameValidatorDirective,
   ]
 })
 export class UserModule { }

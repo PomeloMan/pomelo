@@ -9,22 +9,22 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://www.google.com/design/spec/style/color.html
-$candy-app-primary: mat-palette($mat-indigo);
-$candy-app-accent:  mat-palette($mat-pink, A200, A100, A400);
+$default-primary: mat-palette($mat-indigo);
+$default-accent:  mat-palette($mat-pink, A200, A100, A400);
 // The warn palette is optional (defaults to red).
-$candy-app-warn:    mat-palette($mat-red);
+$default-warn:    mat-palette($mat-red);
 // Create the theme object (a Sass map containing all of the palettes).
-$candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-app-warn);
+$default-theme: mat-light-theme($default-primary, $default-accent, $default-warn);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include angular-material-theme($candy-app-theme);
+@include angular-material-theme($default-theme);
 
 // Include the theme styles for only specified components.
-// @include mat-core-theme($candy-app-theme);
-// @include mat-button-theme($candy-app-theme);
-// @include mat-checkbox-theme($candy-app-theme);
+// @include mat-core-theme($default-theme);
+// @include mat-button-theme($default-theme);
+// @include mat-checkbox-theme($default-theme);
 
 // Define an alternate dark theme.
 $dark-primary: mat-palette($mat-blue-grey);
@@ -65,6 +65,7 @@ $pink-bluegrey-theme:   mat-dark-theme($pink-bluegrey-primary, $pink-bluegrey-ac
   @include angular-material-theme($pink-bluegrey-theme);
 }
 
+// 滚动条主题样式
 .default-theme mat-sidenav-content {
   &::-webkit-scrollbar
   {
@@ -73,7 +74,7 @@ $pink-bluegrey-theme:   mat-dark-theme($pink-bluegrey-primary, $pink-bluegrey-ac
   &::-webkit-scrollbar-thumb
   {
     border-radius: 10px;
-    background-color: mat-color($candy-app-primary);
+    background-color: mat-color($default-primary);
   }
 }
 .unicorn-deeppurple-amber-theme mat-sidenav-content {
@@ -111,3 +112,17 @@ $pink-bluegrey-theme:   mat-dark-theme($pink-bluegrey-primary, $pink-bluegrey-ac
     background-color: mat-color($pink-bluegrey-primary);
   }
 }
+
+// user-detail
+// .default-theme app-user-detail .mat-card .mat-card-header {
+//   background: mat-color($default-primary);
+// }
+// .unicorn-deeppurple-amber-theme app-user-detail .mat-card .mat-card-header {
+//   background: mat-color($deeppurple-amber-primary);
+// }
+// .unicorn-purple-green-theme app-user-detail .mat-card .mat-card-header {
+//   background: mat-color($purple-green-primary);
+// }
+// .unicorn-pink-bluegrey-theme app-user-detail .mat-card .mat-card-header {
+//   background: mat-color($pink-bluegrey-primary);
+// }

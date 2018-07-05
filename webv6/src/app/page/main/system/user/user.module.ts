@@ -10,10 +10,13 @@ import {
   MatGridListModule,
   MatTabsModule,
   MatCardModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatDividerModule,
+  MatSelectModule,
+  MatSlideToggleModule
 } from '@angular/material';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserRoutingModule } from './user-routing.module';
 
 import { UserComponent } from './user.component';
@@ -24,10 +27,13 @@ import { UsernameValidatorDirective } from '../../../../common/validator/usernam
   imports: [
     CommonModule,
     FormsModule,
-    // ReactiveFormsModule,
+    ReactiveFormsModule,//FormControl
 
     // layout
     MatGridListModule,
+    MatDividerModule,
+    MatTabsModule,
+    MatCardModule,
     // button
     MatButtonModule,
     MatIconModule,
@@ -38,9 +44,9 @@ import { UsernameValidatorDirective } from '../../../../common/validator/usernam
     // form
     MatFormFieldModule,
     MatInputModule,
-    // other
-    MatTabsModule,
-    MatCardModule,
+    MatSelectModule,
+    MatSlideToggleModule,
+    // navigation
     MatToolbarModule,
 
     UserRoutingModule

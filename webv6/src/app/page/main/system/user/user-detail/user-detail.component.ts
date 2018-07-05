@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationComponent } from '../../../../../common/component/navigation.component';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-user-detail',
@@ -19,6 +20,12 @@ export class UserDetailComponent extends NavigationComponent implements OnInit {
     super(router, route, location);
   }
 
+  emailFormControl = new FormControl('', [
+    Validators.required,
+    Validators.email,
+  ]);
+  toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
+
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
     console.log(this.id);
@@ -33,4 +40,5 @@ export class UserDetailComponent extends NavigationComponent implements OnInit {
 
     return this.tabLoadTimes[index];
   }
+
 }

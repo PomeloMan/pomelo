@@ -53,6 +53,24 @@ export class MainComponent implements OnInit {
     initMenus() {
         this.menus = menus;
     }
+
+    /**
+     * 滚动条事件
+     * @param $event
+     */
+    private onScroll($event: Event): void {
+        console.log($event.srcElement.scrollLeft, $event.srcElement.scrollTop);
+        let target: any = $event.target;
+        let content = target.children[1];
+        if (content.tagName == 'APP-USER-DETAIL') {
+            let el: any = document.getElementsByClassName('card-header');
+            if ($event.srcElement.scrollTop >= 24) {
+                el[0].classList.add('scrolling');
+            } else {
+                el[0].classList.remove('scrolling');
+            }
+        }
+    };
 }
 
 const menus = [

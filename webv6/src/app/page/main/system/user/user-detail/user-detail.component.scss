@@ -48,6 +48,9 @@
                     }
                 }
             }
+            > .mat-toolbar.card-header.scrolling.sidenav {
+                width: calc(((33.3333% - 0.666667px) * 2) - 85px);
+            }
             > .mat-toolbar.card-header.scrolling {
                 position: fixed;
                 top: 48px;

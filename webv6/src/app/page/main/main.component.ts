@@ -76,9 +76,9 @@ export class MainComponent implements OnInit {
             let el: any = document.getElementsByClassName('card-header');
             if (target.scrollTop >= 24) {
                 if (this.sidenav.opened) {
-                    el[0].classList.add('sidenav');
+                    el[0].classList.add('sidenav-active');
                 } else {
-                    el[0].classList.remove('sidenav');
+                    el[0].classList.remove('sidenav-active');
                 }
                 el[0].classList.add('scrolling');
             } else {

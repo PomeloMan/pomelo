@@ -13,7 +13,8 @@ import {
   MatToolbarModule,
   MatDividerModule,
   MatSelectModule,
-  MatSlideToggleModule
+  MatSlideToggleModule,
+  MatTooltipModule
 } from '@angular/material';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -22,6 +23,7 @@ import { UserRoutingModule } from './user-routing.module';
 import { UserComponent } from './user.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { UsernameValidatorDirective } from '../../../../common/validator/username-validator.directive';
+import { WindowService } from '../../../../config/window.sevice';
 
 @NgModule({
   imports: [
@@ -48,6 +50,8 @@ import { UsernameValidatorDirective } from '../../../../common/validator/usernam
     MatSlideToggleModule,
     // navigation
     MatToolbarModule,
+    // popups & modals
+    MatTooltipModule,
 
     UserRoutingModule
   ],
@@ -55,6 +59,9 @@ import { UsernameValidatorDirective } from '../../../../common/validator/usernam
     UserComponent,
     UserDetailComponent,
     UsernameValidatorDirective,
+  ],
+  providers: [
+    WindowService
   ]
 })
 export class UserModule { }

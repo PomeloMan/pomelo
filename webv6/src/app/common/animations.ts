@@ -45,13 +45,10 @@ export const FADE_IN_DOWN = trigger('fadeInDown', [
 
 export const toggle = trigger('toggle', [
     state('inactive', style({
-        backgroundColor: '#eee',
-        height: '5px'
+        height: '120px'
     })),
     state('active', style({
-        height: '20px',
-        width: '100%',
-        backgroundColor: 'red'
+        height: '96px',
     })),
     transition('inactive <=> active', animate('5s ease-out'))
 ])

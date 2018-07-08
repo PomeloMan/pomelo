@@ -1,0 +1,12 @@
+/* .card {
+    max-width: calc(100%/4 - 16px);
+} */
+
+.inactive {
+    height: 0px !important;
+}
+.active {
+    height: 10px;
+    width: 100%;
+    background-color: red;
+}

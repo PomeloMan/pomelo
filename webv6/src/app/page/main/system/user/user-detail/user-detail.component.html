@@ -1,0 +1,183 @@
+<div class="user-detail" (click)="onClick($event)">
+  <div class="figure user-info">
+    <mat-card class="nopadding">
+      <!-- Custom theming component @link ~src/theme.scss -->
+      <!-- <mat-card-header></mat-card-header> -->
+      <mat-toolbar class="card-header" color="primary">
+        <div class="head-portrait">
+          <mat-icon>account_circle</mat-icon>
+          <div class="intro">
+            <span>PomeloMan(Admin)</span>
+            <button mat-icon-button class="mat-elevation-z6">
+              <mat-icon class="mat-primary">publish</mat-icon>
+            </button>
+            <span>13861800672</span>
+          </div>
+        </div>
+        <div class="settings" [@expand]="!expanded?'in':'active'">
+          <button mat-icon-button *ngIf="!expanded" (click)="expand($event)" class="btn-expand mat-elevation-z2">
+            <mat-icon class="mat-primary">settings_ethernet</mat-icon>
+          </button>
+          <button mat-icon-button *ngIf="expanded" matTooltip="Save" matTooltipPosition="below">
+            <mat-icon class="mat-primary">save</mat-icon>
+          </button>
+          <button mat-icon-button *ngIf="expanded" matTooltip="Delete" matTooltipPosition="below">
+            <mat-icon class="mat-primary">delete</mat-icon>
+          </button>
+
+          <!-- <div class="btn-group mat-elevation-z2" *ngIf="expanded">
+            <button mat-icon-button matTooltip="Save" matTooltipPosition="below">
+              <mat-icon class="mat-primary">save</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="Delete" matTooltipPosition="below">
+              <mat-icon class="mat-primary">delete</mat-icon>
+            </button>
+          </div> -->
+        </div>
+      </mat-toolbar>
+      <mat-card-content>
+        <mat-tab-group>
+          <mat-tab label="BASIC">
+            <ng-template matTabContent>
+              <div class="tab-content">
+                <div class="basic-general">
+                  <mat-toolbar>General info</mat-toolbar>
+                  <div class="basic-general-content">
+                    <div class="row">
+                      <div>
+                        <mat-form-field>
+                          <input matInput placeholder="Username">
+                        </mat-form-field>
+                      </div>
+                      <div class="tile"></div>
+                      <div>
+                        <mat-form-field>
+                          <input matInput placeholder="Address">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <mat-form-field>
+                        <textarea matInput placeholder="About"></textarea>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+                <div class="basic-languages">
+                  <mat-toolbar>Languages</mat-toolbar>
+                  <div class="basic-languages-content">
+                    <div class="row">
+                      <mat-form-field>
+                        <mat-select placeholder="Toppings" multiple>
+                          <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+                <div class="basic-contact">
+                  <mat-toolbar>Contact info</mat-toolbar>
+                  <div class="basic-contact-content">
+                    <div class="row">
+                      <mat-form-field>
+                        <input matInput placeholder="Email" [formControl]="emailFormControl">
+                        <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                          Please enter a valid email address
+                        </mat-error>
+                        <mat-error *ngIf="emailFormControl.hasError('required')">
+                          Email is
+                          <strong>required</strong>
+                        </mat-error>
+                        <mat-icon matSuffix class="mat-primary">email</mat-icon>
+                      </mat-form-field>
+                      <div class="tile"></div>
+                      <mat-form-field>
+                        <span matPrefix>+86 &nbsp;</span>
+                        <input type="tel" matInput placeholder="Telephone">
+                        <mat-icon matSuffix class="mat-primary">phone</mat-icon>
+                      </mat-form-field>
+                    </div>
+                    <div class="row">
+                      <mat-form-field>
+                        <input matInput placeholder="Email" [formControl]="emailFormControl">
+                        <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                          Please enter a valid email address
+                        </mat-error>
+                        <mat-error *ngIf="emailFormControl.hasError('required')">
+                          Email is
+                          <strong>required</strong>
+                        </mat-error>
+                        <mat-icon matSuffix class="mat-primary">email</mat-icon>
+                      </mat-form-field>
+                      <div class="tile"></div>
+                      <mat-form-field>
+                        <span matPrefix>+86 &nbsp;</span>
+                        <input type="tel" matInput placeholder="Telephone">
+                        <mat-icon matSuffix class="mat-primary">phone</mat-icon>
+                      </mat-form-field>
+                    </div>
+                    <div class="row">
+                      <mat-form-field>
+                        <input matInput placeholder="Email" [formControl]="emailFormControl">
+                        <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                          Please enter a valid email address
+                        </mat-error>
+                        <mat-error *ngIf="emailFormControl.hasError('required')">
+                          Email is
+                          <strong>required</strong>
+                        </mat-error>
+                        <mat-icon matSuffix class="mat-primary">email</mat-icon>
+                      </mat-form-field>
+                      <div class="tile"></div>
+                      <mat-form-field>
+                        <span matPrefix>+86 &nbsp;</span>
+                        <input type="tel" matInput placeholder="Telephone">
+                        <mat-icon matSuffix class="mat-primary">phone</mat-icon>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </mat-tab>
+          <mat-tab label="GROUPS">
+            <ng-template matTabContent>
+              <div class="tab-content">
+                Content 2 - Loaded: {{getTimeLoaded(2) | date:'medium'}}
+              </div>
+            </ng-template>
+          </mat-tab>
+          <mat-tab label="TODO">
+            <ng-template matTabContent>
+              <div class="tab-content">
+                Content 3 - Loaded: {{getTimeLoaded(3) | date:'medium'}}
+              </div>
+            </ng-template>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="figure user-setting">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Other settings</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="setting-group">
+          <mat-slide-toggle class="mat-primary">User Active</mat-slide-toggle>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="setting-group">
+          <mat-form-field>
+            <mat-select placeholder="User Role" multiple>
+              <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+<mat-divider></mat-divider>

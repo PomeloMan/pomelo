@@ -1,7 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SelectivePreloadingStrategy } from './config/selective-preloading-strategy';
+
 import { PageNotFoundComponent } from './page/not-found/not-found.component';
+
+import { AuthGuard } from './config/auth-guard.service';
+import { SelectivePreloadingStrategy } from './config/selective-preloading-strategy';
 
 const routes: Routes = [
 	{
@@ -16,7 +19,9 @@ const routes: Routes = [
 	},
 	{
 		path: 'main',
-		loadChildren: './page/main/main.module#MainModule'
+		loadChildren: './page/main/main.module#MainModule',
+		// canLoad: [AuthGuard],
+		data: { preload: true }
 	},
 	{
 		path: '**',

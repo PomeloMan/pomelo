@@ -5,9 +5,9 @@ import {
 	HttpRequest
 } from '@angular/common/http';
 
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from '../config/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AuthGuard } from '../auth/auth-guard.service';
+import { AuthGuard } from '../config/auth-guard.service';
 
 /**
  * This interceptor is used to add a request header to each request

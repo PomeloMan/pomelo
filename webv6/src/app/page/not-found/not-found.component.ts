@@ -1,15 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { NavigationComponent } from '../../common/component/navigation.component';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
-  selector: 'app-not-found',
-  templateUrl: './not-found.component.html',
-  styleUrls: ['./not-found.component.scss']
+	selector: 'app-not-found',
+	templateUrl: './not-found.component.html',
+	styleUrls: ['./not-found.component.scss']
 })
-export class PageNotFoundComponent implements OnInit {
+export class PageNotFoundComponent extends NavigationComponent {
 
-  constructor() { }
-
-  ngOnInit() {
-  }
+	constructor(
+		public router: Router,
+		public route: ActivatedRoute,
+		public location: Location
+	) {
+		super(router, route, location)
+	}
 
 }

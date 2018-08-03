@@ -15,13 +15,13 @@ export class AuthService {
   ) { }
 
   getAuthorizationToken(): string {
-    return this.storageService.getData(TOKEN);
+    return this.storageService.getItem(TOKEN);
   }
 
   setAuthorizationToken(): void {
   }
 
   clear(): void {
-    this.storageService.removeData(TOKEN);
+    this.storageService.removeItem(TOKEN);
   }
 }

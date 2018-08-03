@@ -7,31 +7,31 @@ import { ApiService } from '../../config/api.service';
 import { StorageService } from '../../config/storage.service';
 
 @Component({
-    selector: 'app-login',
-    templateUrl: './login.component.html',
-    styleUrls: ['./login.component.css'],
+	selector: 'app-login',
+	templateUrl: './login.component.html',
+	styleUrls: ['./login.component.css'],
 })
 
 export class LoginComponent implements OnInit {
 
-    constructor(
-        private router: Router,
-        private api: ApiService,
-        private storage: StorageService
-    ) { }
+	constructor(
+		private router: Router,
+		private api: ApiService,
+		private storage: StorageService
+	) { }
 
-    ngOnInit(): void {
-    }
+	ngOnInit(): void {
+	}
 
-    login(username: any, password: any) {
-        this.api.post(API.AUTH_URL, { username: username, password: password }, { observe: 'response' }).subscribe(
-            resp => {
-                this.storage.setData(TOKEN, resp.headers.get('Authorization'));
-                this.router.navigate(['/main']);
-            },
-            error => {
-                console.log(error);
-            }
-        );
-    }
+	login(username: any, password: any) {
+		this.api.post(API.AUTH_URL, { username: username, password: password }, { observe: 'response' }).subscribe(
+			resp => {
+				this.storage.setItem(TOKEN, resp.headers.get('Authorization'));
+				this.router.navigate(['/main']);
+			},
+			error => {
+				console.log(error);
+			}
+		);
+	}
 }

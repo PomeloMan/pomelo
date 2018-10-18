@@ -61,18 +61,15 @@ public class TUserController {
 	public ResponseEntity<User> save(User user) {
 		for (int i = 0; i < 4; i++) {
 			final int j = i;
-			new Thread(new Runnable() {
-				@Override
-				public void run() {
-					User _user = userService.findOne(user.getUsername());
-					logger.info("Thread-" + j);
-					if (_user == null) {
-						_user = new User();
-						_user.setUsername(user.getUsername());
-					}
-					_user.setDisplayName(user.getDisplayName() + "-Thread[" + j + "]");
-					userService.saveOne(_user);
+			new Thread(() -> {
+				User _user = userService.findOne(user.getUsername());
+				logger.info("Thread-" + j);
+				if (_user == null) {
+					_user = new User();
+					_user.setUsername(user.getUsername());
 				}
+				_user.setDisplayName(user.getDisplayName() + "-Thread[" + j + "]");
+				userService.saveOne(_user);
 			}).start();
 		}
 		return new ResponseEntity<>(HttpStatus.OK);

@@ -31,6 +31,22 @@ public class TUserService {
 		}
 	}
 
+	@Test
+	public void save(User user) {
+		for (int i = 0; i < 4; i++) {
+			final int j = i;
+			new Thread(() -> {
+				User _user = userService.findOne(user.getUsername());
+				if (_user == null) {
+					_user = new User();
+					_user.setUsername(user.getUsername());
+				}
+				_user.setDisplayName(user.getDisplayName() + "-Thread[" + j + "]");
+				userService.saveOne(_user);
+			}).start();
+		}
+	}
+
 	public static void main(String[] args) {
 		for (int i = 0; i < 5; i++) {
 			if (i == 3) {

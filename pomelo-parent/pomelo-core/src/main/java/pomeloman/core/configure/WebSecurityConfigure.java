@@ -26,7 +26,8 @@ import pomeloman.core.module.system.service.interfaces.IUserService;
 public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
 
 	/**
-	 * {@link pomeloman.springboot.configure.MvcConfigure.addResourceHandlers(ResourceHandlerRegistry registry)}
+	 * {@link pomeloman.springboot.configure.MvcConfigure.addResourceHandlers(ResourceHandlerRegistry
+	 * registry)}
 	 */
 	@Override
 	public void configure(WebSecurity web) throws Exception {
@@ -34,18 +35,20 @@ public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
 		web.ignoring().antMatchers("/**/*.html", "/**/*.css", "/**/*.js", "/**/*.png", "/**/*.jpg", "/**/*.gif",
 				"/**/*.svg", "/**/*.ico", "/**/*.ttf", "/**/*.woff", "/**/*.woff2");
 		web.ignoring().antMatchers("/test/**");
+		// swagger-ui
+		web.ignoring().antMatchers("/swagger-resources/**", "/v2/api-docs", "/webjars/**", "/swagger-ui.html");
 	}
 
 	/**
-	 * http.cors() -> {@link pomeloman.springboot.configure。WebMvcConfigure。addCorsMappings(CorsRegistry registry)}
+	 * http.cors() ->
+	 * {@link pomeloman.springboot.configure。WebMvcConfigure。addCorsMappings(CorsRegistry
+	 * registry)}
 	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable();
-		http.cors().and().authorizeRequests()
-				.antMatchers("/", "/index.html").permitAll()
-				.antMatchers(HttpMethod.POST, "/login").permitAll()
-				.anyRequest().authenticated();
+		http.cors().and().authorizeRequests().antMatchers("/", "/index.html").permitAll()
+				.antMatchers(HttpMethod.POST, "/login").permitAll().anyRequest().authenticated();
 		// .and().logout().logoutSuccessUrl("/").permitAll();
 		// .and()http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
 		http.addFilterBefore(jwtUsernamePasswordAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
@@ -65,7 +68,8 @@ public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
 		JwtUsernamePasswordAuthenticationFilter jwtUsernamePasswordAuthenticationFilter = new JwtUsernamePasswordAuthenticationFilter();
 		jwtUsernamePasswordAuthenticationFilter.setGson(getApplicationContext().getBean(Gson.class));
 		jwtUsernamePasswordAuthenticationFilter.setAuthenticationManager(authenticationManager());
-		jwtUsernamePasswordAuthenticationFilter.setJwtTokenAuthenticationService(getApplicationContext().getBean(JwtTokenAuthenticationService.class));
+		jwtUsernamePasswordAuthenticationFilter
+				.setJwtTokenAuthenticationService(getApplicationContext().getBean(JwtTokenAuthenticationService.class));
 		return jwtUsernamePasswordAuthenticationFilter;
 	}
 
@@ -74,7 +78,8 @@ public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
 		JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter();
 		jwtAuthenticationFilter.setGson(getApplicationContext().getBean(Gson.class));
 		jwtAuthenticationFilter.setAuthenticationManager(authenticationManager());
-		jwtAuthenticationFilter.setJwtTokenAuthenticationService(getApplicationContext().getBean(JwtTokenAuthenticationService.class));
+		jwtAuthenticationFilter
+				.setJwtTokenAuthenticationService(getApplicationContext().getBean(JwtTokenAuthenticationService.class));
 		return jwtAuthenticationFilter;
 	}
 }

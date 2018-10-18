@@ -14,6 +14,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import pomeloman.core.common.interceptor.PreCheck;
 import pomeloman.core.module.system.persistence.model.User;
 import pomeloman.core.module.system.service.interfaces.IUserService;
@@ -22,12 +26,17 @@ import pomeloman.core.module.system.view.IUser;
 @RestController
 @RequestMapping("/user")
 //@CrossOrigin(origins = "http://127.0.0.1", maxAge = 3600)
+@Api(value = "/user", tags = "UserController")
 public class UserController {
 
 	@Autowired
 	IUserService userService;
 
 	@GetMapping("/me")
+	@ApiOperation(value = "获取当前登录用户信息", notes = "头部需要带token信息")
+	@ApiResponses({ @ApiResponse(code = 200, message = "OK"),
+			@ApiResponse(code = 500, message = "Internal Server Error"),
+			@ApiResponse(code = 403, message = "Forbidden") })
 	public Principal user(Principal user) {
 		return user;
 	}
@@ -49,7 +58,7 @@ public class UserController {
 	 */
 	@PreCheck
 	@GetMapping("queryByPage")
-	@PreAuthorize("authenticated and hasPermission(#view, 'GUEST')")// DefaultPermissionEvaluator
+	@PreAuthorize("authenticated and hasPermission(#view, 'GUEST')") // DefaultPermissionEvaluator
 	public ResponseEntity<Page<User>> queryByPage(@P("view") IUser view) {
 		return new ResponseEntity<Page<User>>(userService.query(view, null), HttpStatus.OK);
 	}

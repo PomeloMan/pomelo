@@ -15,6 +15,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.google.gson.Gson;
 
 import pomeloman.core.configure.authentication.AuthenticationProvider;
+import pomeloman.core.configure.handler.DefaultAccessDeniedHandler;
+import pomeloman.core.configure.handler.DefaultAuthenticationEntryPoint;
 import pomeloman.core.configure.jwt.JwtAuthenticationFilter;
 import pomeloman.core.configure.jwt.JwtTokenAuthenticationService;
 import pomeloman.core.configure.jwt.JwtUsernamePasswordAuthenticationFilter;
@@ -53,6 +55,8 @@ public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
 		// .and()http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
 		http.addFilterBefore(jwtUsernamePasswordAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
 				.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+		http.exceptionHandling().accessDeniedHandler(new DefaultAccessDeniedHandler(getApplicationContext().getBean(Gson.class)))
+				.authenticationEntryPoint(new DefaultAuthenticationEntryPoint(getApplicationContext().getBean(Gson.class)));
 	}
 
 	@Autowired

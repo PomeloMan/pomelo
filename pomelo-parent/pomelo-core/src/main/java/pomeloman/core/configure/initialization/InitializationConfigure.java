@@ -10,11 +10,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
@@ -41,11 +39,8 @@ public class InitializationConfigure {
 	IAuthorityService authorityService;
 	@Autowired
 	IRoleService roleService;
-
-	@Bean
-	public Gson gson() {
-		return new GsonBuilder().create();
-	}
+	@Autowired
+	Gson gson;
 
 	@PostConstruct
 	public void init() throws JsonSyntaxException, IOException, BusinessException {
@@ -59,12 +54,10 @@ public class InitializationConfigure {
 
 		// Init data
 		try {
-			authorityService.save(
-				gson().fromJson(
+			authorityService.save(gson.fromJson(
 					IOUtils.toString(this.getClass().getResourceAsStream("/initialization/authority.json"), "UTF-8"),
-					new TypeToken<List<Authority>>() {}.getType()
-				)
-			);
+					new TypeToken<List<Authority>>() {
+					}.getType()));
 		} catch (Exception e) {
 			if (debug) {
 				logger.debug("Initialize the original authority data failed", e);
@@ -72,12 +65,10 @@ public class InitializationConfigure {
 			throw new BusinessException(e);
 		}
 		try {
-			roleService.save(
-				gson().fromJson(
+			roleService.save(gson.fromJson(
 					IOUtils.toString(this.getClass().getResourceAsStream("/initialization/role.json"), "UTF-8"),
-					new TypeToken<List<Role>>() {}.getType()
-				)
-			);
+					new TypeToken<List<Role>>() {
+					}.getType()));
 		} catch (Exception e) {
 			if (debug) {
 				logger.debug("Initialize the original role data failed", e);
@@ -85,12 +76,10 @@ public class InitializationConfigure {
 			throw new BusinessException(e);
 		}
 		try {
-			userService.save(
-				gson().fromJson(
+			userService.save(gson.fromJson(
 					IOUtils.toString(this.getClass().getResourceAsStream("/initialization/user.json"), "UTF-8"),
-					new TypeToken<List<User>>() {}.getType()
-				)
-			);
+					new TypeToken<List<User>>() {
+					}.getType()));
 		} catch (Exception e) {
 			if (debug) {
 				logger.debug("Initialize the original user data failed", e);

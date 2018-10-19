@@ -30,9 +30,10 @@ import pomeloman.core.module.system.service.interfaces.IUserService;
 public class InitializationConfigure {
 
 	private final Log logger = LogFactory.getLog(InitializationConfigure.class);
+	private boolean debug = logger.isDebugEnabled();
 
-	@Value("${spring.application.init}")
-	boolean init;
+	@Value("${spring.application.initial}")
+	boolean initial;
 
 	@Autowired
 	IUserService userService;
@@ -45,55 +46,58 @@ public class InitializationConfigure {
 
 	@PostConstruct
 	public void init() throws JsonSyntaxException, IOException, BusinessException {
-		if (!init) {
-			return;
-		}
-		boolean debug = logger.isDebugEnabled();
-
 		// Init Timezone/Locale
 		DateUtil.setDefault();
 
-		// Init data
-		try {
-			authorityService.save(gson.fromJson(
-					IOUtils.toString(this.getClass().getResourceAsStream("/initialization/authority.json"), "UTF-8"),
-					new TypeToken<List<Authority>>() {
-					}.getType()));
-		} catch (Exception e) {
-			if (debug) {
-				logger.debug("Initialize the original authority data failed", e);
-			}
-			throw new BusinessException(e);
-		}
-		try {
-			roleService.save(gson.fromJson(
-					IOUtils.toString(this.getClass().getResourceAsStream("/initialization/role.json"), "UTF-8"),
-					new TypeToken<List<Role>>() {
-					}.getType()));
-		} catch (Exception e) {
-			if (debug) {
-				logger.debug("Initialize the original role data failed", e);
-			}
-			throw new BusinessException(e);
-		}
-		try {
-			Collection<User> users = gson.fromJson(
-					IOUtils.toString(this.getClass().getResourceAsStream("/initialization/user.json"), "UTF-8"),
-					new TypeToken<List<User>>() {
-					}.getType());
-			users.stream().forEach(user -> {
-				try {
-					user.setPassword(user.getPassword());
-				} catch (Exception e) {
-					logger.error(e.getMessage(), e);
+		if (initial) {
+			// Init data
+			try {
+				Collection<Authority> auths = gson.fromJson(IOUtils
+						.toString(this.getClass().getResourceAsStream("/initialization/authority.json"), "UTF-8"),
+						new TypeToken<List<Authority>>() {
+						}.getType());
+				Collection<Authority> _auths = authorityService.query(null);
+				auths.removeAll(_auths);
+				authorityService.save(auths);
+			} catch (Exception e) {
+				if (debug) {
+					logger.debug("Initialize the original authority data failed", e);
 				}
-			});
-			userService.save(users);
-		} catch (Exception e) {
-			if (debug) {
-				logger.debug("Initialize the original user data failed", e);
+				throw new BusinessException(e);
 			}
-			throw new BusinessException(e);
+			try {
+				Collection<Role> roles = gson.fromJson(
+						IOUtils.toString(this.getClass().getResourceAsStream("/initialization/role.json"), "UTF-8"),
+						new TypeToken<List<Role>>() {
+						}.getType());
+				Collection<Role> _roles = roleService.query(null);
+				roles.removeAll(_roles);
+				roleService.save(roles);
+			} catch (Exception e) {
+				if (debug) {
+					logger.debug("Initialize the original role data failed", e);
+				}
+				throw new BusinessException(e);
+			}
+			try {
+				Collection<User> users = gson.fromJson(
+						IOUtils.toString(this.getClass().getResourceAsStream("/initialization/user.json"), "UTF-8"),
+						new TypeToken<List<User>>() {
+						}.getType());
+				users.stream().forEach(user -> {
+					try {
+						user.setPassword(user.getPassword());
+					} catch (Exception e) {
+						logger.error(e.getMessage(), e);
+					}
+				});
+				userService.save(users);
+			} catch (Exception e) {
+				if (debug) {
+					logger.debug("Initialize the original user data failed", e);
+				}
+				throw new BusinessException(e);
+			}
 		}
 	}
 }

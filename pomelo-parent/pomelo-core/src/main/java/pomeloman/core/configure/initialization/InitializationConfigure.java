@@ -1,6 +1,7 @@
 package pomeloman.core.configure.initialization;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -76,10 +77,18 @@ public class InitializationConfigure {
 			throw new BusinessException(e);
 		}
 		try {
-			userService.save(gson.fromJson(
+			Collection<User> users = gson.fromJson(
 					IOUtils.toString(this.getClass().getResourceAsStream("/initialization/user.json"), "UTF-8"),
 					new TypeToken<List<User>>() {
-					}.getType()));
+					}.getType());
+			users.stream().forEach(user -> {
+				try {
+					user.setPassword(user.getPassword());
+				} catch (Exception e) {
+					logger.error(e.getMessage(), e);
+				}
+			});
+			userService.save(users);
 		} catch (Exception e) {
 			if (debug) {
 				logger.debug("Initialize the original user data failed", e);

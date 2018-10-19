@@ -11,13 +11,13 @@ import org.springframework.security.access.method.P;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.ApiParam;
 import pomeloman.core.common.interceptor.PreCheck;
 import pomeloman.core.module.system.persistence.model.User;
 import pomeloman.core.module.system.service.interfaces.IUserService;
@@ -34,9 +34,6 @@ public class UserController {
 
 	@GetMapping("/me")
 	@ApiOperation(value = "获取当前登录用户信息", notes = "头部需要带token信息")
-	@ApiResponses({ @ApiResponse(code = 200, message = "OK"),
-			@ApiResponse(code = 500, message = "Internal Server Error"),
-			@ApiResponse(code = 403, message = "Forbidden") })
 	public Principal user(Principal user) {
 		return user;
 	}
@@ -47,7 +44,9 @@ public class UserController {
 	 */
 	@GetMapping("query")
 //	@PreAuthorize("hasAnyAuthority('SYSTEM','GUEST')")
-	public ResponseEntity<Collection<User>> query(IUser view) {
+	@ApiOperation(value = "获取当前登录用户信息", notes = "头部需要带token信息")
+	public ResponseEntity<Collection<User>> query(
+			@RequestBody @ApiParam(name = "用户对象", value = "传入json格式", required = true) IUser view) {
 		return new ResponseEntity<Collection<User>>(userService.query(view), HttpStatus.OK);
 	}
 

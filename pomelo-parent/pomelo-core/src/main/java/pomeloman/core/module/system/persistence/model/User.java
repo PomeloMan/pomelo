@@ -19,6 +19,7 @@ import javax.persistence.Version;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
+import io.swagger.annotations.ApiModelProperty;
 import pomeloman.core.module.system.enums.Status;
 import pomeloman.core.module.system.security.PasswordEncoderImpl;
 
@@ -35,7 +36,9 @@ public class User implements Serializable {
 	@Id
 	private String username;
 	private String displayName;
+	@ApiModelProperty(hidden = true)
 	private String password;
+	@ApiModelProperty(hidden = true)
 	private Status status = Status.Init;
 	private String creator;
 	private String modifier;
@@ -47,12 +50,14 @@ public class User implements Serializable {
 	@org.hibernate.annotations.UpdateTimestamp
 	private Date modifiedDate;
 
+	@ApiModelProperty(hidden = true)
 	@ManyToMany(fetch = FetchType.EAGER)
 	private Collection<Role> roles;
 
 	@Version
 	private int version;// spring 乐观锁
 
+	@ApiModelProperty(hidden = true)
 	@Transient
 	private Collection<SimpleGrantedAuthority> authorities;
 
@@ -66,6 +71,12 @@ public class User implements Serializable {
 	public User(String username) {
 		super();
 		this.username = username;
+	}
+
+	public User(String username, String password) {
+		super();
+		this.username = username;
+		this.password = password;
 	}
 
 	public User() {

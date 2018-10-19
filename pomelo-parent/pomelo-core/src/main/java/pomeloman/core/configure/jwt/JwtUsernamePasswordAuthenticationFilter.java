@@ -48,6 +48,11 @@ public class JwtUsernamePasswordAuthenticationFilter extends AbstractAuthenticat
 		try {
 			User user = gson.fromJson(new InputStreamReader(request.getInputStream()), User.class);
 			// User user = new ObjectMapper().readValue(req.getInputStream(), User.class); //JWT
+			if (user == null) {
+				String username = request.getParameter("username");
+				String password = request.getParameter("password");
+				user = new User(username, password);
+			}
 
 			UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(
 					user.getUsername(), user.getPassword());

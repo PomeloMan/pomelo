@@ -86,11 +86,19 @@ public class UtilTest {
 
 	@Test
 	public void RSATest() throws Exception {
-		KeyPair pair = RSAUtil.getKeyPair();
-		String cipher = RSAUtil.encrypt((RSAPublicKey) pair.getPublic(), securityString);
+		String cipher = null;
+		KeyPair pair = RSAUtil.generateKeyPair();
+		cipher = RSAUtil.encrypt((RSAPublicKey) pair.getPublic(), securityString);
 		System.out.println("Before encryption: " + securityString);
 		System.out.println("After encryption: " + cipher);
 		System.out.println("After decryption: " + RSAUtil.decrypt((RSAPrivateKey) pair.getPrivate(), cipher));
+
+		RSAPrivateKey prikey = (RSAPrivateKey) RSAUtil.loadKeyByFile(RSAUtil.class.getResourceAsStream(RSAUtil.PRIVATE_KEY), RSAUtil.Key.Private);
+		RSAPublicKey pubkey = (RSAPublicKey) RSAUtil.loadKeyByFile(RSAUtil.class.getResourceAsStream(RSAUtil.PUBLIC_KEY), RSAUtil.Key.Public);
+		cipher = RSAUtil.encrypt(prikey, securityString);
+		System.out.println("Before encryption: " + securityString);
+		System.out.println("After encryption: " + cipher);
+		System.out.println("After decryption: " + RSAUtil.decrypt(pubkey, cipher));
 	}
 
 	/******************************** ↑加密解密↑ ********************************/

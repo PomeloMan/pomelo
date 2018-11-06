@@ -24,6 +24,7 @@ import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -55,8 +56,10 @@ public class DefaultControllerTests {
 	}
 
 	@Test
+//	@WithMockUser(username="administrator", roles={"USER", "ADMIN"})
+	@WithUserDetails(value = "administrator", userDetailsServiceBeanName = "userService")
 	public void queryByPage() {
-		ResponseEntity<Page<User>> res = userCtrl.queryByPage(null);
+		ResponseEntity<Page<User>> res = userCtrl.queryByPage(new IUser());
 		res.getBody().getContent().stream().forEach((user) -> {
 			System.out.println(user.getUsername());
 		});

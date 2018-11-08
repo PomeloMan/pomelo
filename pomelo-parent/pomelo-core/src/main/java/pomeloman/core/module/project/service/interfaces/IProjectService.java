@@ -1,4 +1,4 @@
-package pomeloman.core.module.system.service.interfaces;
+package pomeloman.core.module.project.service.interfaces;
 
 import java.util.Collection;
 
@@ -6,48 +6,48 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 
-import pomeloman.core.module.system.persistence.entity.Role;
-import pomeloman.core.module.system.view.IRole;
+import pomeloman.core.module.project.persistence.entity.Project;
+import pomeloman.core.module.project.view.IProject;
 
 /**
- * @ClassName IRoleService.java
+ * @ClassName IProjectService.java
  * @Description TODO
  * @author PomeloMan
  */
 @Transactional(readOnly = true)
-public interface IRoleService {
+public interface IProjectService {
 
 	/**
 	 * @param view
 	 * @return
 	 */
-	Collection<Role> query(IRole view);
+	Collection<Project> query(IProject view);
 
 	/**
 	 * @param view
 	 * @param pageable
 	 * @return
 	 */
-	Page<Role> query(IRole view, Pageable pageable);
+	Page<Project> query(IProject view, Pageable pageable);
 
 	/**
 	 * @param view
 	 * @return
 	 */
 	@Transactional
-	Role saveOne(IRole view);
+	Project saveOne(IProject view);
 
 	/**
-	 * @param role
+	 * @param project
 	 * @return
 	 */
 	@Transactional
-	Role saveOne(Role entity);
+	Project saveOne(Project entity);
 
 	/**
-	 * @param roles
+	 * @param projects
 	 * @return
 	 */
 	@Transactional
-	Collection<Role> save(Collection<Role> entities);
+	Collection<Project> save(Collection<Project> entities);
 }

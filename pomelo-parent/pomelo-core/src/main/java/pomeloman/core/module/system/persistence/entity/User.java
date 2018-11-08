@@ -1,31 +1,27 @@
-package pomeloman.core.module.system.persistence.model;
+package pomeloman.core.module.system.persistence.entity;
 
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Collection;
-import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.Transient;
-import javax.persistence.Version;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import io.swagger.annotations.ApiModelProperty;
 import pomeloman.core.module.system.enums.Status;
+import pomeloman.core.module.system.persistence.VersionEntity;
 import pomeloman.core.module.system.security.PasswordEncoderImpl;
 
 @Entity
 @Table(name = "Users")
-public class User implements Serializable {
+public class User extends VersionEntity implements Serializable {
 
 	// @Id
 	// @GeneratedValue(strategy = GenerationType.AUTO)
@@ -38,24 +34,10 @@ public class User implements Serializable {
 	private String displayName;
 	@ApiModelProperty(hidden = true)
 	private String password;
-	@ApiModelProperty(hidden = true)
-	private Status status = Status.Init;
-	private String creator;
-	private String modifier;
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(updatable = false)
-	@org.hibernate.annotations.CreationTimestamp
-	private Date createdDate;
-	@Temporal(TemporalType.TIMESTAMP)
-	@org.hibernate.annotations.UpdateTimestamp
-	private Date modifiedDate;
 
 	@ApiModelProperty(hidden = true)
 	@ManyToMany(fetch = FetchType.EAGER)
 	private Collection<Role> roles;
-
-	@Version
-	private int version;// spring 乐观锁
 
 	@ApiModelProperty(hidden = true)
 	@Transient
@@ -132,46 +114,6 @@ public class User implements Serializable {
 		this.password = PasswordEncoderImpl.encode(password, username);
 	}
 
-	public Status getStatus() {
-		return status;
-	}
-
-	public void setStatus(Status status) {
-		this.status = status;
-	}
-
-	public String getCreator() {
-		return creator;
-	}
-
-	public void setCreator(String creator) {
-		this.creator = creator;
-	}
-
-	public String getModifier() {
-		return modifier;
-	}
-
-	public void setModifier(String modifier) {
-		this.modifier = modifier;
-	}
-
-	public Date getCreatedDate() {
-		return createdDate;
-	}
-
-	public void setCreatedDate(Date createdDate) {
-		this.createdDate = createdDate;
-	}
-
-	public Date getModifiedDate() {
-		return modifiedDate;
-	}
-
-	public void setModifiedDate(Date modifiedDate) {
-		this.modifiedDate = modifiedDate;
-	}
-
 	public Collection<Role> getRoles() {
 		return roles;
 	}
@@ -186,14 +128,6 @@ public class User implements Serializable {
 
 	public void setAuthorities(Collection<SimpleGrantedAuthority> authorities) {
 		this.authorities = authorities;
-	}
-
-	public int getVersion() {
-		return version;
-	}
-
-	public void setVersion(int version) {
-		this.version = version;
 	}
 
 }

@@ -5,6 +5,7 @@ public enum Status {
 	/** 0 */ Init(0),
 	/** 1 */ Valid(1),
 	/** 2 */ Invalid(2),
+	/** 3 */ Deleted(3),
 	/** -1 */ Expired(-1);
 
 	private int code;

@@ -4,8 +4,8 @@
 		"password": "administrator",
 		"displayName": "administrator",
 		"status": "Valid",
-		"creator": "system",
-		"modifier": "system",
+		"creator": "build-in",
+		"modifier": "build-in",
 		"roles": [
 			{
 				"name": "ADMIN"
@@ -20,8 +20,8 @@
 		"password": "user",
 		"displayName": "user",
 		"status": "Valid",
-		"creator": "system",
-		"modifier": "system",
+		"creator": "build-in",
+		"modifier": "build-in",
 		"roles": [
 			{
 				"name": "USER"

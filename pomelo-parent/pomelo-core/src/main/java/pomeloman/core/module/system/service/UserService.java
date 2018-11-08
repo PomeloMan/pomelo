@@ -36,9 +36,9 @@ import org.springframework.util.Assert;
 
 import pomeloman.core.common.util.DateUtil;
 import pomeloman.core.module.system.enums.Status;
-import pomeloman.core.module.system.persistence.model.Authority;
-import pomeloman.core.module.system.persistence.model.Role;
-import pomeloman.core.module.system.persistence.model.User;
+import pomeloman.core.module.system.persistence.entity.Authority;
+import pomeloman.core.module.system.persistence.entity.Role;
+import pomeloman.core.module.system.persistence.entity.User;
 import pomeloman.core.module.system.persistence.repo.UserRepository;
 import pomeloman.core.module.system.service.interfaces.IUserService;
 import pomeloman.core.module.system.view.IUser;
@@ -167,21 +167,21 @@ public class UserService implements IUserService {
 	}
 
 	@Override
-	public User saveOne(User user) {
-		Assert.notNull(user, null);
-		Assert.notNull(user.getUsername(), null);
-		User _user = userRep.findOne(user.getUsername());
-		if (_user == null) {
-			_user = new User(user.getUsername());
+	public User saveOne(User entity) {
+		Assert.notNull(entity, null);
+		Assert.notNull(entity.getUsername(), null);
+		User _entity = userRep.findOne(entity.getUsername());
+		if (_entity == null) {
+			_entity = new User(entity.getUsername());
 		}
-		user.setVersion(_user.getVersion());
-		return userRep.save(user);
+		entity.setVersion(_entity.getVersion());
+		return userRep.save(entity);
 	}
 
 	@Override
-	public Collection<User> save(Collection<User> users) {
+	public Collection<User> save(Collection<User> entities) {
 		List<User> result = new ArrayList<User>();
-		users.stream().forEach(u -> result.add(saveOne(u)));
+		entities.stream().forEach(entity -> result.add(saveOne(entity)));
 		return result;
 	}
 

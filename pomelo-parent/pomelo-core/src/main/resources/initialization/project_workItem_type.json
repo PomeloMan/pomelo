@@ -1,0 +1,65 @@
+[
+	{
+		"name": "Epic",
+		"status": "Valid",
+		"creator": "build-in",
+		"modifier": "build-in",
+		"process": {
+			"name": "Agile"
+		}
+	},
+	{
+		"name": "Feature",
+		"status": "Valid",
+		"creator": "build-in",
+		"modifier": "build-in",
+		"process": {
+			"name": "Agile"
+		}
+	},
+	{
+		"name": "User Story",
+		"status": "Valid",
+		"creator": "build-in",
+		"modifier": "build-in",
+		"process": {
+			"name": "Agile"
+		}
+	},
+	{
+		"name": "Task",
+		"status": "Valid",
+		"creator": "build-in",
+		"modifier": "build-in",
+		"process": {
+			"name": "Agile"
+		}
+	},
+	{
+		"name": "Bug",
+		"status": "Valid",
+		"creator": "build-in",
+		"modifier": "build-in",
+		"process": {
+			"name": "Agile"
+		}
+	},
+	{
+		"name": "Issue",
+		"status": "Valid",
+		"creator": "build-in",
+		"modifier": "build-in",
+		"process": {
+			"name": "Agile"
+		}
+	},
+	{
+		"name": "TestCase",
+		"status": "Valid",
+		"creator": "build-in",
+		"modifier": "build-in",
+		"process": {
+			"name": "Agile"
+		}
+	}
+]

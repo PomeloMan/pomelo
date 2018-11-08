@@ -4,12 +4,12 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 import pomeloman.core.common.AbstractView;
-import pomeloman.core.module.system.persistence.model.Authority;
+import pomeloman.core.module.system.persistence.entity.Authority;
 
 public class IAuthority extends AbstractView<Authority> {
 
-	public IAuthority(Authority authority) {
-		setEntity(authority);
+	public IAuthority(Authority entity) {
+		setEntity(entity);
 	}
 
 	public IAuthority() {

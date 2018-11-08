@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 import io.swagger.annotations.ApiModel;
 import pomeloman.core.common.AbstractView;
-import pomeloman.core.module.system.persistence.model.User;
+import pomeloman.core.module.system.persistence.entity.User;
 
 @ApiModel
 public class IUser extends AbstractView<User> {
@@ -18,8 +18,7 @@ public class IUser extends AbstractView<User> {
 	}
 
 	public static Collection<User> transform(Collection<IUser> views) {
-		return views.stream().map((view) -> view.getEntity())
-				.collect(Collectors.toList());
+		return views.stream().map((view) -> view.getEntity()).collect(Collectors.toList());
 	}
 
 }

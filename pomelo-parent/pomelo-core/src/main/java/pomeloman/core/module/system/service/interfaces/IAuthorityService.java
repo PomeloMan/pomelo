@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 
-import pomeloman.core.module.system.persistence.model.Authority;
+import pomeloman.core.module.system.persistence.entity.Authority;
 import pomeloman.core.module.system.view.IAuthority;
 
 /**
@@ -42,12 +42,12 @@ public interface IAuthorityService {
 	 * @return
 	 */
 	@Transactional
-	Authority saveOne(Authority authority);
+	Authority saveOne(Authority entity);
 
 	/**
 	 * @param authorities
 	 * @return
 	 */
 	@Transactional
-	Collection<Authority> save(Collection<Authority> authorities);
+	Collection<Authority> save(Collection<Authority> entities);
 }

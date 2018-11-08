@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import pomeloman.core.common.util.DateUtil;
-import pomeloman.core.module.system.persistence.model.Role;
+import pomeloman.core.module.system.persistence.entity.Role;
 import pomeloman.core.module.system.persistence.repo.RoleRepository;
 import pomeloman.core.module.system.service.interfaces.IRoleService;
 import pomeloman.core.module.system.view.IRole;
@@ -97,21 +97,21 @@ public class RoleService implements IRoleService {
 	}
 
 	@Override
-	public Role saveOne(Role role) {
-		Assert.notNull(role, null);
-		Assert.notNull(role.getName(), null);
-		Role _role = roleRep.findOne(role.getName());
-		if (_role == null) {
-			_role = new Role(role.getName());
+	public Role saveOne(Role entity) {
+		Assert.notNull(entity, null);
+		Assert.notNull(entity.getName(), null);
+		Role _entity = roleRep.findOne(entity.getName());
+		if (_entity == null) {
+			_entity = new Role(entity.getName());
 		}
-		role.setVersion(_role.getVersion());
-		return roleRep.save(role);
+		entity.setVersion(_entity.getVersion());
+		return roleRep.save(entity);
 	}
 
 	@Override
-	public Collection<Role> save(Collection<Role> roles) {
+	public Collection<Role> save(Collection<Role> entities) {
 		List<Role> result = new ArrayList<Role>();
-		roles.stream().forEach(r -> result.add(saveOne(r)));
+		entities.stream().forEach(entity -> result.add(saveOne(entity)));
 		return result;
 	}
 

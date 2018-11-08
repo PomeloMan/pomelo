@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.transaction.annotation.Transactional;
 
-import pomeloman.core.module.system.persistence.model.User;
+import pomeloman.core.module.system.persistence.entity.User;
 import pomeloman.core.module.system.view.IUser;
 
 @Transactional(readOnly = true)
@@ -54,12 +54,12 @@ public interface IUserService extends UserDetailsService {
 	 * @return
 	 */
 	@Transactional
-	User saveOne(User user);
+	User saveOne(User entity);
 
 	/**
 	 * @param users
 	 * @return
 	 */
 	@Transactional
-	Collection<User> save(Collection<User> users);
+	Collection<User> save(Collection<User> entities);
 }

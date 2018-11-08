@@ -19,7 +19,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import pomeloman.core.common.interceptor.PreCheck;
-import pomeloman.core.module.system.persistence.model.User;
+import pomeloman.core.module.system.persistence.entity.User;
 import pomeloman.core.module.system.service.interfaces.IUserService;
 import pomeloman.core.module.system.view.IUser;
 

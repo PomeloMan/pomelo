@@ -1,4 +1,4 @@
-package pomeloman.core.module.system.service;
+package pomeloman.core.module.project.service;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -15,6 +15,7 @@ import org.apache.commons.lang3.time.DateUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -22,23 +23,27 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import pomeloman.core.common.util.DateUtil;
-import pomeloman.core.module.system.persistence.entity.Authority;
-import pomeloman.core.module.system.persistence.repo.AuthorityRepository;
-import pomeloman.core.module.system.service.interfaces.IAuthorityService;
-import pomeloman.core.module.system.view.IAuthority;
+import pomeloman.core.module.project.persistence.entity.ProjectWorkItemType;
+import pomeloman.core.module.project.persistence.repo.ProjectWorkItemTypeRepository;
+import pomeloman.core.module.project.service.interfaces.IProjectWorkItemTypeService;
+import pomeloman.core.module.project.view.IProjectWorkItemType;
 
 @Service
-public class AuthorityService implements IAuthorityService {
+public class ProjectWorkItemTypeService implements IProjectWorkItemTypeService {
 
-	private final Log logger = LogFactory.getLog(AuthorityService.class);
+	private final Log logger = LogFactory.getLog(ProjectWorkItemTypeService.class);
 
 	@Autowired
-	AuthorityRepository authorityRep;
+	ConfigurableApplicationContext context;
 
-	private Specification<Authority> getQueryClause(IAuthority view) {
-		return new Specification<Authority>() {
+	@Autowired
+	ProjectWorkItemTypeRepository typeRep;
+
+	private Specification<ProjectWorkItemType> getQueryClause(IProjectWorkItemType view) {
+		return new Specification<ProjectWorkItemType>() {
 			@Override
-			public Predicate toPredicate(Root<Authority> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
+			public Predicate toPredicate(Root<ProjectWorkItemType> root, CriteriaQuery<?> query,
+					CriteriaBuilder builder) {
 
 				if (view == null) {
 					if (logger.isDebugEnabled()) {
@@ -50,9 +55,9 @@ public class AuthorityService implements IAuthorityService {
 				String search = view.getSearch();
 
 				String name = null;
-				Authority authority = view.getEntity();
-				if (authority != null) {
-					name = authority.getName();
+				ProjectWorkItemType entity = view.getEntity();
+				if (entity != null) {
+					name = entity.getName();
 				}
 
 				List<Predicate> restrictions = new ArrayList<Predicate>();
@@ -79,40 +84,32 @@ public class AuthorityService implements IAuthorityService {
 	}
 
 	@Override
-	public Collection<Authority> query(IAuthority view) {
-		return authorityRep.findAll(getQueryClause(view));
+	public Collection<ProjectWorkItemType> query(IProjectWorkItemType view) {
+		return typeRep.findAll(getQueryClause(view));
 	}
 
 	@Override
-	public Page<Authority> query(IAuthority view, Pageable pageable) {
+	public Page<ProjectWorkItemType> query(IProjectWorkItemType view, Pageable pageable) {
 		if (pageable == null) {
 			pageable = view.getPageable();
 		}
-		return authorityRep.findAll(getQueryClause(view), pageable);
+		return typeRep.findAll(getQueryClause(view), pageable);
 	}
 
 	@Override
-	public Authority saveOne(IAuthority view) {
+	public ProjectWorkItemType saveOne(IProjectWorkItemType view) {
 		return this.saveOne(view.getEntity());
 	}
 
 	@Override
-	public Authority saveOne(Authority entity) {
+	public ProjectWorkItemType saveOne(ProjectWorkItemType entity) {
 		Assert.notNull(entity, null);
-		Assert.notNull(entity.getName(), null);
-		Authority _entity = authorityRep.findOne(entity.getName());
-		if (_entity == null) {
-			_entity = new Authority(entity.getName());
-		}
-		entity.setVersion(_entity.getVersion());
-		return authorityRep.save(entity);
+		return typeRep.save(entity);
 	}
 
 	@Override
-	public Collection<Authority> save(Collection<Authority> entities) {
-		List<Authority> result = new ArrayList<Authority>();
-		entities.stream().forEach(entity -> result.add(saveOne(entity)));
-		return result;
+	public Collection<ProjectWorkItemType> save(Collection<ProjectWorkItemType> entities) {
+		return (Collection<ProjectWorkItemType>) typeRep.save(entities);
 	}
 
 }

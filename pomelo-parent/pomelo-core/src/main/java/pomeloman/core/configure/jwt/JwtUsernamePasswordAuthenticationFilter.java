@@ -23,7 +23,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import pomeloman.core.module.system.enums.Status;
-import pomeloman.core.module.system.persistence.model.User;
+import pomeloman.core.module.system.persistence.entity.User;
 
 /**
  * JwtUsernamePasswordAuthenticationFilter

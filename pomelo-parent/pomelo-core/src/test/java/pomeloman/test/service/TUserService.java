@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import pomeloman.core.Application;
-import pomeloman.core.module.system.persistence.model.User;
+import pomeloman.core.module.system.persistence.entity.User;
 import pomeloman.core.module.system.service.interfaces.IUserService;
 
 @RunWith(SpringRunner.class)

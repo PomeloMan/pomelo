@@ -33,7 +33,7 @@ import com.google.gson.Gson;
 
 import pomeloman.core.Application;
 import pomeloman.core.module.system.controller.UserController;
-import pomeloman.core.module.system.persistence.model.User;
+import pomeloman.core.module.system.persistence.entity.User;
 import pomeloman.core.module.system.view.IUser;
 
 @RunWith(SpringRunner.class)

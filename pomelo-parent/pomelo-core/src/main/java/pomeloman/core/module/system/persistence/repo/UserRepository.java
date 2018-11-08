@@ -10,8 +10,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
-import pomeloman.core.module.system.persistence.model.Authority;
-import pomeloman.core.module.system.persistence.model.User;
+import pomeloman.core.module.system.persistence.entity.Authority;
+import pomeloman.core.module.system.persistence.entity.User;
 
 public interface UserRepository extends CrudRepository<User, String>, JpaSpecificationExecutor<User> {
 

@@ -1,4 +1,4 @@
-package pomeloman.core.module.system.service;
+package pomeloman.core.module.project.service;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -15,6 +15,7 @@ import org.apache.commons.lang3.time.DateUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -22,23 +23,26 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import pomeloman.core.common.util.DateUtil;
-import pomeloman.core.module.system.persistence.entity.Authority;
-import pomeloman.core.module.system.persistence.repo.AuthorityRepository;
-import pomeloman.core.module.system.service.interfaces.IAuthorityService;
-import pomeloman.core.module.system.view.IAuthority;
+import pomeloman.core.module.project.persistence.entity.Project;
+import pomeloman.core.module.project.persistence.repo.ProjectRepository;
+import pomeloman.core.module.project.service.interfaces.IProjectService;
+import pomeloman.core.module.project.view.IProject;
 
 @Service
-public class AuthorityService implements IAuthorityService {
+public class ProjectService implements IProjectService {
 
-	private final Log logger = LogFactory.getLog(AuthorityService.class);
+	private final Log logger = LogFactory.getLog(ProjectService.class);
 
 	@Autowired
-	AuthorityRepository authorityRep;
+	ConfigurableApplicationContext context;
 
-	private Specification<Authority> getQueryClause(IAuthority view) {
-		return new Specification<Authority>() {
+	@Autowired
+	ProjectRepository projectRep;
+
+	private Specification<Project> getQueryClause(IProject view) {
+		return new Specification<Project>() {
 			@Override
-			public Predicate toPredicate(Root<Authority> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
+			public Predicate toPredicate(Root<Project> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
 
 				if (view == null) {
 					if (logger.isDebugEnabled()) {
@@ -50,9 +54,9 @@ public class AuthorityService implements IAuthorityService {
 				String search = view.getSearch();
 
 				String name = null;
-				Authority authority = view.getEntity();
-				if (authority != null) {
-					name = authority.getName();
+				Project entity = view.getEntity();
+				if (entity != null) {
+					name = entity.getName();
 				}
 
 				List<Predicate> restrictions = new ArrayList<Predicate>();
@@ -79,38 +83,37 @@ public class AuthorityService implements IAuthorityService {
 	}
 
 	@Override
-	public Collection<Authority> query(IAuthority view) {
-		return authorityRep.findAll(getQueryClause(view));
+	public Collection<Project> query(IProject view) {
+		return projectRep.findAll(getQueryClause(view));
 	}
 
 	@Override
-	public Page<Authority> query(IAuthority view, Pageable pageable) {
+	public Page<Project> query(IProject view, Pageable pageable) {
 		if (pageable == null) {
 			pageable = view.getPageable();
 		}
-		return authorityRep.findAll(getQueryClause(view), pageable);
+		return projectRep.findAll(getQueryClause(view), pageable);
 	}
 
 	@Override
-	public Authority saveOne(IAuthority view) {
+	public Project saveOne(IProject view) {
 		return this.saveOne(view.getEntity());
 	}
 
 	@Override
-	public Authority saveOne(Authority entity) {
+	public Project saveOne(Project entity) {
 		Assert.notNull(entity, null);
-		Assert.notNull(entity.getName(), null);
-		Authority _entity = authorityRep.findOne(entity.getName());
+		Project _entity = projectRep.findOne(entity.getId());
 		if (_entity == null) {
-			_entity = new Authority(entity.getName());
+			_entity = new Project(entity.getName());
 		}
 		entity.setVersion(_entity.getVersion());
-		return authorityRep.save(entity);
+		return projectRep.save(entity);
 	}
 
 	@Override
-	public Collection<Authority> save(Collection<Authority> entities) {
-		List<Authority> result = new ArrayList<Authority>();
+	public Collection<Project> save(Collection<Project> entities) {
+		List<Project> result = new ArrayList<Project>();
 		entities.stream().forEach(entity -> result.add(saveOne(entity)));
 		return result;
 	}

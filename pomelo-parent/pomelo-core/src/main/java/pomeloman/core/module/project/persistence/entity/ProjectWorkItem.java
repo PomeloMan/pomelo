@@ -1,12 +1,14 @@
 package pomeloman.core.module.project.persistence.entity;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 import pomeloman.core.module.system.enums.Priority;
 import pomeloman.core.module.system.persistence.VersionEntity;
@@ -27,6 +29,9 @@ public class ProjectWorkItem extends VersionEntity implements Serializable {
 	private Date targetDate;
 	private String comment;
 	private String tag;
+
+	@ManyToMany
+	private Collection<ProjectWorkItemGroup> groups;
 
 	public ProjectWorkItem() {
 		super();

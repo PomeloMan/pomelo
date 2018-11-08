@@ -115,7 +115,7 @@ public class InitializationConfigure {
 			}
 			try {
 				Collection<ProjectWorkItemProcess> processes = gson().fromJson(IOUtils.toString(
-						this.getClass().getResourceAsStream("/initialization/project_workItem_process.json"),
+						this.getClass().getResourceAsStream("/initialization/project/workItem_process.json"),
 						ApplicationConstants.ENCODING), new TypeToken<List<ProjectWorkItemProcess>>() {
 						}.getType());
 				Collection<ProjectWorkItemProcess> _processes = projProcessService.query(null);
@@ -129,7 +129,7 @@ public class InitializationConfigure {
 			}
 			try {
 				Collection<ProjectWorkItemType> types = gson().fromJson(IOUtils.toString(
-						this.getClass().getResourceAsStream("/initialization/project_workItem_type.json"),
+						this.getClass().getResourceAsStream("/initialization/project/workItem_type.json"),
 						ApplicationConstants.ENCODING), new TypeToken<List<ProjectWorkItemType>>() {
 						}.getType());
 				Collection<ProjectWorkItemType> _processes = projTypeService.query(null);

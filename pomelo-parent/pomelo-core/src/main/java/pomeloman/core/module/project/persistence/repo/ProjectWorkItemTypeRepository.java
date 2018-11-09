@@ -8,4 +8,5 @@ import pomeloman.core.module.project.persistence.entity.ProjectWorkItemType;
 public interface ProjectWorkItemTypeRepository
 		extends CrudRepository<ProjectWorkItemType, Integer>, JpaSpecificationExecutor<ProjectWorkItemType> {
 
+	ProjectWorkItemType findByNameAndProcess(String name, String processName);
 }

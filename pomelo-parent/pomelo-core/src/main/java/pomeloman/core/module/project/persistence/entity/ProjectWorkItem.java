@@ -27,7 +27,6 @@ public class ProjectWorkItem extends VersionEntity implements Serializable {
 	private Priority priority;
 	private Date startDate;
 	private Date targetDate;
-	private String comment;
 	private String tag;
 
 	@ManyToMany
@@ -89,14 +88,6 @@ public class ProjectWorkItem extends VersionEntity implements Serializable {
 
 	public void setTargetDate(Date targetDate) {
 		this.targetDate = targetDate;
-	}
-
-	public String getComment() {
-		return comment;
-	}
-
-	public void setComment(String comment) {
-		this.comment = comment;
 	}
 
 	public String getTag() {

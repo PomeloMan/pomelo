@@ -171,10 +171,9 @@ public class UserService implements IUserService {
 		Assert.notNull(entity, null);
 		Assert.notNull(entity.getUsername(), null);
 		User _entity = userRep.findOne(entity.getUsername());
-		if (_entity == null) {
-			_entity = new User(entity.getUsername());
+		if (_entity != null) {
+			entity.setVersion(_entity.getVersion());
 		}
-		entity.setVersion(_entity.getVersion());
 		return userRep.save(entity);
 	}
 

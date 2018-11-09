@@ -13,27 +13,27 @@ import pomeloman.core.module.system.persistence.DefaultEntity;
 import pomeloman.core.module.system.persistence.entity.User;
 
 @Entity
-public class ProjectWorkItemGroup extends DefaultEntity implements Serializable {
+public class ProjectTeam extends DefaultEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private Integer id;
 
 	@ManyToMany
 	private Collection<User> users;
 
-	public ProjectWorkItemGroup() {
+	public ProjectTeam() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

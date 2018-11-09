@@ -8,6 +8,16 @@ import pomeloman.core.module.project.persistence.entity.ProjectWorkItem;
 
 public class IProjectWorkItem extends AbstractView<ProjectWorkItem> {
 
+	IProjectWorkItemRelation relation;
+
+	public IProjectWorkItemRelation getRelation() {
+		return relation;
+	}
+
+	public void setRelation(IProjectWorkItemRelation relation) {
+		this.relation = relation;
+	}
+
 	public IProjectWorkItem(ProjectWorkItem entity) {
 		setEntity(entity);
 	}

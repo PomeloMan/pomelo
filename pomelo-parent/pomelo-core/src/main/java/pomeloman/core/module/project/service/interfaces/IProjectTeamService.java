@@ -6,48 +6,48 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 
-import pomeloman.core.module.project.persistence.entity.ProjectWorkItemGroup;
-import pomeloman.core.module.project.view.IProjectWorkItemGroup;
+import pomeloman.core.module.project.persistence.entity.ProjectTeam;
+import pomeloman.core.module.project.view.IProjectTeam;
 
 /**
- * @ClassName IProjectWorkItemGroupService.java
+ * @ClassName IProjectTeamService.java
  * @Description TODO
  * @author PomeloMan
  */
 @Transactional(readOnly = true)
-public interface IProjectWorkItemGroupService {
+public interface IProjectTeamService {
 
 	/**
 	 * @param view
 	 * @return
 	 */
-	Collection<ProjectWorkItemGroup> query(IProjectWorkItemGroup view);
+	Collection<ProjectTeam> query(IProjectTeam view);
 
 	/**
 	 * @param view
 	 * @param pageable
 	 * @return
 	 */
-	Page<ProjectWorkItemGroup> query(IProjectWorkItemGroup view, Pageable pageable);
+	Page<ProjectTeam> query(IProjectTeam view, Pageable pageable);
 
 	/**
 	 * @param view
 	 * @return
 	 */
 	@Transactional
-	ProjectWorkItemGroup saveOne(IProjectWorkItemGroup view);
+	ProjectTeam saveOne(IProjectTeam view);
 
 	/**
 	 * @param project
 	 * @return
 	 */
 	@Transactional
-	ProjectWorkItemGroup saveOne(ProjectWorkItemGroup entity);
+	ProjectTeam saveOne(ProjectTeam entity);
 
 	/**
 	 * @param projects
 	 * @return
 	 */
 	@Transactional
-	Collection<ProjectWorkItemGroup> save(Collection<ProjectWorkItemGroup> entities);
+	Collection<ProjectTeam> save(Collection<ProjectTeam> entities);
 }

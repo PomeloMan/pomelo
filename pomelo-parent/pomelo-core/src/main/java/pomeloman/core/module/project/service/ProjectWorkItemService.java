@@ -25,6 +25,7 @@ import org.springframework.util.Assert;
 import pomeloman.core.common.util.DateUtil;
 import pomeloman.core.module.project.persistence.entity.ProjectWorkItem;
 import pomeloman.core.module.project.persistence.repo.ProjectWorkItemRepository;
+import pomeloman.core.module.project.service.interfaces.IProjectWorkItemRelationService;
 import pomeloman.core.module.project.service.interfaces.IProjectWorkItemService;
 import pomeloman.core.module.project.view.IProjectWorkItem;
 
@@ -35,9 +36,10 @@ public class ProjectWorkItemService implements IProjectWorkItemService {
 
 	@Autowired
 	ConfigurableApplicationContext context;
-
 	@Autowired
 	ProjectWorkItemRepository workItemRep;
+	@Autowired
+	IProjectWorkItemRelationService relationService;
 
 	private Specification<ProjectWorkItem> getQueryClause(IProjectWorkItem view) {
 		return new Specification<ProjectWorkItem>() {
@@ -104,10 +106,9 @@ public class ProjectWorkItemService implements IProjectWorkItemService {
 	public ProjectWorkItem saveOne(ProjectWorkItem entity) {
 		Assert.notNull(entity, null);
 		ProjectWorkItem _entity = workItemRep.findOne(entity.getId());
-		if (_entity == null) {
-			_entity = new ProjectWorkItem(entity.getTitle());
+		if (_entity != null) {
+			entity.setVersion(_entity.getVersion());
 		}
-		entity.setVersion(_entity.getVersion());
 		return workItemRep.save(entity);
 	}
 

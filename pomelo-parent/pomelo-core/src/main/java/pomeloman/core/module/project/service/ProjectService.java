@@ -104,10 +104,9 @@ public class ProjectService implements IProjectService {
 	public Project saveOne(Project entity) {
 		Assert.notNull(entity, null);
 		Project _entity = projectRep.findOne(entity.getId());
-		if (_entity == null) {
-			_entity = new Project(entity.getName());
+		if (_entity != null) {
+			entity.setVersion(_entity.getVersion());
 		}
-		entity.setVersion(_entity.getVersion());
 		return projectRep.save(entity);
 	}
 

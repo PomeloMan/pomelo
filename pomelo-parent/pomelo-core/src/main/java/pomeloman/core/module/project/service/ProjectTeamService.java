@@ -23,26 +23,26 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import pomeloman.core.common.util.DateUtil;
-import pomeloman.core.module.project.persistence.entity.ProjectWorkItemGroup;
-import pomeloman.core.module.project.persistence.repo.ProjectWorkItemGroupRepository;
-import pomeloman.core.module.project.service.interfaces.IProjectWorkItemGroupService;
-import pomeloman.core.module.project.view.IProjectWorkItemGroup;
+import pomeloman.core.module.project.persistence.entity.ProjectTeam;
+import pomeloman.core.module.project.persistence.repo.ProjectTeamRepository;
+import pomeloman.core.module.project.service.interfaces.IProjectTeamService;
+import pomeloman.core.module.project.view.IProjectTeam;
 
 @Service
-public class ProjectWorkItemGroupService implements IProjectWorkItemGroupService {
+public class ProjectTeamService implements IProjectTeamService {
 
-	private final Log logger = LogFactory.getLog(ProjectWorkItemGroupService.class);
+	private final Log logger = LogFactory.getLog(ProjectTeamService.class);
 
 	@Autowired
 	ConfigurableApplicationContext context;
 
 	@Autowired
-	ProjectWorkItemGroupRepository workItemGroupRep;
+	ProjectTeamRepository workItemGroupRep;
 
-	private Specification<ProjectWorkItemGroup> getQueryClause(IProjectWorkItemGroup view) {
-		return new Specification<ProjectWorkItemGroup>() {
+	private Specification<ProjectTeam> getQueryClause(IProjectTeam view) {
+		return new Specification<ProjectTeam>() {
 			@Override
-			public Predicate toPredicate(Root<ProjectWorkItemGroup> root, CriteriaQuery<?> query,
+			public Predicate toPredicate(Root<ProjectTeam> root, CriteriaQuery<?> query,
 					CriteriaBuilder builder) {
 
 				if (view == null) {
@@ -54,7 +54,7 @@ public class ProjectWorkItemGroupService implements IProjectWorkItemGroupService
 
 				String search = view.getSearch();
 
-				ProjectWorkItemGroup entity = view.getEntity();
+				ProjectTeam entity = view.getEntity();
 				if (entity != null) {
 
 				}
@@ -78,12 +78,12 @@ public class ProjectWorkItemGroupService implements IProjectWorkItemGroupService
 	}
 
 	@Override
-	public Collection<ProjectWorkItemGroup> query(IProjectWorkItemGroup view) {
+	public Collection<ProjectTeam> query(IProjectTeam view) {
 		return workItemGroupRep.findAll(getQueryClause(view));
 	}
 
 	@Override
-	public Page<ProjectWorkItemGroup> query(IProjectWorkItemGroup view, Pageable pageable) {
+	public Page<ProjectTeam> query(IProjectTeam view, Pageable pageable) {
 		if (pageable == null) {
 			pageable = view.getPageable();
 		}
@@ -91,19 +91,19 @@ public class ProjectWorkItemGroupService implements IProjectWorkItemGroupService
 	}
 
 	@Override
-	public ProjectWorkItemGroup saveOne(IProjectWorkItemGroup view) {
+	public ProjectTeam saveOne(IProjectTeam view) {
 		return this.saveOne(view.getEntity());
 	}
 
 	@Override
-	public ProjectWorkItemGroup saveOne(ProjectWorkItemGroup entity) {
+	public ProjectTeam saveOne(ProjectTeam entity) {
 		Assert.notNull(entity, null);
 		return workItemGroupRep.save(entity);
 	}
 
 	@Override
-	public Collection<ProjectWorkItemGroup> save(Collection<ProjectWorkItemGroup> entities) {
-		return (Collection<ProjectWorkItemGroup>) workItemGroupRep.save(entities);
+	public Collection<ProjectTeam> save(Collection<ProjectTeam> entities) {
+		return (Collection<ProjectTeam>) workItemGroupRep.save(entities);
 	}
 
 }

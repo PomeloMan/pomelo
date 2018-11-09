@@ -101,10 +101,9 @@ public class AuthorityService implements IAuthorityService {
 		Assert.notNull(entity, null);
 		Assert.notNull(entity.getName(), null);
 		Authority _entity = authorityRep.findOne(entity.getName());
-		if (_entity == null) {
-			_entity = new Authority(entity.getName());
+		if (_entity != null) {
+			entity.setVersion(_entity.getVersion());
 		}
-		entity.setVersion(_entity.getVersion());
 		return authorityRep.save(entity);
 	}
 

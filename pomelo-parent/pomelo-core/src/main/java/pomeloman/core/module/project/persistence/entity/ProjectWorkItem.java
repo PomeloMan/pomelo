@@ -20,7 +20,7 @@ public class ProjectWorkItem extends VersionEntity implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private Long id;
 
 	private String title;
 	private String description;
@@ -31,7 +31,7 @@ public class ProjectWorkItem extends VersionEntity implements Serializable {
 	private String tag;
 
 	@ManyToMany
-	private Collection<ProjectWorkItemGroup> groups;
+	private Collection<ProjectTeam> teams;
 
 	public ProjectWorkItem() {
 		super();
@@ -43,11 +43,11 @@ public class ProjectWorkItem extends VersionEntity implements Serializable {
 		this.title = title;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -105,6 +105,14 @@ public class ProjectWorkItem extends VersionEntity implements Serializable {
 
 	public void setTag(String tag) {
 		this.tag = tag;
+	}
+
+	public Collection<ProjectTeam> getTeams() {
+		return teams;
+	}
+
+	public void setTeams(Collection<ProjectTeam> teams) {
+		this.teams = teams;
 	}
 
 }

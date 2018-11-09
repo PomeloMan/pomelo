@@ -50,4 +50,6 @@ public interface IProjectWorkItemService {
 	 */
 	@Transactional
 	Collection<ProjectWorkItem> save(Collection<ProjectWorkItem> entities);
+
+	// <-------------------- --------------------> //
 }

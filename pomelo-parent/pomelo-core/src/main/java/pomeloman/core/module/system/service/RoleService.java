@@ -101,10 +101,9 @@ public class RoleService implements IRoleService {
 		Assert.notNull(entity, null);
 		Assert.notNull(entity.getName(), null);
 		Role _entity = roleRep.findOne(entity.getName());
-		if (_entity == null) {
-			_entity = new Role(entity.getName());
+		if (_entity != null) {
+			entity.setVersion(_entity.getVersion());
 		}
-		entity.setVersion(_entity.getVersion());
 		return roleRep.save(entity);
 	}
 

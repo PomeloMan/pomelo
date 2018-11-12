@@ -3,6 +3,7 @@ package pomeloman.core.configure.initialization;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 
@@ -133,7 +134,11 @@ public class InitializationConfigure {
 						ApplicationConstants.ENCODING), new TypeToken<List<ProjectWorkItemType>>() {
 						}.getType());
 				Collection<ProjectWorkItemType> _processes = projTypeService.query(null);
-				types.removeAll(_processes);
+				Collection<String> names = _processes.stream().map(process -> {
+					return process.getName();
+				}).collect(Collectors.toSet());
+				// exclude exist items
+				types = types.stream().filter(type -> !names.contains(type.getName())).collect(Collectors.toSet());
 				projTypeService.save(types);
 			} catch (Exception e) {
 				if (debug) {

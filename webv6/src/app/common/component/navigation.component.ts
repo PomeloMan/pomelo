@@ -5,9 +5,9 @@ import { isNullOrUndefined } from "util";
 export class NavigationComponent {
 
 	constructor(
-		public router: Router,
-		public route: ActivatedRoute,
-		public location: Location
+		protected router: Router,
+		protected route: ActivatedRoute,
+		protected location: Location
 	) { }
 
 	/**

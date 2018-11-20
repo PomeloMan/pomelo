@@ -1,4 +1,4 @@
-@import '~@angular/material/_theming';
+@import '~@angular/material/theming';
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -10,9 +10,9 @@
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://www.google.com/design/spec/style/color.html
 $default-primary: mat-palette($mat-indigo);
-$default-accent:  mat-palette($mat-pink, A200, A100, A400);
+$default-accent: mat-palette($mat-pink, A200, A100, A400);
 // The warn palette is optional (defaults to red).
-$default-warn:    mat-palette($mat-red);
+$default-warn: mat-palette($mat-red);
 // Create the theme object (a Sass map containing all of the palettes).
 $default-theme: mat-light-theme($default-primary, $default-accent, $default-warn);
 
@@ -28,101 +28,27 @@ $default-theme: mat-light-theme($default-primary, $default-accent, $default-warn
 
 // Define an alternate dark theme.
 $dark-primary: mat-palette($mat-blue-grey);
-$dark-accent:  mat-palette($mat-amber, A200, A100, A400);
-$dark-warn:    mat-palette($mat-deep-orange);
-$dark-theme:   mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+$dark-accent: mat-palette($mat-amber, A200, A100, A400);
+$dark-warn: mat-palette($mat-deep-orange);
+$dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+
 // Include the alternative theme styles inside of a block with a CSS class. You can make this
 // CSS class whatever you want. In this example, any component inside of an element with
-// `.unicorn-dark-theme` will be affected by this alternate dark theme instead of the default theme.
-.unicorn-dark-theme {
+// `.dark-theme` will be affected by this alternate dark theme instead of the default theme.
+.dark-theme {
   @include angular-material-theme($dark-theme);
 }
 
-// Define an alternate deep-purple theme.
-$deeppurple-amber-primary: mat-palette($mat-deep-purple);
-$deeppurple-amber-accent:  mat-palette($mat-amber, A200, A100, A400);
-$deeppurple-amber-warn:    mat-palette($mat-red);
-$deeppurple-amber-theme:   mat-light-theme($deeppurple-amber-primary, $deeppurple-amber-accent, $deeppurple-amber-warn);
-.unicorn-deeppurple-amber-theme {
-  @include angular-material-theme($deeppurple-amber-theme);
-}
+@import './theme/deeppurple-amber.theme.scss';
+@import './theme/purple-green.theme.scss';
+@import './theme/pink-bluegrey.theme.scss';
 
-// Define an alternate purple-green theme.
-$purple-green-primary: mat-palette($mat-purple);
-$purple-green-accent:  mat-palette($mat-green, A200, A100, A400);
-$purple-green-warn:    mat-palette($mat-orange);
-$purple-green-theme:   mat-dark-theme($purple-green-primary, $purple-green-accent, $purple-green-warn);
-.unicorn-purple-green-theme {
-  @include angular-material-theme($purple-green-theme);
-}
-
-// Define an alternate pink-bluegrey theme.
-$pink-bluegrey-primary: mat-palette($mat-pink);
-$pink-bluegrey-accent:  mat-palette($mat-blue-grey, A200, A100, A400);
-$pink-bluegrey-warn:    mat-palette($mat-orange);
-$pink-bluegrey-theme:   mat-dark-theme($pink-bluegrey-primary, $pink-bluegrey-accent, $pink-bluegrey-warn);
-.unicorn-pink-bluegrey-theme {
-  @include angular-material-theme($pink-bluegrey-theme);
-}
-
-// 滚动条主题样式
 .default-theme mat-sidenav-content {
-  &::-webkit-scrollbar
-  {
-    width: 4px;
-  }
-  &::-webkit-scrollbar-thumb
-  {
-    border-radius: 10px;
+  &::-webkit-scrollbar-thumb {
     background-color: mat-color($default-primary);
   }
 }
-.unicorn-deeppurple-amber-theme mat-sidenav-content {
-  &::-webkit-scrollbar
-  {
-    width: 4px;
-  }
-  &::-webkit-scrollbar-thumb
-  {
-    border-radius: 10px;
-    background-color: mat-color($deeppurple-amber-primary);
-  }
-}
-.unicorn-purple-green-theme mat-sidenav-content {
-  &::-webkit-scrollbar
-  {
-    width: 4px;
-    background-color: rgba(0, 0, 0, 0.2);
-  }
-  &::-webkit-scrollbar-thumb
-  {
-    border-radius: 10px;
-    background-color: mat-color($purple-green-primary);
-  }
-}
-.unicorn-pink-bluegrey-theme mat-sidenav-content {
-  &::-webkit-scrollbar
-  {
-    width: 4px;
-    background-color: rgba(0, 0, 0, 0.2);
-  }
-  &::-webkit-scrollbar-thumb
-  {
-    border-radius: 10px;
-    background-color: mat-color($pink-bluegrey-primary);
-  }
-}
 
-// user-detail
-// .default-theme app-user-detail .mat-card .mat-card-header {
-//   background: mat-color($default-primary);
-// }
-// .unicorn-deeppurple-amber-theme app-user-detail .mat-card .mat-card-header {
-//   background: mat-color($deeppurple-amber-primary);
-// }
-// .unicorn-purple-green-theme app-user-detail .mat-card .mat-card-header {
-//   background: mat-color($purple-green-primary);
-// }
-// .unicorn-pink-bluegrey-theme app-user-detail .mat-card .mat-card-header {
-//   background: mat-color($pink-bluegrey-primary);
-// }
+.default-theme i.primary {
+  background-color: mat-color($default-primary);
+}

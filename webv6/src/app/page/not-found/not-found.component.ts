@@ -11,9 +11,9 @@ import { Location } from '@angular/common';
 export class PageNotFoundComponent extends NavigationComponent {
 
 	constructor(
-		public router: Router,
-		public route: ActivatedRoute,
-		public location: Location
+		protected router: Router,
+		protected route: ActivatedRoute,
+		protected location: Location
 	) {
 		super(router, route, location)
 	}

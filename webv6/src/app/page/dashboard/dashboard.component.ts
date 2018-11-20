@@ -22,6 +22,11 @@ export class DashboardComponent {
 
 	active: boolean = true;
 	state: string = this.active ? 'active' : 'inactive';
+
+	constructor(
+	) {
+	}
+
 	toggle() {
 		this.active = !this.active;
 		this.state = this.active ? 'active' : 'inactive';

@@ -1,0 +1,20 @@
+// Define an alternate pink-bluegrey theme.
+$pink-bluegrey-primary: mat-palette($mat-pink);
+$pink-bluegrey-accent: mat-palette($mat-blue-grey, A200, A100, A400);
+$pink-bluegrey-warn: mat-palette($mat-orange);
+$pink-bluegrey-theme: mat-dark-theme($pink-bluegrey-primary, $pink-bluegrey-accent, $pink-bluegrey-warn);
+
+.pink-bluegrey-theme {
+  @include angular-material-theme($pink-bluegrey-theme);
+}
+
+// special element style
+.pink-bluegrey-theme mat-sidenav-content {
+  &::-webkit-scrollbar-thumb {
+    background-color: mat-color($pink-bluegrey-primary);
+  }
+}
+
+.pink-bluegrey-theme i.primary {
+  background-color: mat-color($pink-bluegrey-primary);
+}

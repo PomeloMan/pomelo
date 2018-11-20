@@ -1,0 +1,20 @@
+// Define an alternate deep-purple theme.
+$deeppurple-amber-primary: mat-palette($mat-deep-purple);
+$deeppurple-amber-accent: mat-palette($mat-amber, A200, A100, A400);
+$deeppurple-amber-warn: mat-palette($mat-red);
+$deeppurple-amber-theme: mat-light-theme($deeppurple-amber-primary, $deeppurple-amber-accent, $deeppurple-amber-warn);
+
+.deeppurple-amber-theme {
+  @include angular-material-theme($deeppurple-amber-theme);
+}
+
+// special element style
+.deeppurple-amber-theme mat-sidenav-content {
+  &::-webkit-scrollbar-thumb {
+    background-color: mat-color($deeppurple-amber-primary);
+  }
+}
+
+.deeppurple-amber-theme i.primary {
+  background-color: mat-color($deeppurple-amber-primary);
+}

@@ -1,0 +1,41 @@
+.menu-wrapper {
+  mat-divider {
+    margin: 7px 16px 8px 16px;
+  }
+
+  button {
+    height: 32px;
+    line-height: 32px;
+    display: flex;
+    align-items: center;
+
+    mat-icon {
+      margin-right: 8px !important;
+    }
+  }
+}
+
+.avatar-menu-wrapper {
+  width: 252px;
+
+  .user-menu-item {
+    padding: 6px 16px;
+    overflow: hidden;
+    word-break: break-all;
+    display: flex;
+    align-items: center;
+
+    .user-menu-item-image {
+      height: 40px;
+      width: 40px;
+      margin-right: 8px;
+      border-radius: 50%;
+    }
+
+    .user-menu-item-details {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}

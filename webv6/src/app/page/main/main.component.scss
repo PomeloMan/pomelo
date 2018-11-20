@@ -1,17 +1,41 @@
 /* header */
-.navbar-header {
+mat-toolbar.navbar-header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  height: auto;
+  height: 48px;
   z-index: 2;
-  padding: 4px 16px;
+  padding: 0px;
   align-items: center;
+  font-size: 16px;
+
+  .navbar-list {
+    display: flex;
+    align-items: center;
+    height: inherit;
+
+    .navbar-item {
+      height: inherit;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
+      min-width: 48px;
+
+      .navbar-item-avatar {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+      }
+    }
+  }
 }
-.navbar-header.flex {
+
+mat-toolbar.navbar-header.flex {
   display: flex;
   flex-wrap: wrap;
+
   .flex-spacer {
     /* This fills the remaining space, by using flexbox. 
        Every toolbar row uses a flexbox row layout. */
@@ -26,25 +50,64 @@
   bottom: 0;
   left: 0;
   right: 0;
+
   /* sidenav */
-  .sidenav {
+  mat-sidenav.sidenav {
     align-items: center;
     justify-content: center;
-    .forward {
-      position: absolute;
-      right: 0;
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
+
+    mat-nav-list {
+
+      mat-list-item.active {
+        background: rgba(0, 0, 0, 0.04);
+      }
+
+      mat-list-item {
+        i {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 3px;
+          height: inherit;
+        }
+
+        .menu-item {
+          display: flex;
+          align-items: center;
+
+          span {
+            font-size: 14px;
+          }
+        }
+
+        .forward {
+          position: absolute;
+          right: 0;
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+        }
+      }
     }
   }
+
   mat-sidenav-content {
-		padding: 12px;
+    padding: 12px;
+
+    // scrollbar style
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+    }
   }
 }
 
 /* cdk-overlay */
-.theme-item, .theme-item mat-icon {
+.theme-item,
+.theme-item mat-icon {
   width: 48px;
   height: 48px;
   line-height: 48px;

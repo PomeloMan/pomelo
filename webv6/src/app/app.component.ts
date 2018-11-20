@@ -20,6 +20,9 @@ export class AppComponent {
       if (event instanceof NavigationEnd) {
         this.navigating = false;
       }
+    }, error => {
+      console.error(error);
+      this.navigating = false;
     });
   }
 }

@@ -20,7 +20,7 @@ mat-toolbar.navbar-header {
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 0;
+      padding: 0 8px;
       min-width: 48px;
 
       .navbar-item-avatar {
@@ -56,7 +56,7 @@ mat-toolbar.navbar-header.flex {
     align-items: center;
     justify-content: center;
 
-    mat-nav-list {
+    mat-nav-list.menu-list {
 
       mat-list-item.active {
         background: rgba(0, 0, 0, 0.04);
@@ -88,11 +88,24 @@ mat-toolbar.navbar-header.flex {
           align-items: center;
         }
       }
+
+      mat-nav-list.submenu-list {
+        padding: 0;
+
+        .submenu-item {
+          flex: 1;
+          display: flex;
+          align-items: center;
+          height: inherit;
+          padding-left: 8px;
+        }
+      }
     }
   }
 
   mat-sidenav-content {
     padding: 12px;
+    height: calc(100% - 24px);
 
     // scrollbar style
     &::-webkit-scrollbar {
@@ -103,6 +116,11 @@ mat-toolbar.navbar-header.flex {
       border-radius: 10px;
     }
   }
+}
+
+/** project **/
+.project-wrapper {
+  height: 100%;
 }
 
 /* cdk-overlay */

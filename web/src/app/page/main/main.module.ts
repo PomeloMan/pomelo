@@ -6,6 +6,7 @@ import { MainRoutingModule } from './main-routing.module';
 
 import { MainComponent } from './main.component';
 import { FormsModule } from '@angular/forms';
+import { ProjectComponent } from './project/project.component';
 
 @NgModule({
 	imports: [
@@ -15,7 +16,8 @@ import { FormsModule } from '@angular/forms';
 		MainRoutingModule
 	],
 	declarations: [
-		MainComponent
+		MainComponent,
+		ProjectComponent
 	],
 	providers: []
 })

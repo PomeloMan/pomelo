@@ -1,16 +1,23 @@
 import { Injectable } from '@angular/core';
+import { STORAGE_SETTING } from './app.constant';
 
 @Injectable()
 export class StorageService {
 
-	storage: Storage;
+	private _settings: any;
+	private storage: Storage;
 
 	constructor() {
 		this.setDefault();
+		this.init();
+	}
+
+	private init() {
+		this._settings = JSON.parse(this.storage.getItem(STORAGE_SETTING) || "{}");
 	}
 
 	public setDefault() {
-		this.setStorage(sessionStorage);
+		this.setStorage(localStorage);// sessionStorage
 	}
 
 	public setStorage(storage: Storage) {
@@ -18,14 +25,17 @@ export class StorageService {
 	}
 
 	public setItem(key: string, value: any) {
-		this.storage.setItem(key, JSON.stringify(value));
+		this._settings[key] = value;
+		this.storage.setItem(STORAGE_SETTING, JSON.stringify(this._settings));
 	}
 
 	public getItem(key: string) {
-		return JSON.parse(this.storage.getItem(key));
+		if (key == STORAGE_SETTING) return this._settings;
+		return this._settings[key];
 	}
 
 	public removeItem(key: string) {
-		this.storage.removeItem(key);
+		delete this._settings[key];
+		this.storage.setItem(STORAGE_SETTING, JSON.stringify(this._settings));
 	}
 }

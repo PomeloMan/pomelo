@@ -1,0 +1,82 @@
+<mat-tab-group>
+  <mat-tab label="Projects">
+    <ng-template matTabContent>
+      Content 1 - Loaded: {{getTimeLoaded(1) | date:'medium'}}
+      <mat-grid-list cols="3" rowHeight="2:1" class="project-list">
+        <mat-grid-tile>
+          <div class="project-wrapper">
+            <div class="project-item">
+              1
+            </div>
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <div class="project-wrapper">
+            <div class="project-item">
+              2
+            </div>
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <div class="project-wrapper">
+            <div class="project-item">
+              3
+            </div>
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <div class="project-wrapper">
+            <div class="project-item">
+              4
+            </div>
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <div class="project-wrapper">
+            <div class="project-item">
+              5
+            </div>
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <div class="project-wrapper">
+            <div class="project-item">
+              6
+            </div>
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <div class="project-wrapper">
+            <div class="project-item">
+              7
+            </div>
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <div class="project-wrapper">
+            <div class="project-item">
+              8
+            </div>
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <div class="project-wrapper">
+            <div class="project-item">
+              9
+            </div>
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="Second">
+    <ng-template matTabContent>
+      Content 2 - Loaded: {{getTimeLoaded(2) | date:'medium'}}
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="Third">
+    <ng-template matTabContent>
+      Content 3 - Loaded: {{getTimeLoaded(3) | date:'medium'}}
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>

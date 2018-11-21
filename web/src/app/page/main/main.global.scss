@@ -1,4 +1,39 @@
+//.backdrop-submenu-default+div: .backdrop-submenu 同级<div>元素（'.cdk-overlay-connected-position-bounding-box'）
+// .backdrop-submenu-default+div {
+// }
+// .backdrop-submenu-mini+div {
+// }
+
 .menu-wrapper {
+  mat-nav-list {
+    padding: 0;
+
+    mat-list-item span {
+      font-size: 14px;
+    }
+  }
+}
+
+/** submenu layout **/
+.submenu-wrapper {
+  position: absolute;
+
+  a {
+    display: flex;
+    align-items: center;
+
+    mat-icon {
+      margin-right: 0px !important;
+    }
+  }
+}
+
+/** submenu layout **/
+
+/** avatar menu layout **/
+.avatar-menu-wrapper {
+  width: 252px;
+
   mat-divider {
     margin: 7px 16px 8px 16px;
   }
@@ -13,10 +48,6 @@
       margin-right: 8px !important;
     }
   }
-}
-
-.avatar-menu-wrapper {
-  width: 252px;
 
   .user-menu-item {
     padding: 6px 16px;
@@ -39,3 +70,5 @@
     }
   }
 }
+
+/** avatar menu layout **/

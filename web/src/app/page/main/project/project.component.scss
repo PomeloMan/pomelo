@@ -1,0 +1,14 @@
+mat-grid-list.project-list {
+  .project-wrapper {
+    flex: 1;
+    height: inherit;
+    display: flex;
+
+    .project-item {
+      flex: 1;
+      padding: 16px;
+      display: flex;
+    }
+  }
+
+}

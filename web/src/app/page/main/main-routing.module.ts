@@ -4,12 +4,17 @@ import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './main.component';
 import { AuthGuard } from '../../config/auth-guard.service';
 import { PageNotFoundComponent } from '../not-found/not-found.component';
+import { ProjectComponent } from './project/project.component';
 
 const routes: Routes = [
 	{
 		path: '',
 		component: MainComponent,
 		children: [
+			{
+				path: 'project',
+				component: ProjectComponent
+			},
 			{
 				path: 'dashboard',
 				loadChildren: '../dashboard/dashboard.module#DashboardModule',

@@ -12,6 +12,11 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.support.BeanDefinitionRegistry;
+import org.springframework.beans.factory.support.DefaultListableBeanFactory;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -53,6 +58,28 @@ public class InitializationConfigure {
 	IProjectWorkItemProcessService projProcessService;
 	@Autowired
 	IProjectWorkItemTypeService projTypeService;
+
+	/** 手动注入 Bean **/
+	ConfigurableApplicationContext context;
+	BeanDefinitionRegistry beanDefinitionRegistry;
+
+	@Autowired
+	public InitializationConfigure(ConfigurableApplicationContext context) {
+		this.context = context;
+		this.beanDefinitionRegistry = (DefaultListableBeanFactory) context.getBeanFactory();
+	}
+
+	/**
+	 * 注册 Bean 到 ApplicationContext
+	 * @param beanId
+	 * @param beanClass
+	 */
+	public void registerBean(String beanId, Class<?> beanClass) {
+		BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(beanClass);
+		BeanDefinition beanDefinition = builder.getBeanDefinition();
+		beanDefinitionRegistry.registerBeanDefinition(beanId, beanDefinition);
+	}
+	/** 手动注入 Bean **/
 
 	@Bean
 	public Gson gson() {

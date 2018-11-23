@@ -107,6 +107,12 @@
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>${springfox-swagger.version}</version>
 		</dependency>
+
+		<!-- RabbitMQ -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-amqp</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -125,7 +131,7 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
 					<!-- Sets the VM argument line used when unit tests are run. -->
-        			<argLine>${surefireArgLine}</argLine>
+					<argLine>${surefireArgLine}</argLine>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -133,8 +139,8 @@
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>${jacoco-plugin.version}</version>
 				<executions>
-					<!-- Prepares the property pointing to the JaCoCo runtime agent which is 
-						passed as VM argument when Maven the Surefire plugin is executed. -->
+					<!-- Prepares the property pointing to the JaCoCo runtime agent which 
+						is passed as VM argument when Maven the Surefire plugin is executed. -->
 					<execution>
 						<id>default-prepare-agent</id>
 						<goals>
@@ -148,8 +154,8 @@
 							<propertyName>surefireArgLine</propertyName>
 						</configuration>
 					</execution>
-					<!-- Ensures that the code coverage report for unit tests is created after 
-						unit tests have been run. -->
+					<!-- Ensures that the code coverage report for unit tests is created 
+						after unit tests have been run. -->
 					<execution>
 						<id>post-unit-test</id>
 						<phase>test</phase>
@@ -163,7 +169,7 @@
 							<outputDirectory>${project.reporting.outputDirectory}/jacoco-ut</outputDirectory>
 						</configuration>
 					</execution>
-                </executions>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

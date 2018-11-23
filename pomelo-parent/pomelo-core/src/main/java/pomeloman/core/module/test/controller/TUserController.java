@@ -15,15 +15,26 @@ import org.springframework.web.bind.annotation.RestController;
 import pomeloman.core.module.system.persistence.entity.User;
 import pomeloman.core.module.system.service.interfaces.IUserService;
 import pomeloman.core.module.system.view.IUser;
+import pomeloman.core.rabbitmq.Producer;
 
 @RestController
-@RequestMapping("/test/user")
+@RequestMapping("/test")
 public class TUserController {
 
 	private final static Log logger = LogFactory.getLog(TUserController.class);
 
 	@Autowired
 	IUserService userService;
+	@Autowired
+	Producer producer;
+
+	@GetMapping("send")
+	public ResponseEntity<Object> send() {
+		for (int i = 0; i < 50; i++) {
+			producer.send();
+		}
+		return new ResponseEntity<Object>(HttpStatus.OK);
+	}
 
 	@GetMapping("query")
 	public ResponseEntity<Collection<User>> query(IUser view) {

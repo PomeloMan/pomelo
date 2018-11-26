@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.annotation.PostConstruct;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.rabbit.core.RabbitTemplate.ConfirmCallback;
@@ -32,6 +34,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class Producer implements ConfirmCallback, ReturnCallback {
 
+	private final Log logger = LogFactory.getLog(Producer.class);
+
 //	private final AmqpAdmin amqpAdmin;
 //	private final AmqpTemplate amqpTemplate;
 
@@ -50,10 +54,13 @@ public class Producer implements ConfirmCallback, ReturnCallback {
 		rabbitTemplate.setReturnCallback(this);
 	}
 
-	public void send() {
+	public void send(int type) {
 		String sendMsg = "hello " + new Date();
-		System.out.println("Sender: " + sendMsg);
-		this.rabbitTemplate.convertAndSend("hello", sendMsg);
+		if (type == 1) {
+			this.rabbitTemplate.convertAndSend("pomelor.topic.default", "log.all", "log.all" + sendMsg);
+		} else {
+			this.rabbitTemplate.convertAndSend("pomelor.topic.default", "log.info", "log.info" + sendMsg);
+		}
 	}
 
 	/**
@@ -62,9 +69,9 @@ public class Producer implements ConfirmCallback, ReturnCallback {
 	@Override
 	public void confirm(CorrelationData correlationData, boolean ack, String cause) {
 		if (ack) {
-			System.out.println("消息发送成功:" + correlationData);
+			logger.info(correlationData + "(message => exchange) successful.");
 		} else {
-			System.out.println("消息发送失败:" + cause);
+			logger.warn(correlationData + "(message => exchange) failed: " + cause);
 		}
 	}
 
@@ -73,6 +80,6 @@ public class Producer implements ConfirmCallback, ReturnCallback {
 	 */
 	@Override
 	public void returnedMessage(Message message, int replyCode, String replyText, String exchange, String routingKey) {
-		System.out.println(message.getMessageProperties().getCorrelationIdString() + " 发送失败");
+		logger.warn(message.getMessageProperties().getCorrelationIdString() + "(exchange => queue) failed.");
 	}
 }

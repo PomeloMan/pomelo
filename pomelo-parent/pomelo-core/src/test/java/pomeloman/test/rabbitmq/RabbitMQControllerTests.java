@@ -18,8 +18,12 @@ public class RabbitMQControllerTests {
 
 	@Test
 	public void hello() {
-		for (int i = 0; i < 150; i++) {
-			sender.send();
+		for (int i = 0; i < 50; i++) {
+			if (i > 25) {
+				sender.send(1);
+			} else {
+				sender.send(0);
+			}
 		}
 	}
 

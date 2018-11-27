@@ -35,7 +35,6 @@ public class RabbitConfiguration {
 	@PostConstruct
 	public void init() {
 		for (int i = 0; i < concurrency; i++) {
-			// 声明消费者
 			context.getBean(Consumer.class);
 		}
 	}

@@ -48,7 +48,9 @@ public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
 	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		// security 默认会开启 CSRF 处理，判断请求是否携带了token，如果没有就拒绝访问。并且，在请求为(GET|HEAD|TRACE|OPTIONS)时，则不会开启。
 		http.csrf().disable();
+		// http.headers().xssProtection();// security.headers.xss=true
 		http.cors().and().authorizeRequests().antMatchers("/", "/index.html").permitAll()
 				.antMatchers(HttpMethod.POST, "/login").permitAll().anyRequest().authenticated();
 		// .and().logout().logoutSuccessUrl("/").permitAll();

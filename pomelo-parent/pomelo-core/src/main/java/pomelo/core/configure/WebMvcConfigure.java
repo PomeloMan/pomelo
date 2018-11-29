@@ -1,5 +1,6 @@
 package pomelo.core.configure;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -8,10 +9,12 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import pomelo.core.common.interceptor.PreCheckInterceptor;
-import pomelo.core.configure.jwt.JwtTokenAuthenticationService;
 
 @Configuration
 public class WebMvcConfigure extends WebMvcConfigurerAdapter {
+
+	@Value("${jwt.header}")
+	private String header;
 
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
@@ -32,7 +35,7 @@ public class WebMvcConfigure extends WebMvcConfigurerAdapter {
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
 		registry.addMapping("/**")
-			.exposedHeaders(JwtTokenAuthenticationService.TOKEN_HEADER);// Set exposed header for front page to get the header.
+			.exposedHeaders(header);// Set exposed header for front page to get the header.
 		// .allowedOrigins("http://domainfrom.com", "*")
 		// .allowedMethods("GET", "POST", "OPTIONS", "PUT", "DELETE", "*");
 		// .allowedHeaders("Content-Type", "X-Requested-With", "accept", "Origin",

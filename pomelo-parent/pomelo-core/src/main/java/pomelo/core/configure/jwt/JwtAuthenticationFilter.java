@@ -45,15 +45,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 			throws ServletException, IOException {
 		final boolean debug = this.logger.isDebugEnabled();
 
-		String header = request.getHeader(JwtTokenAuthenticationService.TOKEN_HEADER);
+		String header = request.getHeader(jwtTokenAuthenticationService.getHeader());
 
-		if (header == null || !header.startsWith(JwtTokenAuthenticationService.TOKEN_PREFIX)) {
+		if (header == null || !header.startsWith(jwtTokenAuthenticationService.getPrefix())) {
 			chain.doFilter(request, response);
 			return;
 		}
 
 		try {
-			String token = StringUtils.substringAfter(header, JwtTokenAuthenticationService.TOKEN_PREFIX);
+			String token = StringUtils.substringAfter(header, jwtTokenAuthenticationService.getPrefix());
 			Claims claims = null;
 
 			try {
@@ -69,7 +69,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 			}
 
 			if (authenticationIsRequired(username)) {
-				Object principalJson = claims.get(JwtTokenAuthenticationService.PRINCIPAL);
+				Object principalJson = claims.get(jwtTokenAuthenticationService.getPrincipal());
 
 				User principal = null;
 				try {

@@ -71,10 +71,10 @@ public class JwtUsernamePasswordAuthenticationFilter extends AbstractAuthenticat
 		User principal = new User(auth.getName(), Status.Valid, auth.getAuthorities().stream()
 				.map(a -> new SimpleGrantedAuthority(a.getAuthority())).collect(Collectors.toSet()));
 		String token = jwtTokenAuthenticationService.generateToken(auth.getName(),
-				gson.fromJson("{" + JwtTokenAuthenticationService.PRINCIPAL + ":" + gson.toJson(principal) + "}",
+				gson.fromJson("{" + jwtTokenAuthenticationService.getPrincipal() + ":" + gson.toJson(principal) + "}",
 						new TypeToken<HashMap<String, Object>>() {
 						}.getType()));
-		res.addHeader(JwtTokenAuthenticationService.TOKEN_HEADER, JwtTokenAuthenticationService.TOKEN_PREFIX + token);
+		res.addHeader(jwtTokenAuthenticationService.getHeader(), jwtTokenAuthenticationService.getPrefix() + token);
 	}
 
 	public Gson getGson() {

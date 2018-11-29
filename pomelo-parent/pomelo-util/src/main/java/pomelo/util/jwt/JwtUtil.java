@@ -13,6 +13,7 @@ import io.jsonwebtoken.lang.Assert;
 
 /**
  * Json Web Token util
+ * 
  * @ClassName JwtUtil.java
  * @author PomeloMan
  */
@@ -47,9 +48,15 @@ public class JwtUtil {
 
 	public static String generateToken(SignatureAlgorithm algorithm, String subject, Map<String, Object> claims,
 			long expiration, String secret) {
-		return Jwts.builder().setClaims(claims).setSubject(subject)
-				.setExpiration(new Date(System.currentTimeMillis() + expiration))
-				.signWith(algorithm, Base64.decodeBase64(secret)).compact();
+		Date nowDate = new Date();
+		Date expireDate = new Date(System.currentTimeMillis() + expiration);
+		return Jwts.builder()
+				.setClaims(claims)
+				.setSubject(subject)
+				.setIssuedAt(nowDate)
+				.setExpiration(expireDate)
+				.signWith(algorithm, Base64.decodeBase64(secret))
+				.compact();
 	}
 
 	public static Claims validateToken(String token, String secret) {

@@ -1,5 +1,6 @@
 package pomelo.core.configure.jwt;
 
+import java.util.Date;
 import java.util.Map;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -30,6 +31,10 @@ public class JwtTokenAuthenticationService {
 	public Claims validateToken(String token) {
 		return JwtUtil.validateToken(token, secret);
 	}
+
+	public boolean isTokenExpired(Date expiration) {
+        return expiration.before(new Date());
+    }
 
 	public String getPrefix() {
 		return prefix;

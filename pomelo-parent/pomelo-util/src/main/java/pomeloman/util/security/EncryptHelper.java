@@ -4,6 +4,7 @@ import org.bouncycastle.util.encoders.Base64;
 
 /**
  * <p>加密工具类<br>EncryptUtil</p>
+ * Reference {@link DigestUtils.class}
  * @ClassName EncryptHelper.java
  * @author PomeloMan
  */

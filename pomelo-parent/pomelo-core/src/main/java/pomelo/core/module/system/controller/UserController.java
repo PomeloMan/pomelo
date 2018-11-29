@@ -19,6 +19,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import pomelo.core.common.interceptor.PreCheck;
+import pomelo.core.module.system.annotation.CurrentUser;
 import pomelo.core.module.system.persistence.entity.User;
 import pomelo.core.module.system.service.interfaces.IUserService;
 import pomelo.core.module.system.view.IUser;
@@ -32,10 +33,15 @@ public class UserController {
 	@Autowired
 	IUserService userService;
 
+	/**
+	 * @param principal
+	 * @param user {@link CurrentUserHandlerMethodArgumentResolver.class} 自定义注解方法参数，返回处理后的数据
+	 * @return
+	 */
 	@GetMapping("/me")
 	@ApiOperation(value = "获取当前登录用户信息", notes = "头部需要带token信息")
-	public Principal user(Principal user) {
-		return user;
+	public Principal user(Principal principal, @CurrentUser User user) {
+		return principal;
 	}
 
 	/**

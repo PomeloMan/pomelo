@@ -7,10 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 import pomeloman.core.module.system.persistence.VersionEntity;
 
 @Entity
+@Table(name = "sys_role")
 public class Role extends VersionEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;

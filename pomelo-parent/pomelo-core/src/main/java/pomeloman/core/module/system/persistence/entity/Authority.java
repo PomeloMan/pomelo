@@ -4,10 +4,12 @@ import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import pomeloman.core.module.system.persistence.VersionEntity;
 
 @Entity
+@Table(name = "sys_authority")
 public class Authority extends VersionEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;

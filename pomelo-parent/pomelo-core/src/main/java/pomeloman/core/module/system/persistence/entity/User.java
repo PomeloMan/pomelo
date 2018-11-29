@@ -20,7 +20,7 @@ import pomeloman.core.module.system.persistence.VersionEntity;
 import pomeloman.core.module.system.security.PasswordEncoderImpl;
 
 @Entity
-@Table(name = "Users")
+@Table(name = "sys_user")
 public class User extends VersionEntity implements Serializable {
 
 	// @Id

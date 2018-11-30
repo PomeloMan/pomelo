@@ -71,6 +71,7 @@ public class InitializationConfigure {
 
 	/**
 	 * 注册 Bean 到 ApplicationContext
+	 * 
 	 * @param beanId
 	 * @param beanClass
 	 */
@@ -79,6 +80,7 @@ public class InitializationConfigure {
 		BeanDefinition beanDefinition = builder.getBeanDefinition();
 		beanDefinitionRegistry.registerBeanDefinition(beanId, beanDefinition);
 	}
+
 	/** 手动注入 Bean **/
 
 	@Bean

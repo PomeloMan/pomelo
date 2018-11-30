@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.Map;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import io.jsonwebtoken.Claims;
@@ -24,17 +25,26 @@ public class JwtTokenAuthenticationService {
 	private String secret;
 	private long expiration;
 
-	public String generateToken(String subject, Map<String, Object> claims) {
-		return JwtUtil.generateToken(SignatureAlgorithm.valueOf(algorithm), subject, claims, expiration, secret);
+	@Bean
+	public JwtUtil jwtUtil() {
+		JwtUtil jwtUtil = new JwtUtil();
+		jwtUtil.setAlgorithm(SignatureAlgorithm.valueOf(algorithm));
+		jwtUtil.setSecret(secret);
+		jwtUtil.setExpiration(expiration);
+		return jwtUtil;
 	}
 
-	public Claims validateToken(String token) {
-		return JwtUtil.validateToken(token, secret);
+	public String generateToken(String subject, Map<String, Object> claims) {
+		return jwtUtil().generateToken(subject, claims);
+	}
+
+	public Claims getClaimByToken(String token) {
+		return jwtUtil().getClaimByToken(token);
 	}
 
 	public boolean isTokenExpired(Date expiration) {
-        return expiration.before(new Date());
-    }
+		return expiration.before(new Date());
+	}
 
 	public String getPrefix() {
 		return prefix;

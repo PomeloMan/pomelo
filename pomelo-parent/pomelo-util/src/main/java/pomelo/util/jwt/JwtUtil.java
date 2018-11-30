@@ -42,8 +42,8 @@ public class JwtUtil {
 		return generateToken(algorithm, subject, claims, expiration, secret);
 	}
 
-	public Claims validateToken(String token) {
-		return validateToken(token, secret);
+	public Claims getClaimByToken(String token) {
+		return getClaimByToken(token, secret);
 	}
 
 	public static String generateToken(SignatureAlgorithm algorithm, String subject, Map<String, Object> claims,
@@ -59,10 +59,18 @@ public class JwtUtil {
 				.compact();
 	}
 
-	public static Claims validateToken(String token, String secret) {
+	public static Claims getClaimByToken(String token, String secret) {
 		Assert.notNull(token);
 		Jws<Claims> jws = Jwts.parser().setSigningKey(Base64.decodeBase64(secret)).parseClaimsJws(token);
 		return jws.getBody();
+	}
+
+	public SignatureAlgorithm getAlgorithm() {
+		return algorithm;
+	}
+
+	public void setAlgorithm(SignatureAlgorithm algorithm) {
+		this.algorithm = algorithm;
 	}
 
 	public String getSecret() {
@@ -77,7 +85,7 @@ public class JwtUtil {
 		return expiration;
 	}
 
-	public void setExpiration(Long expiration) {
+	public void setExpiration(long expiration) {
 		this.expiration = expiration;
 	}
 

@@ -16,6 +16,7 @@ public class Authority extends VersionEntity implements Serializable {
 
 	@Id
 	private String name;
+	private String url;
 
 	public Authority(String name) {
 		super();
@@ -58,6 +59,14 @@ public class Authority extends VersionEntity implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 }

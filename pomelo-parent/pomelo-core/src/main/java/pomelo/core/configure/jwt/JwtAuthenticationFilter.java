@@ -47,7 +47,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 		String header = request.getHeader(jwtTokenAuthenticationService.getHeader());
 
-		if (header == null || !header.startsWith(jwtTokenAuthenticationService.getPrefix())) {
+		if (header == null) {
 			chain.doFilter(request, response);
 			return;
 		}
@@ -57,11 +57,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 			Claims claims = null;
 
 			try {
-				claims = jwtTokenAuthenticationService.validateToken(token);
+				claims = jwtTokenAuthenticationService.getClaimByToken(token);
 			} catch (Exception e) {
 				throw new AuthenticationServiceException(e.getMessage(), e);
 			}
 
+			// expired?
 			if (jwtTokenAuthenticationService.isTokenExpired(claims.getExpiration())) {
 				throw new AuthenticationServiceException("Token expired");
 			}
@@ -77,7 +78,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 				User principal = null;
 				try {
-					principal = gson.fromJson(principalJson.toString(), new TypeToken<User>() {}.getType());
+					principal = gson.fromJson(principalJson.toString(), new TypeToken<User>() { }.getType());
 				} catch (Exception e) {
 					throw new AuthenticationServiceException(e.getMessage(), e);
 				}
@@ -86,7 +87,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 				authRequest.setDetails(this.authenticationDetailsSource.buildDetails(request));
 
 				Authentication authResult = authRequest;
-				// Authentication authResult = this.authenticationManager.authenticate(authRequest);
+//				Authentication authResult = this.authenticationManager.authenticate(authRequest);
 
 				if (debug) {
 					this.logger.debug("Authentication success: " + authResult);

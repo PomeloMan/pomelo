@@ -15,7 +15,7 @@ public class JwtTest {
 	@Test
 	public void jwt() {
 		String token = jwtUtil.generateToken("Subject", new HashMap<String, Object>());
-		Claims c = jwtUtil.validateToken(token);
+		Claims c = jwtUtil.getClaimByToken(token);
 		System.out.println(c.toString());
 	}
 }

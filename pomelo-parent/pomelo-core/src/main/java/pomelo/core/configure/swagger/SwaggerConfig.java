@@ -32,7 +32,8 @@ public class SwaggerConfig {
 				// .apis(RequestHandlerSelectors.basePackage("pomelo.core"))
 				.paths(PathSelectors.any())
 				.build()
-				.securitySchemes(security());
+				.securitySchemes(security());// 全局
+//				.securityContexts(securityContexts());// 非全局
 	}
 
 	private ApiInfo apiInfo() {
@@ -43,4 +44,16 @@ public class SwaggerConfig {
 	private List<ApiKey> security() {
 		return Lists.newArrayList(new ApiKey("Authorization", "Authorization", "header"));
 	}
+
+//	private List<SecurityContext> securityContexts() {
+//		return Lists.newArrayList(SecurityContext.builder().securityReferences(defaultAuth())
+//				.forPaths(PathSelectors.regex("^(?!auth).*$")).build());
+//	}
+//
+//	private List<SecurityReference> defaultAuth() {
+//		AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
+//		AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
+//		authorizationScopes[0] = authorizationScope;
+//		return Lists.newArrayList(new SecurityReference("Authorization", authorizationScopes));
+//	}
 }

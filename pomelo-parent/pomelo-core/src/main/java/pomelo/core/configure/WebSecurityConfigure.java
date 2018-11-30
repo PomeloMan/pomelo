@@ -34,11 +34,12 @@ public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 //		web.ignoring().antMatchers("/resources/**");
-		web.ignoring().antMatchers("/**/*.html", "/**/*.css", "/**/*.js", "/**/*.png", "/**/*.jpg", "/**/*.gif",
-				"/**/*.svg", "/**/*.ico", "/**/*.ttf", "/**/*.woff", "/**/*.woff2");
+		// ignore static resources
+		web.ignoring().antMatchers("/**/*.html", "/**/*.css", "/**/*.js", "/**/*.png", "/**/*.jpg", "/**/*.gif", "/**/*.svg", "/**/*.ico", "/**/*.ttf", "/**/*.woff", "/**/*.woff2");
 		web.ignoring().antMatchers("/test/**");
 		// swagger-ui
 		web.ignoring().antMatchers("/swagger-resources/**", "/v2/api-docs", "/webjars/**", "/swagger-ui.html");
+		web.ignoring().antMatchers("/app/**");// {@link WebMvcConfigure.addInterceptors() AppAuthorizationInterceptor.class}
 	}
 
 	/**
@@ -51,10 +52,18 @@ public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
 		// security 默认会开启 CSRF 处理，判断请求是否携带了token，如果没有就拒绝访问。并且，在请求为(GET|HEAD|TRACE|OPTIONS)时，则不会开启。
 		http.csrf().disable();
 		// http.headers().xssProtection();// security.headers.xss=true
-		http.cors().and().authorizeRequests().antMatchers("/", "/index.html").permitAll()
-				.antMatchers(HttpMethod.POST, "/login").permitAll().anyRequest().authenticated();
+		http.cors()
+			.and()
+			.authorizeRequests()
+			.antMatchers("/", "/index.html")
+			.permitAll()
+			.antMatchers(HttpMethod.POST, "/login")
+			.permitAll()
+			.anyRequest()
+			.authenticated();
 		// .and().logout().logoutSuccessUrl("/").permitAll();
 		// .and()http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
+
 		http.addFilterBefore(jwtUsernamePasswordAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
 				.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 		http.exceptionHandling().accessDeniedHandler(new DefaultAccessDeniedHandler(getApplicationContext().getBean(Gson.class)))

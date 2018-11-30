@@ -9,6 +9,7 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import pomelo.core.common.interceptor.PreCheckInterceptor;
+import pomelo.core.module.app.interceptor.AppAuthorizationInterceptor;
 
 @Configuration
 public class WebMvcConfigure extends WebMvcConfigurerAdapter {
@@ -24,18 +25,21 @@ public class WebMvcConfigure extends WebMvcConfigurerAdapter {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(new PreCheckInterceptor());
+		registry.addInterceptor(new AppAuthorizationInterceptor());// app-security
 	}
 
 	/**
-	 * <p>跨域设置<br/>Cross-domain setting</p>
+	 * <p>
+	 * 跨域设置<br/>
+	 * Cross-domain setting
+	 * </p>
 	 * {@link https://spring.io/blog/2015/06/08/cors-support-in-spring-framework}
 	 * {@link https://spring.io/guides/gs/rest-service-cors/}
 	 * {@link application.properties/endpoints.cors.allowed-xxx}
 	 */
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
-		registry.addMapping("/**")
-			.exposedHeaders(header);// Set exposed header for front page to get the header.
+		registry.addMapping("/**").exposedHeaders(header);// Set exposed header for front page to get the header.
 		// .allowedOrigins("http://domainfrom.com", "*")
 		// .allowedMethods("GET", "POST", "OPTIONS", "PUT", "DELETE", "*");
 		// .allowedHeaders("Content-Type", "X-Requested-With", "accept", "Origin",
@@ -44,7 +48,8 @@ public class WebMvcConfigure extends WebMvcConfigurerAdapter {
 	}
 
 	/**
-	 * {@link pomelo.springboot.configure.WebSecurityConfigure.configure(WebSecurity web)}
+	 * {@link pomelo.springboot.configure.WebSecurityConfigure.configure(WebSecurity
+	 * web)}
 	 */
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {

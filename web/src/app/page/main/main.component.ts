@@ -145,7 +145,10 @@ export class MainComponent implements OnInit {
 	navigate(menu, pmenu?) {
 		this.getMenu(undefined, this.menus).forEach(item => { item.active = false });
 		if (pmenu) pmenu.active = true;
-		menu.active = true;
+		if (menu)
+			menu.active = true;
+		else
+			this.router.navigate(['/main/project']);
 	}
 
 }

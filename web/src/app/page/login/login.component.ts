@@ -38,14 +38,18 @@ export class LoginComponent {
 	}
 
 	login() {
-		this.api.post(API.AUTH_URL, { username: this.form.value.username, password: this.form.value.password }, { observe: 'response' }).subscribe(
-			res => {
-				this.storage.setItem(TOKEN, res.headers.get('Authorization'));
-				this.router.navigate(['/main']);
-			},
-			error => {
-				console.log(error);
-			}
-		);
+		this.api.post(
+			API.AUTH_URL,
+			{ username: this.form.value.username, password: this.form.value.password },
+			{ observe: 'response' })// show full response e.g. '{ body: {code: 10007, msg: "验证码不正确", data: null}, headers: HttpHeaders { normalizedNames: Map(0), lazyUpdate: null, lazyInit: ƒ }, ok: true, status: 200, statusText: "OK", type: 4, url: "http://localhost:8000/login"}'
+			.subscribe(
+				res => {
+					this.storage.setItem(TOKEN, res.headers.get('Authorization'));
+					this.router.navigate(['/main']);
+				},
+				error => {
+					console.log(error);
+				}
+			);
 	}
 }

@@ -1,38 +1,32 @@
 <section>
-    <mat-toolbar color="primary" class="navbar-header flex mat-elevation-z6">
-        <span>Application Title</span>
-
-        <span>Right Aligned Text</span>
-    </mat-toolbar>
-</section>
-<section>
-    <div class="container">
-        <div class="text-wrapper">
-            <h1>Built for developers</h1>
-            <p>
-                GitHub is a development platform inspired by the way you work. From open source to business, you can host and review code, manage projects, and build software alongside millions of other developers.
-            </p>
-        </div>
-        <div class="form-wrapper">
-            <div class="mat-elevation-z6">
-                <form [formGroup]="form" (ngSubmit)="login()">
-                    <mat-form-field class="full-width">
-                        <input matInput placeholder="Email" [formControl]="form.controls.username" required/>
-                        <mat-error *ngIf="form.controls.username.invalid">{{getErrorMessage(form.controls.username)}}</mat-error>
-                    </mat-form-field>
-                    <mat-form-field class="full-width">
-                        <input matInput type="password" placeholder="Password" [formControl]="form.controls.password" required/>
-                        <a href="#" matSuffix matTooltip="Forgot password?">
-                            <mat-icon color="primary">help_outline</mat-icon>
-                        </a>
-                        <mat-error *ngIf="form.controls.password.invalid">{{getErrorMessage(form.controls.password)}}</mat-error>
-                    </mat-form-field>
-                    <div class="btn-wrapper">
-                        <button mat-raised-button color="primary" type="submit">Sign in</button>
-                    </div>
-                    <p>New to Pomelo? <a href="javascript:void(0)">Create an account.</a></p>
-                </form>
-            </div>
-        </div>
+  <div class="container">
+    <div class="text-wrapper">
+      <h1>Built for developers</h1>
+      <p>
+        GitHub is a development platform inspired by the way you work. From open source to business, you can host and
+        review code, manage projects, and build software alongside millions of other developers.
+      </p>
     </div>
+    <div class="form-wrapper">
+      <div class="mat-elevation-z6">
+        <form [formGroup]="form" (ngSubmit)="login()">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Email" [formControl]="form.controls.username" required />
+            <mat-error *ngIf="form.controls.username.invalid">{{getErrorMessage(form.controls.username)}}</mat-error>
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <input matInput type="password" placeholder="Password" [formControl]="form.controls.password" required />
+            <a href="#" matSuffix matTooltip="Forgot password?">
+              <mat-icon color="primary">help_outline</mat-icon>
+            </a>
+            <mat-error *ngIf="form.controls.password.invalid">{{getErrorMessage(form.controls.password)}}</mat-error>
+          </mat-form-field>
+          <div class="btn-wrapper">
+            <button mat-raised-button color="primary" type="submit">Sign in</button>
+          </div>
+          <p>New to Pomelo? <a href="javascript:void(0)">Create an account.</a></p>
+        </form>
+      </div>
+    </div>
+  </div>
 </section>

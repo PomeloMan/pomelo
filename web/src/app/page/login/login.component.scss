@@ -1,24 +1,32 @@
-section:nth-child(2) {
-	background-image: url('/assets/image/home/main.png');
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	background-size: 100% 100%;
+section:nth-child(1) {
+  display: flex;
+  height: 100%;
+  background-image: url('/assets/image/home/main.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+
   .container {
     display: flex;
     align-items: center;
     max-width: 1024px;
     margin: auto;
+
     .text-wrapper {
       width: 60%;
     }
+
     .form-wrapper {
       width: 40%;
+
       >div {
         padding: 24px;
+
         >form {
           * {
             width: 100%;
           }
+
           .btn-wrapper,
           p {
             border-top: 0.84375em solid transparent;
@@ -31,6 +39,7 @@ section:nth-child(2) {
 }
 
 @media (min-width: 768px) {
+
   .text-wrapper,
   .form-wrapper {
     padding: 0 24px;
@@ -38,13 +47,13 @@ section:nth-child(2) {
 }
 
 @media (min-width: 1280px) {
-  section:nth-child(2) {
+  section:nth-child(1) {
     padding: 128px 0;
   }
 }
 
 @media (min-width: 640px) {
-  section:nth-child(2) {
+  section:nth-child(1) {
     padding: 64px 0;
   }
 }

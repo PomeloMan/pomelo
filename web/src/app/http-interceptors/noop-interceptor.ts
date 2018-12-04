@@ -42,10 +42,13 @@ export class NoopInterceptor implements HttpInterceptor {
 		return next.handle(req).pipe(
 			mergeMap((event: any) => {
 				if (event instanceof HttpResponse) {
-					if (event.status == 200 && event.body.msg == 'success') {
+					if (event.status == 200 && event.body.success) {
+						// http & backend success handler
 						return Observable.create(observer => observer.next(event));
+					} else {
+						// http & backend error handler
+						return throwError(event);// {@link src/app/config/api.service.ts handleError()}
 					}
-					return throwError(event);// {@link src/app/config/api.service.ts handleError()}
 				}
 				return Observable.create(observer => observer.next(event));
 			})

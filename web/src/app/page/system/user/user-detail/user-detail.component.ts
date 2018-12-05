@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { NavigationComponent } from '../../../../common/component/navigation.component';
+import { BaseComponent } from '../../../../common/component/base.component';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormControl, Validators } from '@angular/forms';
@@ -24,7 +24,7 @@ import { trigger, state, transition, animate, style } from '@angular/animations'
 		])
 	]
 })
-export class UserDetailComponent extends NavigationComponent implements OnInit, OnDestroy {
+export class UserDetailComponent extends BaseComponent implements OnInit, OnDestroy {
 
 	id: any;
 	expanded: boolean = false;

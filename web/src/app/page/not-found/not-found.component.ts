@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavigationComponent } from '../../common/component/navigation.component';
+import { BaseComponent } from '../../common/component/base.component';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -8,7 +8,7 @@ import { Location } from '@angular/common';
 	templateUrl: './not-found.component.html',
 	styleUrls: ['./not-found.component.scss']
 })
-export class PageNotFoundComponent extends NavigationComponent {
+export class PageNotFoundComponent extends BaseComponent {
 
 	constructor(
 		protected router: Router,

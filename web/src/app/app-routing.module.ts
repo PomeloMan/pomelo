@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { PageNotFoundComponent } from './page/not-found/not-found.component';
 
-import { AuthGuard } from './config/auth-guard.service';
+import { AuthGuard } from './config/security/auth-guard.service';
 import { SelectivePreloadingStrategy } from './config/selective-preloading-strategy';
 
 const routes: Routes = [

@@ -3,9 +3,9 @@ import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { API } from '../../config/api';
-import { TOKEN } from '../../config/auth.service';
+import { TOKEN } from '../../config/security/auth.service';
 import { ApiService } from '../../config/api.service';
-import { StorageService } from '../../config/storage.service';
+import { StorageService } from '../../common/service/storage.service';
 
 @Component({
 	selector: 'app-login',

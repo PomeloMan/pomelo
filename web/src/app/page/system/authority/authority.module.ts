@@ -4,7 +4,7 @@ import { MaterialModule } from '../../../common/module/material.module';
 import { AuthorityRoutingModule } from './authority-routing.module';
 
 import { AuthorityComponent } from './authority.component';
-import { AuthService } from '../../../config/auth.service';
+import { AuthService } from '../../../config/security/auth.service';
 
 @NgModule({
 	imports: [

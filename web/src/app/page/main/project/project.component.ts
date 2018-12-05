@@ -1,7 +1,7 @@
 import { Component, OnInit, HostBinding, ViewChild } from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { Router } from '@angular/router';
-import { StorageService } from 'src/app/config/storage.service';
+import { StorageService } from 'src/app/common/service/storage.service';
 
 @Component({
     selector: 'app-project',

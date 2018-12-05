@@ -3,7 +3,7 @@ import { OverlayContainer } from '@angular/cdk/overlay';
 import { MatSidenav, MatSidenavContainer } from '@angular/material';
 import { SidenavStyle } from './sidenav';
 import { Router } from '@angular/router';
-import { StorageService } from 'src/app/config/storage.service';
+import { StorageService } from 'src/app/common/service/storage.service';
 import { STORAGE_SETTING_THEME, STORAGE_SETTING_STYLE } from 'src/app/config/app.constant';
 
 class Theme { color: string; class: string; }

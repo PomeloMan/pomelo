@@ -9,10 +9,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PageNotFoundComponent } from './page/not-found/not-found.component';
 
-import { StorageService } from './config/storage.service';
+import { StorageService } from './common/service/storage.service';
 import { ApiService } from './config/api.service';
-import { AuthGuard } from './config/auth-guard.service';
-import { AuthService } from './config/auth.service';
+import { AuthGuard } from './config/security/auth-guard.service';
+import { AuthService } from './config/security/auth.service';
 import { HTTP_INTERCEPTOR_PROVIDERS } from './http-interceptors';
 
 @NgModule({

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { StorageService } from '../config/storage.service';
+import { StorageService } from '../../common/service/storage.service';
 
 export const TOKEN: string = "token";
 

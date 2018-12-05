@@ -9,12 +9,17 @@ import {
 
 import { Observable, throwError } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
+import { NativeService } from '../common/service/native.service';
 
 /**
  * Pass untouched request through to the next request handler.
  */
 @Injectable()
 export class NoopInterceptor implements HttpInterceptor {
+
+	constructor(
+		private native: NativeService
+	) { }
 
 	/**
 	 * 数据转换 JSON => URL Encode Params
@@ -39,6 +44,7 @@ export class NoopInterceptor implements HttpInterceptor {
 
 	intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 		//do nothing
+		let _this = this;
 		return next.handle(req).pipe(
 			mergeMap((event: any) => {
 				if (event instanceof HttpResponse) {
@@ -47,6 +53,7 @@ export class NoopInterceptor implements HttpInterceptor {
 						return Observable.create(observer => observer.next(event));
 					} else {
 						// http & backend error handler
+						_this.native.openSnackBar(event.body.msg, 'ok');
 						return throwError(event);// {@link src/app/config/api.service.ts handleError()}
 					}
 				}

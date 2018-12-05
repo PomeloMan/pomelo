@@ -22,6 +22,7 @@ export class ApiService {
 
   constructor(
     private http: HttpClient
+    // private native: NativeService
   ) { }
 
   get(url: string, options?: any): Observable<any> {
@@ -31,6 +32,12 @@ export class ApiService {
     return this.http.get(this.base + url, options)
       .pipe(
         retry(this.retry), // retry a failed request up to 3 times
+        // {@link noop-interceptor.ts}
+        // mergeMap(res => {
+        //   _this.native.openSnackBar(res.body.msg, 'ok');
+        //   return throwError(event);
+        //   return Observable.create(observer => observer.next(event));
+        // }),
         catchError(this.handleError) // then handle the error
       );
   }
@@ -42,6 +49,12 @@ export class ApiService {
     return this.http.post(this.base + url, body, options)
       .pipe(
         retry(this.retry), // retry a failed request up to 3 times
+        // {@link noop-interceptor.ts}
+        // mergeMap(res => {
+        //   _this.native.openSnackBar(res.body.msg, 'ok');
+        //   return throwError(event);
+        //   return Observable.create(observer => observer.next(event));
+        // }),
         catchError(this.handleError) // then handle the error
       );
   }

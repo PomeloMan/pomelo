@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { STORAGE_SETTING } from './app.constant';
+import { STORAGE_SETTING } from '../../config/app.constant';
 
 @Injectable()
 export class StorageService {

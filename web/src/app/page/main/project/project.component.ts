@@ -2,6 +2,7 @@ import { Component, OnInit, HostBinding, ViewChild } from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { Router } from '@angular/router';
 import { StorageService } from 'src/app/common/service/storage.service';
+import { InteractionService } from 'src/app/common/service/Interaction.service';
 
 @Component({
     selector: 'app-project',
@@ -22,11 +23,13 @@ export class ProjectComponent implements OnInit {
     constructor(
         private overlayContainer: OverlayContainer,
         private router: Router,
-        private storage: StorageService
+        private storage: StorageService,
+        private interactionService: InteractionService
     ) {
     }
 
     ngOnInit(): void {
+        this.interactionService.pageChange('Project');
     }
 
 }

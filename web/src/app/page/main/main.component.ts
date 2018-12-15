@@ -5,6 +5,7 @@ import { SidenavStyle } from './sidenav';
 import { Router } from '@angular/router';
 import { StorageService } from 'src/app/common/service/storage.service';
 import { STORAGE_SETTING_THEME, STORAGE_SETTING_STYLE } from 'src/app/config/app.constant';
+import { InteractionService } from 'src/app/common/service/Interaction.service';
 
 class Theme { color: string; class: string; }
 
@@ -44,17 +45,22 @@ export class MainComponent implements OnInit {
 	constructor(
 		private overlayContainer: OverlayContainer,
 		private router: Router,
-		private storage: StorageService
+		private storage: StorageService,
+		private interactionService: InteractionService
 	) {
 		this._current_theme = this.storage.getItem(STORAGE_SETTING_THEME) || this.themes[0];
 		this._current_style = this.storage.getItem(STORAGE_SETTING_STYLE) || SidenavStyle.Default;
 		this.SidenavStyleArray = Object.keys(this.SidenavStyle).filter((v, i, arr) => i >= arr.length / 2);
-		if (!this._current_project) {
-			this.router.navigate(['/main/project']);
-		}
 	}
 
 	ngOnInit(): void {
+		this.interactionService.pageChange$.subscribe(res => {
+		})
+
+		if (!this._current_project) {
+			this.router.navigate(['/main/project']);
+		}
+
 		this.setTheme(this._current_theme);
 		this.initProjects();
 		this.initMenus();

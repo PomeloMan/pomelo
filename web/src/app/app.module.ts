@@ -14,6 +14,7 @@ import { ApiService } from './config/api.service';
 import { AuthGuard } from './config/security/auth-guard.service';
 import { AuthService } from './config/security/auth.service';
 import { HTTP_INTERCEPTOR_PROVIDERS } from './http-interceptors';
+import { InteractionService } from './common/service/Interaction.service';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { HTTP_INTERCEPTOR_PROVIDERS } from './http-interceptors';
     ApiService,
     AuthService,
     AuthGuard,
+    InteractionService,
     HTTP_INTERCEPTOR_PROVIDERS//http拦截器
   ],
   bootstrap: [AppComponent]

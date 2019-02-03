@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import pomelo.core.common.annotation.LogOperation;
 import pomelo.core.module.app.annotation.Guest;
 
 @RestController("appUserController")
@@ -14,6 +15,7 @@ public class UserController {
 
 	@Guest
 	@GetMapping("/test")
+	@LogOperation("test")
 	public ResponseEntity<String> test() {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}

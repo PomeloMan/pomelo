@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import pomelo.core.common.annotation.LogOperation;
 import pomelo.core.common.interceptor.PreCheck;
 import pomelo.core.module.system.annotation.CurrentUser;
 import pomelo.core.module.system.persistence.entity.User;
@@ -70,7 +71,9 @@ public class UserController {
 
 	@PreCheck
 	@PostMapping("/save")
-	public ResponseEntity<User> save(IUser view) {
+	@LogOperation("save")
+	@ApiOperation(value = "save")
+	public ResponseEntity<User> save(@RequestBody IUser view) {
 		return new ResponseEntity<User>(userService.saveOne(view), HttpStatus.OK);
 	}
 

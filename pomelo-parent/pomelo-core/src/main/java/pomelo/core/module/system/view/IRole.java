@@ -1,21 +1,19 @@
 package pomelo.core.module.system.view;
 
-import java.util.Collection;
-import java.util.stream.Collectors;
-
-import pomelo.core.common.AbstractView;
 import pomelo.core.module.system.persistence.entity.Role;
 
-public class IRole extends AbstractView<Role> {
+public class IRole extends Role {
 
-	public IRole() {
+	private static final long serialVersionUID = 1L;
+
+	private String search;
+
+	public String getSearch() {
+		return search;
 	}
 
-	public IRole(Role entity) {
-		setEntity(entity);
+	public void setSearch(String search) {
+		this.search = search;
 	}
 
-	public static Collection<Role> transform(Collection<IRole> views) {
-		return views.stream().map((view) -> view.getEntity()).collect(Collectors.toList());
-	}
 }

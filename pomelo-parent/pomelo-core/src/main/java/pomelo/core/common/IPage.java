@@ -7,9 +7,9 @@ import org.springframework.data.domain.Sort.Direction;
 
 import pomelo.core.common.util.PageableUtil;
 
-public abstract class AbstractView<P> {
+public class IPage<O> {
 
-	Pageable pageable;
+	private Pageable pageable;
 
 	int page;
 	int size;
@@ -19,14 +19,14 @@ public abstract class AbstractView<P> {
 
 	String search;
 
-	protected P entity;
+	O object;
 
-	public P getEntity() {
-		return entity;
+	public O getObject() {
+		return object;
 	}
 
-	public void setEntity(P entity) {
-		this.entity = entity;
+	public void setObject(O object) {
+		this.object = object;
 	}
 
 	public int getPage() {
@@ -83,5 +83,4 @@ public abstract class AbstractView<P> {
 	public void setPageable(Pageable pageable) {
 		this.pageable = pageable;
 	}
-
 }

@@ -1,14 +1,21 @@
 package pomelo.core.module.project.view;
 
-import java.util.Collection;
-import java.util.stream.Collectors;
-
-import pomelo.core.common.AbstractView;
 import pomelo.core.module.project.persistence.entity.ProjectWorkItem;
 
-public class IProjectWorkItem extends AbstractView<ProjectWorkItem> {
+public class IProjectWorkItem extends ProjectWorkItem {
 
+	private static final long serialVersionUID = 1L;
+
+	private String search;
 	IProjectWorkItemRelation relation;
+
+	public String getSearch() {
+		return search;
+	}
+
+	public void setSearch(String search) {
+		this.search = search;
+	}
 
 	public IProjectWorkItemRelation getRelation() {
 		return relation;
@@ -18,14 +25,4 @@ public class IProjectWorkItem extends AbstractView<ProjectWorkItem> {
 		this.relation = relation;
 	}
 
-	public IProjectWorkItem(ProjectWorkItem entity) {
-		setEntity(entity);
-	}
-
-	public IProjectWorkItem() {
-	}
-
-	public static Collection<ProjectWorkItem> transform(Collection<IProjectWorkItem> views) {
-		return views.stream().map((view) -> view.getEntity()).collect(Collectors.toList());
-	}
 }

@@ -34,6 +34,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import pomelo.core.common.IPage;
+import pomelo.core.common.util.BeanUtils;
 import pomelo.core.common.util.DateUtil;
 import pomelo.core.module.system.enums.Status;
 import pomelo.core.module.system.persistence.entity.Authority;
@@ -70,7 +72,7 @@ public class UserService implements IUserService {
 
 				String username = null;
 				Collection<Role> roles = null;
-				User user = view.getEntity();
+				User user = BeanUtils.transform(view, User.class);
 				if (user != null) {
 					username = user.getUsername();
 					roles = user.getRoles();
@@ -90,7 +92,10 @@ public class UserService implements IUserService {
 				}
 				// add username condition
 				if (StringUtils.isNotEmpty(username)) {
-					Predicate likePredicate = builder.like(root.get("username"), "%" + username + "%");
+//					Predicate likePredicate = builder.like(root.get("username"), "%" + username + "%");
+//					restrictions.add(likePredicate);
+					// 优化模糊查询，使用locate；locate(?, user.username) >= 1
+					Predicate likePredicate = builder.ge(builder.locate(root.get("username"), username), 1);
 					restrictions.add(likePredicate);
 				}
 				// add role condition
@@ -154,16 +159,16 @@ public class UserService implements IUserService {
 	}
 
 	@Override
-	public Page<User> query(IUser view, Pageable pageable) {
+	public Page<User> query(IPage<IUser> pageView, Pageable pageable) {
 		if (pageable == null) {
-			pageable = view.getPageable();
+			pageable = pageView.getPageable();
 		}
-		return userRep.findAll(getQueryClause(view), pageable);
+		return userRep.findAll(getQueryClause(pageView.getObject()), pageable);
 	}
 
 	@Override
 	public User saveOne(IUser view) {
-		return this.saveOne(view.getEntity());
+		return this.saveOne(BeanUtils.transform(view, User.class));
 	}
 
 	@Override

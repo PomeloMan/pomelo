@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.transaction.annotation.Transactional;
 
+import pomelo.core.common.IPage;
 import pomelo.core.module.system.persistence.entity.User;
 import pomelo.core.module.system.view.IUser;
 
@@ -40,7 +41,7 @@ public interface IUserService extends UserDetailsService {
 	 * @param pageable
 	 * @return
 	 */
-	Page<User> query(IUser view, Pageable pageable);
+	Page<User> query(IPage<IUser> pageView, Pageable pageable);
 
 	/**
 	 * @param view

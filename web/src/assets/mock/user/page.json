@@ -1,0 +1,86 @@
+{
+  "content": [{
+      "status": "Valid",
+      "creator": "build-in",
+      "modifier": "build-in",
+      "createdDate": 1543468850000,
+      "modifiedDate": 1550644214000,
+      "version": 66,
+      "username": "administrator",
+      "displayName": "administrator",
+      "password": "153D0B5569F101EF6A1AE8DBF6784F0D",
+      "roles": [{
+          "status": "Valid",
+          "creator": "build-in",
+          "modifier": "build-in",
+          "createdDate": 1543468850000,
+          "modifiedDate": 1543468850000,
+          "version": 1,
+          "name": "ADMIN",
+          "authorities": [{
+              "status": "Valid",
+              "creator": "build-in",
+              "modifier": "build-in",
+              "createdDate": 1543468850000,
+              "modifiedDate": 1543468850000,
+              "version": 0,
+              "name": "GUEST",
+              "url": null
+            },
+            {
+              "status": "Valid",
+              "creator": "build-in",
+              "modifier": "build-in",
+              "createdDate": 1543468849000,
+              "modifiedDate": 1543468849000,
+              "version": 0,
+              "name": "SYSTEM",
+              "url": null
+            }
+          ]
+        },
+        {
+          "status": "Valid",
+          "creator": "build-in",
+          "modifier": "build-in",
+          "createdDate": 1543468850000,
+          "modifiedDate": 1543468850000,
+          "version": 1,
+          "name": "USER",
+          "authorities": [{
+            "status": "Valid",
+            "creator": "build-in",
+            "modifier": "build-in",
+            "createdDate": 1543468850000,
+            "modifiedDate": 1543468850000,
+            "version": 0,
+            "name": "GUEST",
+            "url": null
+          }]
+        }
+      ],
+      "authorities": null
+    },
+    {
+      "status": "Init",
+      "creator": "string",
+      "modifier": "string",
+      "createdDate": 1549162849000,
+      "modifiedDate": 1549162849000,
+      "version": 0,
+      "username": "string",
+      "displayName": "string",
+      "password": null,
+      "roles": [],
+      "authorities": null
+    }
+  ],
+  "totalPages": 2,
+  "totalElements": 3,
+  "last": false,
+  "number": 0,
+  "size": 2,
+  "sort": null,
+  "numberOfElements": 2,
+  "first": true
+}

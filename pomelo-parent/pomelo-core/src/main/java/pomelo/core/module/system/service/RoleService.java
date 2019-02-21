@@ -21,6 +21,8 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import pomelo.core.common.IPage;
+import pomelo.core.common.util.BeanUtils;
 import pomelo.core.common.util.DateUtil;
 import pomelo.core.module.system.persistence.entity.Role;
 import pomelo.core.module.system.persistence.repo.RoleRepository;
@@ -50,7 +52,7 @@ public class RoleService implements IRoleService {
 				String search = view.getSearch();
 
 				String name = null;
-				Role role = view.getEntity();
+				Role role = BeanUtils.transform(view, Role.class);
 				if (role != null) {
 					name = role.getName();
 				}
@@ -84,16 +86,16 @@ public class RoleService implements IRoleService {
 	}
 
 	@Override
-	public Page<Role> query(IRole view, Pageable pageable) {
+	public Page<Role> query(IPage<IRole> pageView, Pageable pageable) {
 		if (pageable == null) {
-			pageable = view.getPageable();
+			pageable = pageView.getPageable();
 		}
-		return roleRep.findAll(getQueryClause(view), pageable);
+		return roleRep.findAll(getQueryClause(pageView.getObject()), pageable);
 	}
 
 	@Override
 	public Role saveOne(IRole view) {
-		return this.saveOne(view.getEntity());
+		return this.saveOne(BeanUtils.transform(view, Role.class));
 	}
 
 	@Override

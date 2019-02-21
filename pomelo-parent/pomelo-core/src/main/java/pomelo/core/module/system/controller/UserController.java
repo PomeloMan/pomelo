@@ -17,9 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import pomelo.core.common.IPage;
 import pomelo.core.common.annotation.LogOperation;
-import pomelo.core.common.interceptor.PreCheck;
 import pomelo.core.module.system.annotation.CurrentUser;
 import pomelo.core.module.system.persistence.entity.User;
 import pomelo.core.module.system.service.interfaces.IUserService;
@@ -40,7 +39,7 @@ public class UserController {
 	 * @return
 	 */
 	@GetMapping("/me")
-	@ApiOperation(value = "获取当前登录用户信息", notes = "头部需要带token信息")
+	@ApiOperation(value = "me")
 	public Principal user(Principal principal, @CurrentUser User user) {
 		return principal;
 	}
@@ -49,11 +48,11 @@ public class UserController {
 	 * @param iuser
 	 * @return
 	 */
-	@GetMapping("query")
+	@PostMapping("list")
 //	@PreAuthorize("hasAnyAuthority('SYSTEM','GUEST')")
-	@ApiOperation(value = "获取当前登录用户信息", notes = "头部需要带token信息")
-	public ResponseEntity<Collection<User>> query(
-			@RequestBody @ApiParam(name = "用户对象", value = "传入json格式", required = true) IUser view) {
+	@ApiOperation(value = "list")
+	public ResponseEntity<Collection<User>> list(
+			@RequestBody IUser view) {
 		return new ResponseEntity<Collection<User>>(userService.query(view), HttpStatus.OK);
 	}
 
@@ -62,14 +61,13 @@ public class UserController {
 	 * @return
 	 * @PreAuthorize.hasPermission {@link pomelo.core.configure.authentication.DefaultPermissionEvaluator.java}
 	 */
-	@PreCheck
-	@GetMapping("queryByPage")
+	@PostMapping("page")
 	@PreAuthorize("authenticated and hasPermission(#view, 'GUEST')") // DefaultPermissionEvaluator
-	public ResponseEntity<Page<User>> queryByPage(@P("view") IUser view) {
-		return new ResponseEntity<Page<User>>(userService.query(view, null), HttpStatus.OK);
+	@ApiOperation(value = "page")
+	public ResponseEntity<Page<User>> page(@P("view") @RequestBody IPage<IUser> pageView) {
+		return new ResponseEntity<Page<User>>(userService.query(pageView, null), HttpStatus.OK);
 	}
 
-	@PreCheck
 	@PostMapping("/save")
 	@LogOperation("save")
 	@ApiOperation(value = "save")

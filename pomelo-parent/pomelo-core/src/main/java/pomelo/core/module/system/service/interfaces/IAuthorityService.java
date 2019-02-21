@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 
+import pomelo.core.common.IPage;
 import pomelo.core.module.system.persistence.entity.Authority;
 import pomelo.core.module.system.view.IAuthority;
 
@@ -28,7 +29,7 @@ public interface IAuthorityService {
 	 * @param pageable
 	 * @return
 	 */
-	Page<Authority> query(IAuthority view, Pageable pageable);
+	Page<Authority> query(IPage<IAuthority> pageView, Pageable pageable);
 
 	/**
 	 * @param view

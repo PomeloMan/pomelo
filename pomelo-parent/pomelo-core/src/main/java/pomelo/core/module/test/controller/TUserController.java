@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import pomelo.core.common.IPage;
 import pomelo.core.module.system.persistence.entity.User;
 import pomelo.core.module.system.service.interfaces.IUserService;
 import pomelo.core.module.system.view.IUser;
@@ -31,8 +32,8 @@ public class TUserController {
 	}
 
 	@GetMapping("queryByPage")
-	public ResponseEntity<Page<User>> queryByPage(IUser view) {
-		return new ResponseEntity<Page<User>>(userService.query(view, null), HttpStatus.OK);
+	public ResponseEntity<Page<User>> queryByPage(IPage<IUser> pageView) {
+		return new ResponseEntity<Page<User>>(userService.query(pageView, null), HttpStatus.OK);
 	}
 
 	@GetMapping("/save")

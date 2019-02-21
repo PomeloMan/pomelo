@@ -22,6 +22,8 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import pomelo.core.common.IPage;
+import pomelo.core.common.util.BeanUtils;
 import pomelo.core.common.util.DateUtil;
 import pomelo.core.module.project.persistence.entity.ProjectWorkItemRelation;
 import pomelo.core.module.project.persistence.repo.ProjectWorkItemRelationRepository;
@@ -55,7 +57,7 @@ public class ProjectWorkItemRelationService implements IProjectWorkItemRelationS
 				String search = view.getSearch();
 
 				Long from = null;
-				ProjectWorkItemRelation entity = view.getEntity();
+				ProjectWorkItemRelation entity = BeanUtils.transform(view, ProjectWorkItemRelation.class);
 				if (entity != null) {
 					from = entity.getFrom();
 				}
@@ -89,16 +91,16 @@ public class ProjectWorkItemRelationService implements IProjectWorkItemRelationS
 	}
 
 	@Override
-	public Page<ProjectWorkItemRelation> query(IProjectWorkItemRelation view, Pageable pageable) {
+	public Page<ProjectWorkItemRelation> query(IPage<IProjectWorkItemRelation> pageView, Pageable pageable) {
 		if (pageable == null) {
-			pageable = view.getPageable();
+			pageable = pageView.getPageable();
 		}
-		return relationRep.findAll(getQueryClause(view), pageable);
+		return relationRep.findAll(getQueryClause(pageView.getObject()), pageable);
 	}
 
 	@Override
 	public Collection<ProjectWorkItemRelation> saveOne(IProjectWorkItemRelation view) {
-		return this.saveOne(view.getEntity());
+		return this.saveOne(BeanUtils.transform(view, ProjectWorkItemRelation.class));
 	}
 
 	@Override

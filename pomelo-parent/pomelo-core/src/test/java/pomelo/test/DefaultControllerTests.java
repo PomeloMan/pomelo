@@ -32,6 +32,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.google.gson.Gson;
 
 import pomelo.core.Application;
+import pomelo.core.common.IPage;
 import pomelo.core.module.system.controller.UserController;
 import pomelo.core.module.system.persistence.entity.User;
 import pomelo.core.module.system.view.IUser;
@@ -48,7 +49,7 @@ public class DefaultControllerTests {
 
 	@Test
 	public void query() {
-		ResponseEntity<Collection<User>> res = userCtrl.query(null);
+		ResponseEntity<Collection<User>> res = userCtrl.list(null);
 		System.out.println(gson.toJson(res));
 		res.getBody().stream().forEach((user) -> {
 			System.out.println(user.getUsername());
@@ -59,7 +60,7 @@ public class DefaultControllerTests {
 //	@WithMockUser(username="administrator", roles={"USER", "ADMIN"})
 	@WithUserDetails(value = "administrator", userDetailsServiceBeanName = "userService")
 	public void queryByPage() {
-		ResponseEntity<Page<User>> res = userCtrl.queryByPage(new IUser());
+		ResponseEntity<Page<User>> res = userCtrl.page(new IPage<IUser>());
 		res.getBody().getContent().stream().forEach((user) -> {
 			System.out.println(user.getUsername());
 		});
@@ -69,7 +70,7 @@ public class DefaultControllerTests {
 	@Rollback(true)
 	@Test
 	public void save() {
-		ResponseEntity<User> response = userCtrl.save(new IUser(new User("hello wordl")));
+		ResponseEntity<User> response = userCtrl.save(new IUser());
 		System.out.println(response);
 	}
 

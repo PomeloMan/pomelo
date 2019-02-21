@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MaterialModule } from '../../../common/module/material.module';
+import { MaterialModule } from '../../../../common/module/material.module';
 import { AuthorityRoutingModule } from './authority-routing.module';
 
 import { AuthorityComponent } from './authority.component';
-import { AuthService } from '../../../config/security/auth.service';
+import { AuthService } from '../../../../config/security/auth.service';
 
 @NgModule({
 	imports: [

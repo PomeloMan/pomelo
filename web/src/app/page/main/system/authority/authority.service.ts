@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { ApiService } from '../../../config/api.service';
+import { ApiService } from '../../../../config/api.service';
 
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
-import { authorities } from '../../../data-model/authority';
+import { authorities } from '../../../../data-model/authority';
 
 @Injectable({
 	providedIn: 'root'

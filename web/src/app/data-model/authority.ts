@@ -1,4 +1,4 @@
-import { Authority } from "../page/system/authority/authority.service";
+import { Authority } from "../page/main/system/authority/authority.service";
 
 export const authorities: Authority[] = [
 	{

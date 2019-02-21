@@ -8,9 +8,6 @@ import {
     group
 } from '@angular/animations';
 
-export function animation(name, duration, delay) {
-}
-
 export const FADE_IN_UP = trigger('fadeInUp', [
     state('in', style({ transform: 'translateY(0px)' })),
     transition('void => *', [
@@ -35,12 +32,6 @@ export const FADE_IN_DOWN = trigger('fadeInDown', [
         }),
         animate(200)
     ])
-    // transition('void => *', [
-    //     animate(500, keyframes([
-    //         style({ opacity: 0, transform: 'translateY(-200px)', offset: 0 }),
-    //         style({ opacity: 1, transform: 'translateY(0px)', offset: 1.0 })
-    //     ]))
-    // ])
 ])
 
 export const toggle = trigger('toggle', [
@@ -53,24 +44,26 @@ export const toggle = trigger('toggle', [
     transition('inactive <=> active', animate('5s ease-out'))
 ])
 
-export const flyInOut1 = trigger('flyInOut', [
-    state('in', style({ opacity: 1, transform: 'translateX(0)' })),
+export const FLY_IN_OUT = trigger('flyInOut', [
+    state('in', style({ opacity: 1, transform: 'translateX(0) scale(1)' })),
+    // 进场动画
     transition('void => *', [
         style({
             opacity: 0,
-            transform: 'translateX(-100%)'
+            transform: 'translateX(-100%) scale(0)'
         }),
         animate('0.5s ease-in')
     ]),
+    // 出场动画
     transition('* => void', [
-        animate('0.5s 0.1s ease-out', style({
+        animate('0.5s 0s ease-out', style({
             opacity: 0,
-            transform: 'translateX(100%)'
+            transform: 'translateX(100%) scale(0)'
         }))
     ])
 ])
 
-export const flyInOut2 = trigger('flyInOut', [
+export const FLY_IN_OUT_KEYFRAMES = trigger('flyInOut', [
     state('in', style({ transform: 'translateX(0)' })),
     transition('void => *', [
         animate(1000, keyframes([
@@ -88,7 +81,7 @@ export const flyInOut2 = trigger('flyInOut', [
     ])
 ])
 
-export const flyInOutGroup = trigger('flyInOut', [
+export const FLY_IN_OUT_GROUP = trigger('flyInOut', [
     state('in', style({ width: 120, transform: 'translateX(0)', opacity: 1 })),
     transition('void => *', [
         style({ width: 10, transform: 'translateX(50px)', opacity: 0 }),

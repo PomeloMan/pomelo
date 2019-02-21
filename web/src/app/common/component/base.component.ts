@@ -8,7 +8,7 @@ import { PageEvent } from "@angular/material";
 export class BaseComponent implements Navigator, Paginator {
 
 	// MatPaginator Inputs
-	length: number;
+	length: number = 0;
 	pageIndex: number = 0;// mat-paginator default value
 	pageSize: number = 10;
 	pageSizeOptions: number[] = [5, 10, 25, 50, 100];

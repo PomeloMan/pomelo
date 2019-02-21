@@ -22,12 +22,12 @@ const routes: Routes = [
 			},
 			{
 				path: 'system/user',
-				loadChildren: '../system/user/user.module#UserModule'
+				loadChildren: './system/user/user.module#UserModule'
 			},
 			{
 				path: 'system/authority',
 				// canActivate: [AuthGuard],
-				loadChildren: '../system/authority/authority.module#AuthorityModule'
+				loadChildren: './system/authority/authority.module#AuthorityModule'
 			}
 		]
 	}

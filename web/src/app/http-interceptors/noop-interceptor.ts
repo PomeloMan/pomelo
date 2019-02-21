@@ -21,27 +21,6 @@ export class NoopInterceptor implements HttpInterceptor {
 		private native: NativeService
 	) { }
 
-	/**
-	 * 数据转换 JSON => URL Encode Params
-	 * @param param 
-	 * @param key 
-	 * @param encode 
-	 */
-	parse(param, key?, encode?) {
-		if (param == null) return '';
-		let paramStr = '';
-		let t = typeof (param);
-		if (t == 'string' || t == 'number' || t == 'boolean') {
-			paramStr += '&' + key + '=' + ((encode == null || encode) ? encodeURIComponent(param) : param);
-		} else {
-			for (let i in param) {
-				let k = key == null ? i : key + (param instanceof Array ? '[' + i + ']' : '.' + i);
-				paramStr += this.parse(param[i], k, encode);
-			}
-		}
-		return paramStr;
-	}
-
 	intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 		//do nothing
 		let _this = this;

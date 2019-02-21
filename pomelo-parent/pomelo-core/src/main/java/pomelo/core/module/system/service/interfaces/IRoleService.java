@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 
+import pomelo.core.common.IPage;
 import pomelo.core.module.system.persistence.entity.Role;
 import pomelo.core.module.system.view.IRole;
 
@@ -28,7 +29,7 @@ public interface IRoleService {
 	 * @param pageable
 	 * @return
 	 */
-	Page<Role> query(IRole view, Pageable pageable);
+	Page<Role> query(IPage<IRole> pageView, Pageable pageable);
 
 	/**
 	 * @param view

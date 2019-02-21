@@ -1,3 +1,4 @@
 export const API = {
-    AUTH_URL: ""
+    AUTH_URL: '',
+    USER_PAGE_URL: 'user/page'
 }

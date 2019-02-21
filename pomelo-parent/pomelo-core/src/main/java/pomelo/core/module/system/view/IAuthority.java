@@ -1,21 +1,19 @@
 package pomelo.core.module.system.view;
 
-import java.util.Collection;
-import java.util.stream.Collectors;
-
-import pomelo.core.common.AbstractView;
 import pomelo.core.module.system.persistence.entity.Authority;
 
-public class IAuthority extends AbstractView<Authority> {
+public class IAuthority extends Authority {
 
-	public IAuthority(Authority entity) {
-		setEntity(entity);
+	private static final long serialVersionUID = 1L;
+
+	private String search;
+
+	public String getSearch() {
+		return search;
 	}
 
-	public IAuthority() {
+	public void setSearch(String search) {
+		this.search = search;
 	}
 
-	public static Collection<Authority> transform(Collection<IAuthority> views) {
-		return views.stream().map((view) -> view.getEntity()).collect(Collectors.toList());
-	}
 }

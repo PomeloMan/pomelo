@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { flyInOut1, flyInOut2, flyInOutGroup, toggle } from '../../common/animations';
+import { FLY_IN_OUT, toggle } from '../../common/animations';
 
 @Component({
 	selector: 'app-dashboard',
@@ -7,7 +7,7 @@ import { flyInOut1, flyInOut2, flyInOutGroup, toggle } from '../../common/animat
 	styleUrls: ['./dashboard.component.css'],
 	animations: [
 		toggle,
-		flyInOut1,
+		FLY_IN_OUT,
 	]
 })
 

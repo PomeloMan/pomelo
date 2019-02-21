@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { BaseComponent } from '../../../../common/component/base.component';
+import { BaseComponent } from '../../../../../common/component/base.component';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormControl, Validators } from '@angular/forms';

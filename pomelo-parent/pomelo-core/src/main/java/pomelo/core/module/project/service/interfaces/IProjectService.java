@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 
+import pomelo.core.common.IPage;
 import pomelo.core.module.project.persistence.entity.Project;
 import pomelo.core.module.project.view.IProject;
 
@@ -28,7 +29,7 @@ public interface IProjectService {
 	 * @param pageable
 	 * @return
 	 */
-	Page<Project> query(IProject view, Pageable pageable);
+	Page<Project> query(IPage<IProject> pageView, Pageable pageable);
 
 	/**
 	 * @param view

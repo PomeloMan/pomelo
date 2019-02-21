@@ -22,6 +22,8 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import pomelo.core.common.IPage;
+import pomelo.core.common.util.BeanUtils;
 import pomelo.core.common.util.DateUtil;
 import pomelo.core.module.project.persistence.entity.ProjectWorkItemProcess;
 import pomelo.core.module.project.persistence.repo.ProjectWorkItemProcessRepository;
@@ -55,7 +57,7 @@ public class ProjectWorkItemProcessService implements IProjectWorkItemProcessSer
 				String search = view.getSearch();
 
 				String name = null;
-				ProjectWorkItemProcess entity = view.getEntity();
+				ProjectWorkItemProcess entity = BeanUtils.transform(view, ProjectWorkItemProcess.class);
 				if (entity != null) {
 					name = entity.getName();
 				}
@@ -89,16 +91,16 @@ public class ProjectWorkItemProcessService implements IProjectWorkItemProcessSer
 	}
 
 	@Override
-	public Page<ProjectWorkItemProcess> query(IProjectWorkItemProcess view, Pageable pageable) {
+	public Page<ProjectWorkItemProcess> query(IPage<IProjectWorkItemProcess> pageView, Pageable pageable) {
 		if (pageable == null) {
-			pageable = view.getPageable();
+			pageable = pageView.getPageable();
 		}
-		return processRep.findAll(getQueryClause(view), pageable);
+		return processRep.findAll(getQueryClause(pageView.getObject()), pageable);
 	}
 
 	@Override
 	public ProjectWorkItemProcess saveOne(IProjectWorkItemProcess view) {
-		return this.saveOne(view.getEntity());
+		return this.saveOne(BeanUtils.transform(view, ProjectWorkItemProcess.class));
 	}
 
 	@Override

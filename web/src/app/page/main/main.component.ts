@@ -57,9 +57,9 @@ export class MainComponent implements OnInit {
 		this.interactionService.pageChange$.subscribe(res => {
 		})
 
-		if (!this._current_project) {
-			this.router.navigate(['/main/project']);
-		}
+		// if (!this._current_project) {
+		// 	this.router.navigate(['/main/project']);
+		// }
 
 		this.setTheme(this._current_theme);
 		this.initProjects();

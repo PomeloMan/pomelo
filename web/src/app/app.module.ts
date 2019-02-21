@@ -13,7 +13,7 @@ import { StorageService } from './common/service/storage.service';
 import { ApiService } from './config/api.service';
 import { AuthGuard } from './config/security/auth-guard.service';
 import { AuthService } from './config/security/auth.service';
-import { HTTP_INTERCEPTOR_PROVIDERS } from './http-interceptors';
+import { HTTP_INTERCEPTOR_PROVIDERS } from './http-interceptors/_index';
 import { InteractionService } from './common/service/Interaction.service';
 
 @NgModule({

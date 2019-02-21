@@ -21,6 +21,8 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import pomelo.core.common.IPage;
+import pomelo.core.common.util.BeanUtils;
 import pomelo.core.common.util.DateUtil;
 import pomelo.core.module.system.persistence.entity.Authority;
 import pomelo.core.module.system.persistence.repo.AuthorityRepository;
@@ -50,7 +52,7 @@ public class AuthorityService implements IAuthorityService {
 				String search = view.getSearch();
 
 				String name = null;
-				Authority authority = view.getEntity();
+				Authority authority = BeanUtils.transform(view, Authority.class);
 				if (authority != null) {
 					name = authority.getName();
 				}
@@ -84,16 +86,16 @@ public class AuthorityService implements IAuthorityService {
 	}
 
 	@Override
-	public Page<Authority> query(IAuthority view, Pageable pageable) {
+	public Page<Authority> query(IPage<IAuthority> pageView, Pageable pageable) {
 		if (pageable == null) {
-			pageable = view.getPageable();
+			pageable = pageView.getPageable();
 		}
-		return authorityRep.findAll(getQueryClause(view), pageable);
+		return authorityRep.findAll(getQueryClause(pageView.getObject()), pageable);
 	}
 
 	@Override
 	public Authority saveOne(IAuthority view) {
-		return this.saveOne(view.getEntity());
+		return this.saveOne(BeanUtils.transform(view, Authority.class));
 	}
 
 	@Override

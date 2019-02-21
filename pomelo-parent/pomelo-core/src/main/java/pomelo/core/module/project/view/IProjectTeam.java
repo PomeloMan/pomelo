@@ -1,21 +1,19 @@
 package pomelo.core.module.project.view;
 
-import java.util.Collection;
-import java.util.stream.Collectors;
-
-import pomelo.core.common.AbstractView;
 import pomelo.core.module.project.persistence.entity.ProjectTeam;
 
-public class IProjectTeam extends AbstractView<ProjectTeam> {
+public class IProjectTeam extends ProjectTeam {
 
-	public IProjectTeam(ProjectTeam entity) {
-		setEntity(entity);
+	private static final long serialVersionUID = 1L;
+
+	private String search;
+
+	public String getSearch() {
+		return search;
 	}
 
-	public IProjectTeam() {
+	public void setSearch(String search) {
+		this.search = search;
 	}
 
-	public static Collection<ProjectTeam> transform(Collection<IProjectTeam> views) {
-		return views.stream().map((view) -> view.getEntity()).collect(Collectors.toList());
-	}
 }

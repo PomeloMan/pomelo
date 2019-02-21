@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Observable, merge, of } from 'rxjs';
+import { merge, of } from 'rxjs';
 import { Authority, AuthorityService } from './authority.service';
-import { finalize, startWith, switchMap, map, catchError } from 'rxjs/operators';
+import { startWith, switchMap, map, catchError, finalize } from 'rxjs/operators';
 import { MatSort, MatPaginator } from '@angular/material';
 
 @Component({
@@ -38,10 +38,10 @@ export class AuthorityComponent implements OnInit {
             this.sort.active, this.sort.direction, this.paginator.pageIndex);
         }),
         map(res => {
-          this.isloading = false;
           this.totalLength = res.length;
           return res;
         }),
+        finalize(() => this.isloading = false),
         catchError(() => {
           this.isloading = false;
           this.totalLength = 0;

@@ -1,0 +1,12 @@
+<li class="ch-timeline-item">
+  <!-- timeline vertical line -->
+  <div class="ch-timeline-item-tail"></div>
+  <!-- timeline icon -->
+  <div class="ch-timeline-circle" [ngClass]="{'ch-timeline-circle-custom': template}" [ngStyle]="{'color': color, 'borderColor': color}">
+    <ng-template [ngTemplateOutlet]="template"></ng-template>
+  </div>
+  <!-- timeline content text -->
+  <div class="ch-timeline-content">
+    <ng-content></ng-content>
+  </div>
+</li>

@@ -1,0 +1,56 @@
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+
+li {
+  list-style: none;
+}
+
+.ch-timeline-item {
+  position: relative;
+  padding: 0 0 20px 0;
+  margin: 0;
+}
+
+.ch-timeline-item-tail {
+  position: absolute;
+  left: 4px;
+  top: .75em;
+  height: 100%;
+  border-left: 2px solid #e8e8e8;
+}
+
+.ch-timeline-circle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: #fff;
+  border-radius: 100px;
+  border: 2px solid transparent;
+  margin: 0;
+  padding: 0;
+  border-color: #1890ff;
+  color: #1890ff;
+}
+
+.ch-timeline-circle-custom {
+  position: absolute;
+  text-align: center;
+  line-height: 1;
+  border: 0;
+  border-radius: 0;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  top: 5px;
+  left: 5px;
+  height: auto;
+  width: auto;
+}
+
+.ch-timeline-content {
+  margin: 0 0 0 18px;
+  position: relative;
+  top: -6px;
+}

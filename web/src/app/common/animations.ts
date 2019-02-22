@@ -8,6 +8,22 @@ import {
     group
 } from '@angular/animations';
 
+export const EXPAND_TO_LEFT = trigger('expandToLeft', [
+    state('in', style({ transform: 'scale(0, 0)' })),
+    transition('void => *', [
+        animate('0.25s 0s ease-in', keyframes([
+            style({ transform: 'scale(0, 0)', transformOrigin: 'right bottom' }),
+            style({ transform: 'scale(1, 1)', transformOrigin: 'right bottom' }),
+        ]))
+    ]),
+    transition('* => void', [
+        animate('0.25s 0s ease-out', keyframes([
+            style({ transform: 'scale(1, 1)', transformOrigin: 'right bottom' }),
+            style({ transform: 'scale(0, 0)', transformOrigin: 'right bottom' }),
+        ]))
+    ])
+])
+
 export const FADE_IN_UP = trigger('fadeInUp', [
     state('in', style({ transform: 'translateY(0px)' })),
     transition('void => *', [

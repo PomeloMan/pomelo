@@ -1,0 +1,52 @@
+// {@link https://material.angular.io/guide/theming-your-components}
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://www.google.com/design/spec/style/color.html
+$default-primary: mat-palette($mat-indigo);
+$default-accent: mat-palette($mat-pink, A200, A100, A400);
+// The warn palette is optional (defaults to red).
+$default-warn: mat-palette($mat-red);
+// Create the theme object (a Sass map containing all of the palettes).
+$default-theme: mat-light-theme($default-primary, $default-accent, $default-warn);
+
+// Define a mixin that accepts a theme and outputs the theme-specific styles.
+@mixin mat-sidenav-theme($theme) {
+  // Extract the palettes you need from the theme definition.
+  $primary: map-get($theme, primary);
+
+  // Define any styles affected by the theme.
+  .mat-sidenav-content {
+    &::-webkit-scrollbar-thumb {
+      background-color: mat-color($primary);
+    }
+  }
+}
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component that you are using.
+// Include theme styles for Angular Material components.
+@include angular-material-theme($default-theme);
+// Include the theme styles for only specified components.
+// @include mat-core-theme($default-theme);
+// @include mat-button-theme($default-theme);
+// @include mat-checkbox-theme($default-theme);
+
+// Define a mixin that accepts a theme and outputs the theme-specific styles
+@mixin ng-popover-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  .ng-popover .popover-button {
+    background: mat-color($background, 'card');
+  }
+
+  .popover-layout-pane {
+    background-color: mat-color($background, 'card');
+  }
+}
+// Include theme styles for your custom components.
+@include ng-popover-theme($default-theme);

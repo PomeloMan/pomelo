@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, PageEvent, MatTableDataSource, Sort } from '@angular/material';
 import { FLY_IN_OUT } from '../../../../common/animations';
 import { UserService, User } from './user.service';
-import { Page } from 'src/app/config/api.service';
+import { Page } from 'src/app/model/page';
 import { BaseComponent } from 'src/app/common/component/base.component';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from "@angular/common";
@@ -58,7 +58,7 @@ export class UserComponent extends BaseComponent implements OnInit {
 
 	getUsers() {
 		if (this.useMockData) {
-			return of(page).subscribe(res => {
+			return of(page).subscribe((res: Page) => {
 				this.dataSource.data = res.content;
 			});
 		} else {

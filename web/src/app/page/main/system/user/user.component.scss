@@ -1,6 +1,11 @@
 .app-container {
-  width: 80%;
-  margin: auto;
+  padding: 24px;
+  position: relative;
+
+  .layout-wrapper {
+    position: relative;
+    right: 0;
+  }
 }
 
 .mat-form-field {

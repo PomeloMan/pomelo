@@ -104,8 +104,8 @@ mat-toolbar.navbar-header.flex {
   }
 
   mat-sidenav-content {
-    padding: 12px;
-    height: calc(100% - 24px);
+    // padding: 24px;
+    // height: calc(100% - 48px);
 
     // scrollbar style
     &::-webkit-scrollbar {
@@ -114,6 +114,13 @@ mat-toolbar.navbar-header.flex {
 
     &::-webkit-scrollbar-thumb {
       border-radius: 10px;
+    }
+
+    ng-popover {
+      position: fixed;
+      top: 20%;
+      right: 150px;
+      z-index: 100;
     }
   }
 }

@@ -5,6 +5,20 @@
     </mat-form-field>
   </div>
 
+  <div class="layout-wrapper">
+    <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+      <mat-button-toggle value="bold">
+        <mat-icon color="">view_list</mat-icon>
+      </mat-button-toggle>
+      <mat-button-toggle value="italic">
+        <mat-icon>view_module</mat-icon>
+      </mat-button-toggle>
+      <mat-button-toggle value="underline">
+        <mat-icon>view_column</mat-icon>
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+
   <div class="table-wrapper mat-elevation-z8" [@flyInOut]>
     <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortChange($event)">
 
@@ -51,6 +65,7 @@
       <tr mat-row *matRowDef="let i = index; let row; columns: displayedColumns;"></tr>
     </table>
 
-    <mat-paginator (page)="page($event)" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" showFirstLastButtons></mat-paginator>
+    <mat-paginator (page)="page($event)" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+      showFirstLastButtons></mat-paginator>
   </div>
 </div>

@@ -6,18 +6,6 @@ import { catchError, retry } from 'rxjs/operators';
 import { isNullOrUndefined } from 'util';
 import { BASE_PATH } from './app.constant';
 
-export interface Page {
-  content: any;
-  totalPages: number;
-  totalElements: number;
-  last: boolean;
-  first: boolean;
-  number: number;
-  size: number;
-  sort: any;
-  numberOfElements: number
-}
-
 @Injectable({
   providedIn: 'root'
 })

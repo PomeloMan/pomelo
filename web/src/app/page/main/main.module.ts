@@ -7,13 +7,15 @@ import { MainRoutingModule } from './main-routing.module';
 import { MainComponent } from './main.component';
 import { FormsModule } from '@angular/forms';
 import { ProjectComponent } from './project/project.component';
+import { PomeloModule } from 'src/app/common/module/pomelo.module';
 
 @NgModule({
 	imports: [
 		CommonModule,
 		FormsModule,
 		MaterialModule,
-		MainRoutingModule
+		MainRoutingModule,
+		PomeloModule
 	],
 	declarations: [
 		MainComponent,

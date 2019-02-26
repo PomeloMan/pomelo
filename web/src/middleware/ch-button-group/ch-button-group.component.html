@@ -1,0 +1,7 @@
+<button class="ch-button" [disabled]="item.disabled" [ngClass]="{'ch-button-checked': checked.text == item.text}" *ngFor="let item of items" (click)="select(item)">
+  <ng-container *ngIf="item.icon">
+    <i class="material-icons">{{item.icon}}</i>
+  </ng-container>
+  <span>{{item.text}}</span>
+</button>
+<ng-content></ng-content>

@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { StorageService } from 'src/app/common/service/storage.service';
 import { STORAGE_SETTING_THEME, STORAGE_SETTING_STYLE } from 'src/app/config/app.constant';
 import { InteractionService } from 'src/app/common/service/Interaction.service';
+import { MainService } from './main.service';
 
 class Theme { color: string; class: string; }
 
@@ -45,6 +46,7 @@ export class MainComponent implements OnInit {
 	constructor(
 		private overlayContainer: OverlayContainer,
 		private router: Router,
+		private service: MainService,
 		private storage: StorageService,
 		private interactionService: InteractionService
 	) {
@@ -53,8 +55,11 @@ export class MainComponent implements OnInit {
 		this.SidenavStyleArray = Object.keys(this.SidenavStyle).filter((v, i, arr) => i >= arr.length / 2);
 	}
 
+	hasChildToolbar: boolean = false;
 	ngOnInit(): void {
-		this.interactionService.pageChange$.subscribe(res => {
+		let _this = this;
+		this.service.change$.subscribe((res: any) => {
+			_this.hasChildToolbar = res.hasChildToolbar;
 		})
 
 		// if (!this._current_project) {

@@ -6,6 +6,10 @@ $pink-bluegrey-theme: mat-dark-theme($pink-bluegrey-primary, $pink-bluegrey-acce
 
 .pink-bluegrey-theme {
   @include angular-material-theme($pink-bluegrey-theme);
+
+  @include ng-popover-theme($pink-bluegrey-theme);
+  @include ch-typography();
+  @include ch-theme($pink-bluegrey-theme);
 }
 
 // special element style

@@ -1,6 +1,6 @@
 <!-- toolbar -->
 <!-- color="primary" > class="mat-primary" -->
-<mat-toolbar color="primary" class="mat-primary navbar-header flex mat-elevation-z6">
+<mat-toolbar color="primary" class="mat-primary navbar-header flex" [ngClass]="{'mat-elevation-z6': !hasChildToolbar}">
   <div class="navbar-list">
     <button mat-button class="navbar-item" (click)="matSidenav.toggle()">
       <!-- <mat-icon>menu</mat-icon> -->

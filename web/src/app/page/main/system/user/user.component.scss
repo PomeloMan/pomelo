@@ -1,3 +1,21 @@
+mat-toolbar {
+  height: 40px;
+  min-height: 40px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+
+  mat-toolbar-row {
+    display: flex;
+    justify-content: space-between;
+    height: inherit;
+
+    >div {
+      height: inherit;
+    }
+  }
+}
+
 .app-container {
   padding: 24px;
   position: relative;

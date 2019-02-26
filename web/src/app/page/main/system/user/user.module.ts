@@ -8,6 +8,7 @@ import { UserComponent } from './user.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { UsernameValidatorDirective } from '../../../../common/directive/username-validator.directive';
 import { UserService } from './user.service';
+import { ChModule } from 'src/middleware/ch.module';
 
 @NgModule({
 	imports: [
@@ -15,6 +16,7 @@ import { UserService } from './user.service';
 		FormsModule,
 		ReactiveFormsModule,//FormControl
 		MaterialModule,
+		ChModule,
 		UserRoutingModule
 	],
 	declarations: [

@@ -1,3 +1,12 @@
+<mat-toolbar class="mat-elevation-z6">
+  <mat-toolbar-row>
+    <div></div>
+    <div>
+      <ch-button-group [items]="layoutButtons" (change)="changeLayout($event)"> </ch-button-group>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
 <div class="app-container">
   <div class="">
     <mat-form-field>
@@ -6,17 +15,7 @@
   </div>
 
   <div class="layout-wrapper">
-    <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-      <mat-button-toggle value="bold">
-        <mat-icon color="">view_list</mat-icon>
-      </mat-button-toggle>
-      <mat-button-toggle value="italic">
-        <mat-icon>view_module</mat-icon>
-      </mat-button-toggle>
-      <mat-button-toggle value="underline">
-        <mat-icon>view_column</mat-icon>
-      </mat-button-toggle>
-    </mat-button-toggle-group>
+
   </div>
 
   <div class="table-wrapper mat-elevation-z8" [@flyInOut]>

@@ -27,26 +27,14 @@ $default-theme: mat-light-theme($default-primary, $default-accent, $default-warn
 // Alternatively, you can import and @include the theme mixins for each component that you are using.
 // Include theme styles for Angular Material components.
 @include angular-material-theme($default-theme);
+
+
+@include ng-popover-theme($default-theme);
+@include ch-typography();
+@include ch-theme($default-theme);
+
 // Include the theme styles for only specified components.
 // @include mat-core-theme($default-theme);
 // @include mat-button-theme($default-theme);
 // @include mat-checkbox-theme($default-theme);
 
-// Define a mixin that accepts a theme and outputs the theme-specific styles
-@mixin ng-popover-theme($theme) {
-  $primary: map-get($theme, primary);
-  $accent: map-get($theme, accent);
-  $warn: map-get($theme, warn);
-  $background: map-get($theme, background);
-  $foreground: map-get($theme, foreground);
-
-  .ng-popover .popover-button {
-    background: mat-color($background, 'card');
-  }
-
-  .popover-layout-pane {
-    background-color: mat-color($background, 'card');
-  }
-}
-// Include theme styles for your custom components.
-@include ng-popover-theme($default-theme);

@@ -1,0 +1,29 @@
+:host {
+  display: flex;
+  height: inherit;
+}
+
+.ch-button {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  position: relative;
+  user-select: none;
+  cursor: pointer;
+  outline: 0;
+  border: none;
+  -webkit-tap-highlight-color: transparent;
+  white-space: nowrap;
+  text-decoration: none;
+  vertical-align: baseline;
+  text-align: center;
+  margin: 0;
+  height: inherit;
+  min-width: 64px;
+  padding: 0 16px;
+  overflow: visible;
+
+  &[disabled] {
+    cursor: default;
+  }
+}

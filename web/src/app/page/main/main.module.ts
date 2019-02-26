@@ -8,6 +8,7 @@ import { MainComponent } from './main.component';
 import { FormsModule } from '@angular/forms';
 import { ProjectComponent } from './project/project.component';
 import { PomeloModule } from 'src/app/common/module/pomelo.module';
+import { MainService } from './main.service';
 
 @NgModule({
 	imports: [
@@ -21,6 +22,8 @@ import { PomeloModule } from 'src/app/common/module/pomelo.module';
 		MainComponent,
 		ProjectComponent
 	],
-	providers: []
+	providers: [
+		MainService
+	]
 })
 export class MainModule { }

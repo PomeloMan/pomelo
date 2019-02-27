@@ -106,6 +106,7 @@ mat-toolbar.navbar-header.flex {
   mat-sidenav-content {
     // padding: 24px;
     // height: calc(100% - 48px);
+    overflow-x: hidden;
 
     // scrollbar style
     &::-webkit-scrollbar {

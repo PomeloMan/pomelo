@@ -9,6 +9,7 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
 import { UsernameValidatorDirective } from '../../../../common/directive/username-validator.directive';
 import { UserService } from './user.service';
 import { ChModule } from 'src/middleware/ch.module';
+import { LayoutDirective } from 'src/app/common/directive/layout.directive';
 
 @NgModule({
 	imports: [
@@ -23,6 +24,7 @@ import { ChModule } from 'src/middleware/ch.module';
 		UserComponent,
 		UserDetailComponent,
 		UsernameValidatorDirective,
+		LayoutDirective
 	],
 	providers: [
 		UserService

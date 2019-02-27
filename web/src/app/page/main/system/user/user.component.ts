@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy, ElementRef, ViewChildren, QueryList, TemplateRef } from '@angular/core';
 import { MatPaginator, MatSort, PageEvent, MatTableDataSource, Sort } from '@angular/material';
 import { FLY_IN_OUT } from '../../../../common/animations';
 import { UserService, User } from './user.service';
@@ -11,6 +11,7 @@ import page from '../../../../../assets/mock/user/page.json';
 import { of } from 'rxjs';
 import { ChButton } from 'src/middleware/ch-button-group/ch-button-group.component';
 import { MainService } from '../../main.service';
+import { LayoutDirective } from 'src/app/common/directive/layout.directive';
 
 @Component({
 	selector: 'app-user',
@@ -22,6 +23,8 @@ import { MainService } from '../../main.service';
 })
 export class UserComponent extends BaseComponent implements OnInit, OnDestroy {
 
+	_current: CurrentPageData = {}
+
 	displayedColumns: string[] = ['number', 'username', 'displayName', 'role', 'createDate', 'operation'];
 	dataSource: any;
 	useMockData: boolean = true;
@@ -29,11 +32,16 @@ export class UserComponent extends BaseComponent implements OnInit, OnDestroy {
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	@ViewChild(MatSort) sort: MatSort;
 
+	@ViewChildren(LayoutDirective) layouts: QueryList<LayoutDirective>;
+
+	layout: TemplateRef<ElementRef>;
 	layoutButtons: ChButton[] = [
 		{
+			id: 'ListLayout',
 			icon: 'view_list',
 			text: 'List'
 		}, {
+			id: 'GridLayout',
 			icon: 'view_module',
 			text: 'Grid',
 			// disabled: true
@@ -60,6 +68,10 @@ export class UserComponent extends BaseComponent implements OnInit, OnDestroy {
 			this.dataSource = [];
 		}
 		this.page({ pageIndex: this.pageIndex, pageSize: this.pageSize, length: this.length });
+	}
+
+	ngAfterViewInit(): void {
+		this.changeLayout(this.layoutButtons[0]);
 	}
 
 	ngOnDestroy(): void {
@@ -103,6 +115,14 @@ export class UserComponent extends BaseComponent implements OnInit, OnDestroy {
 	 * @param event 
 	 */
 	changeLayout(event: ChButton) {
-		console.log(event.text)
+		let layoutDirective = this.layouts.toArray().find(l => l.layoutId == event.id);
+		if (layoutDirective) {
+			setTimeout(() => {
+				this.layout = layoutDirective.template;
+			}, 0);
+		}
 	}
+}
+
+interface CurrentPageData {
 }

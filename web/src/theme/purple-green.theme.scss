@@ -8,13 +8,6 @@ $purple-green-theme: mat-dark-theme($purple-green-primary, $purple-green-accent,
   @include angular-material-theme($purple-green-theme);
 }
 
-// special element style
-.purple-green-theme mat-sidenav-content {
-  &::-webkit-scrollbar-thumb {
-    background-color: mat-color($purple-green-primary);
-  }
-}
-
 .purple-green-theme i.primary {
   background-color: mat-color($purple-green-primary);
 }

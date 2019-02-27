@@ -6,17 +6,11 @@ $pink-bluegrey-theme: mat-dark-theme($pink-bluegrey-primary, $pink-bluegrey-acce
 
 .pink-bluegrey-theme {
   @include angular-material-theme($pink-bluegrey-theme);
+  @include angular-material-theme-custom($pink-bluegrey-theme);
 
   @include ng-popover-theme($pink-bluegrey-theme);
   @include ch-typography();
   @include ch-theme($pink-bluegrey-theme);
-}
-
-// special element style
-.pink-bluegrey-theme mat-sidenav-content {
-  &::-webkit-scrollbar-thumb {
-    background-color: mat-color($pink-bluegrey-primary);
-  }
 }
 
 .pink-bluegrey-theme i.primary {

@@ -59,7 +59,9 @@ export class MainComponent implements OnInit {
 	ngOnInit(): void {
 		let _this = this;
 		this.service.change$.subscribe((res: any) => {
-			_this.hasChildToolbar = res.hasChildToolbar;
+			setTimeout(() => {
+				_this.hasChildToolbar = res.hasChildToolbar;
+			}, 0);
 		})
 
 		// if (!this._current_project) {

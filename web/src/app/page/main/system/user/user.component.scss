@@ -19,6 +19,9 @@ mat-toolbar {
 .app-container {
   padding: 24px;
   position: relative;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  height: calc(100% - 88px);// mat-toolbar(height:40px) + padding(top:24px + bottom:24px)
 
   .layout-wrapper {
     position: relative;
@@ -34,4 +37,15 @@ mat-toolbar {
 mat-icon {
   cursor: pointer;
   margin-right: 6px;
+}
+
+.grid-wrapper {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+
+  .user-card {
+    max-width: 280px;
+    margin-bottom: 24px;
+  }
 }

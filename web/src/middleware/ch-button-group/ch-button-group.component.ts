@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'ch-button-group',
@@ -23,6 +23,7 @@ export class ChButtonGroupComponent implements OnInit {
 }
 
 export interface ChButton {
+  id: string;
   icon?: string;
   text: string;
   disabled?: boolean;

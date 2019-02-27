@@ -20,6 +20,35 @@
 @include mat-core();
 @import 'middleware/ch.theme.scss';
 
+// Define a mixin that accepts a theme and outputs the theme-specific styles.
+@mixin mat-sidenav-theme-custom($theme) {
+  // Extract the palettes you need from the theme definition.
+  $primary: map-get($theme, primary);
+  $background: map-get($theme, background);
+
+  // Define any styles affected by the theme.
+  .mat-sidenav-content {
+    &::-webkit-scrollbar-thumb {
+      background-color: mat-color($primary);
+    }
+  }
+}
+
+@mixin mat-list-theme-custom($theme) {
+  $primary: map-get($theme, primary);
+
+  .mat-list-item {
+    i {
+      background-color: mat-color($primary);
+    }
+  }
+}
+
+@mixin angular-material-theme-custom($theme) {
+  @include mat-sidenav-theme-custom($theme);
+  @include mat-list-theme-custom($theme);
+}
+
 @import './theme/indigo-pink.theme.scss';
 @import './theme/deeppurple-amber.theme.scss';
 @import './theme/purple-green.theme.scss';

@@ -10,23 +10,11 @@ $default-warn: mat-palette($mat-red);
 // Create the theme object (a Sass map containing all of the palettes).
 $default-theme: mat-light-theme($default-primary, $default-accent, $default-warn);
 
-// Define a mixin that accepts a theme and outputs the theme-specific styles.
-@mixin mat-sidenav-theme($theme) {
-  // Extract the palettes you need from the theme definition.
-  $primary: map-get($theme, primary);
-
-  // Define any styles affected by the theme.
-  .mat-sidenav-content {
-    &::-webkit-scrollbar-thumb {
-      background-color: mat-color($primary);
-    }
-  }
-}
-
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component that you are using.
 // Include theme styles for Angular Material components.
 @include angular-material-theme($default-theme);
+@include angular-material-theme-custom($default-theme);
 
 
 @include ng-popover-theme($default-theme);
@@ -37,4 +25,3 @@ $default-theme: mat-light-theme($default-primary, $default-accent, $default-warn
 // @include mat-core-theme($default-theme);
 // @include mat-button-theme($default-theme);
 // @include mat-checkbox-theme($default-theme);
-

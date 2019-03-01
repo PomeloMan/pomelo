@@ -1,5 +1,20 @@
 @import '~@angular/material/theming';
 
+@mixin app-avatar-theme($theme) {
+  $primary: map-get($theme, primary);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  .user-avatar {
+    background-color: mat-color($foreground, divider);
+  }
+}
+
+@mixin app-theme($theme) {
+  @include app-avatar-theme($theme);
+}
+
+
 // ng-theme
 @mixin ng-popover-theme($theme) {
   $primary: map-get($theme, primary);

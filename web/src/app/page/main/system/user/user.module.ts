@@ -10,6 +10,7 @@ import { UsernameValidatorDirective } from '../../../../common/directive/usernam
 import { UserService } from './user.service';
 import { ChModule } from 'src/middleware/ch.module';
 import { LayoutDirective } from 'src/app/common/directive/layout.directive';
+import { UserEditComponent } from './user-edit/user-edit.component';
 
 @NgModule({
 	imports: [
@@ -24,7 +25,8 @@ import { LayoutDirective } from 'src/app/common/directive/layout.directive';
 		UserComponent,
 		UserDetailComponent,
 		UsernameValidatorDirective,
-		LayoutDirective
+		LayoutDirective,
+		UserEditComponent
 	],
 	providers: [
 		UserService

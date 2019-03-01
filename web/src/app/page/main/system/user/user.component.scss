@@ -1,3 +1,7 @@
+:host {
+  font-size: 14px;
+}
+
 mat-toolbar {
   height: 40px;
   min-height: 40px;
@@ -21,31 +25,66 @@ mat-toolbar {
   position: relative;
   overflow-x: hidden;
   overflow-y: scroll;
-  height: calc(100% - 88px);// mat-toolbar(height:40px) + padding(top:24px + bottom:24px)
-
-  .layout-wrapper {
-    position: relative;
-    right: 0;
-  }
+  height: calc(100% - 88px); // mat-toolbar(height:40px) + padding(top:24px + bottom:24px)
 }
 
-.mat-form-field {
-  font-size: 14px;
-  width: 100%;
-}
-
-mat-icon {
-  cursor: pointer;
-  margin-right: 6px;
-}
-
-.grid-wrapper {
+.grid-layout-wrapper {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around;
 
+  .mat-form-field {
+    width: 100%;
+  }
+
   .user-card {
     max-width: 280px;
     margin-bottom: 24px;
+  }
+
+  .user-avatar {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    overflow: hidden;
+
+    img {
+      width: inherit;
+      height: inherit;
+    }
+  }
+}
+
+.list-layout-wrapper {
+  .mat-table {
+    td {
+      &.mat-column-username {
+        display: flex;
+        align-items: center;
+        height: inherit;
+
+        .user-avatar {
+          display: inline-block;
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          border: 2px solid transparent;
+          overflow: hidden;
+          margin-right: 12px;
+
+          img {
+            width: inherit;
+            height: inherit;
+          }
+        }
+      }
+
+      mat-icon {
+        cursor: pointer;
+        margin-right: 6px;
+      }
+    }
   }
 }

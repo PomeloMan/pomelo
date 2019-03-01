@@ -1,4 +1,4 @@
-<div class="user-detail" (click)="onClick($event)">
+<div class="user-detail">
   <div class="figure user-info">
     <mat-card>
       <!-- Custom theming component @link ~src/theme.scss -->
@@ -13,25 +13,18 @@
             <span>13861800672</span>
           </div>
         </div>
-        <div class="settings" [@expand]="!expanded?'in':'active'">
-          <button mat-icon-button *ngIf="!expanded" (click)="expand($event)" class="btn-expand mat-elevation-z2">
+        <div class="settings" [ngClass]="{'active': show}" [@ease]="show? 'active': 'inactive'">
+          <button *ngIf="!show" mat-icon-button class="btn-expand mat-elevation-z2" (click)="toggleOperationMenu($event)">
             <mat-icon class="mat-primary">settings_ethernet</mat-icon>
           </button>
-          <button mat-icon-button *ngIf="expanded" matTooltip="Save" matTooltipPosition="below">
-            <mat-icon class="mat-primary">save</mat-icon>
-          </button>
-          <button mat-icon-button *ngIf="expanded" matTooltip="Delete" matTooltipPosition="below">
-            <mat-icon class="mat-primary">delete</mat-icon>
-          </button>
-
-          <!-- <div class="btn-group mat-elevation-z2" *ngIf="expanded">
+          <ng-container *ngIf="show">
             <button mat-icon-button matTooltip="Save" matTooltipPosition="below">
               <mat-icon class="mat-primary">save</mat-icon>
             </button>
             <button mat-icon-button matTooltip="Delete" matTooltipPosition="below">
               <mat-icon class="mat-primary">delete</mat-icon>
             </button>
-          </div> -->
+          </ng-container>
         </div>
       </mat-toolbar>
       <mat-card-content>

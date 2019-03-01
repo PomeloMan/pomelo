@@ -25,7 +25,7 @@ export class UserComponent extends BaseComponent implements OnInit, OnDestroy {
 
 	_current: CurrentPageData = {}
 
-	displayedColumns: string[] = ['number', 'username', 'displayName', 'role', 'createDate', 'operation'];
+	displayedColumns: string[] = ['number', 'username', 'displayName', 'email', 'role', 'createDate', 'operation'];
 	dataSource: any;
 	useMockData: boolean = true;
 

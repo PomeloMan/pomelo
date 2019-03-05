@@ -1,32 +1,43 @@
 <div class="user-detail">
   <div class="figure user-info">
     <mat-card>
-      <!-- Custom theming component @link ~src/theme.scss -->
-      <mat-toolbar class="card-header" color="primary">
-        <div class="head-portrait">
-          <mat-icon>account_circle</mat-icon>
-          <div class="intro">
-            <span>PomeloMan(Admin)</span>
-            <button mat-icon-button class="mat-elevation-z6">
-              <mat-icon class="mat-primary">publish</mat-icon>
-            </button>
-            <span>13861800672</span>
-          </div>
-        </div>
-        <div class="settings" [ngClass]="{'active': show}" [@ease]="show? 'active': 'inactive'">
-          <button *ngIf="!show" mat-icon-button class="btn-expand mat-elevation-z2" (click)="toggleOperationMenu($event)">
-            <mat-icon class="mat-primary">settings_ethernet</mat-icon>
-          </button>
-          <ng-container *ngIf="show">
-            <button mat-icon-button matTooltip="Save" matTooltipPosition="below">
-              <mat-icon class="mat-primary">save</mat-icon>
-            </button>
-            <button mat-icon-button matTooltip="Delete" matTooltipPosition="below">
-              <mat-icon class="mat-primary">delete</mat-icon>
-            </button>
-          </ng-container>
-        </div>
-      </mat-toolbar>
+      <div class="card-header">
+        <mat-toolbar #UserToolbar color="primary" [@toolbarAni]="scrolled? 'active': 'inactive'">
+          <div class="head-portrait">
+            <div class="user-avatar" [@toolbarAvatarAni]="scrolled? 'active': 'inactive'">
+              <ng-container *ngIf="!user.avatar">
+                <mat-icon>account_circle</mat-icon>
+              </ng-container>
+              <ng-container *ngIf="user.avatar">
+                <img [src]="user.avatar">
+              </ng-container>
+            </div> <!-- user-avatar -->
+            <div class="intro">
+              <span>PomeloMan(Admin)</span>
+              <button mat-icon-button class="upload-avatar-button mat-elevation-z6">
+                <mat-icon class="mat-primary">publish</mat-icon>
+                <input type="file" (change)="uploadAvatar($event)">
+              </button>
+              <span>{{user.phoneNumber}}</span>
+            </div> <!-- intro -->
+          </div> <!-- head-portrait -->
+          <div class="settings mat-elevation-z6" [ngClass]="{'active': showOperation}" [@easeInOut]="showOperation? 'active': 'inactive'">
+            <ng-container *ngIf="!showOperation">
+              <button mat-button class="btn-expand" (click)="toggleOperationMenu($event)">
+                <mat-icon class="mat-primary">settings_ethernet</mat-icon>
+              </button>
+            </ng-container>
+            <ng-container *ngIf="showOperation">
+              <button mat-button matTooltip="Save" matTooltipPosition="below" [disabled]="!contactForm.valid" (click)="save()">
+                <mat-icon class="mat-primary">save</mat-icon>
+              </button>
+              <button mat-button matTooltip="Delete" matTooltipPosition="below">
+                <mat-icon class="mat-primary">delete</mat-icon>
+              </button>
+            </ng-container>
+          </div> <!-- settings -->
+        </mat-toolbar>
+      </div> <!-- card-header -->
       <mat-card-content>
         <mat-tab-group>
           <mat-tab label="BASIC">
@@ -36,21 +47,22 @@
                   <mat-toolbar>General info</mat-toolbar>
                   <div class="basic-general-content">
                     <div class="row">
-                      <div>
-                        <mat-form-field>
-                          <input matInput placeholder="Username">
-                        </mat-form-field>
-                      </div>
+                      <mat-form-field class="col">
+                        <input matInput placeholder="User name" [(ngModel)]="user.displayName">
+                      </mat-form-field>
                       <div class="tile"></div>
-                      <div>
-                        <mat-form-field>
-                          <input matInput placeholder="Address">
-                        </mat-form-field>
-                      </div>
+                      <mat-form-field class="col">
+                        <input matInput placeholder="User position" [(ngModel)]="user.position">
+                      </mat-form-field>
+                    </div>
+                    <div class="row">
+                      <mat-form-field class="col">
+                        <input matInput placeholder="Address" [(ngModel)]="user.address">
+                      </mat-form-field>
                     </div>
                     <div class="row">
                       <mat-form-field>
-                        <textarea matInput placeholder="About"></textarea>
+                        <textarea matInput placeholder="About" [(ngModel)]="user.selfIntroduction"></textarea>
                       </mat-form-field>
                     </div>
                   </div>
@@ -58,76 +70,103 @@
                 <div class="basic-languages">
                   <mat-toolbar>Languages</mat-toolbar>
                   <div class="basic-languages-content">
-                    <div class="row">
-                      <mat-form-field>
-                        <mat-select placeholder="Toppings" multiple>
-                          <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                    </div>
+                    <mat-form-field class="example-chip-list">
+                      <mat-chip-list #chipList>
+                        <mat-chip *ngFor="let fruit of fruits" [selectable]="true" [removable]="true" (removed)="remove(fruit)">
+                          {{fruit}}
+                          <mat-icon matChipRemove>cancel</mat-icon>
+                        </mat-chip>
+                        <input #fruitInput [formControl]="fruitCtrl" [matAutocomplete]="auto" [matChipInputFor]="chipList"
+                          [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                          (matChipInputTokenEnd)="add($event)">
+                      </mat-chip-list>
+                      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                        <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
+                          {{fruit}}
+                        </mat-option>
+                      </mat-autocomplete>
+                    </mat-form-field>
                   </div>
                 </div>
                 <div class="basic-contact">
                   <mat-toolbar>Contact info</mat-toolbar>
-                  <div class="basic-contact-content">
-                    <div class="row">
-                      <mat-form-field>
-                        <input matInput placeholder="Email" [formControl]="emailFormControl">
-                        <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-                          Please enter a valid email address
-                        </mat-error>
-                        <mat-error *ngIf="emailFormControl.hasError('required')">
-                          Email is
-                          <strong>required</strong>
-                        </mat-error>
-                        <mat-icon matSuffix class="mat-primary">email</mat-icon>
-                      </mat-form-field>
-                      <div class="tile"></div>
-                      <mat-form-field>
-                        <span matPrefix>+86 &nbsp;</span>
-                        <input type="tel" matInput placeholder="Telephone">
-                        <mat-icon matSuffix class="mat-primary">phone</mat-icon>
-                      </mat-form-field>
+                  <form [formGroup]="contactForm">
+                    <div class="basic-contact-content">
+                      <div class="row">
+                        <mat-form-field class="col">
+                          <input matInput name="email" placeholder="Email" formControlName="email">
+                          <mat-error *ngIf="contactForm.controls.email.hasError('email') && !contactForm.controls.email.hasError('required')">
+                            Please enter a valid email address
+                          </mat-error>
+                          <mat-error *ngIf="contactForm.controls.email.hasError('required')">
+                            Email is
+                            <strong>required</strong>
+                          </mat-error>
+                          <mat-icon matSuffix class="mat-primary">email</mat-icon>
+                        </mat-form-field>
+                        <div class="tile"></div>
+                        <mat-form-field class="col">
+                          <input matInput name="secondary-email" placeholder="Secondary Email" formControlName="secondaryEmail">
+                          <mat-error *ngIf="contactForm.controls.secondaryEmail.hasError('email') && !contactForm.controls.secondaryEmail.hasError('required')">
+                            Please enter a valid email address
+                          </mat-error>
+                          <mat-error *ngIf="contactForm.controls.secondaryEmail.hasError('required')">
+                            Email is
+                            <strong>required</strong>
+                          </mat-error>
+                          <mat-icon matSuffix class="mat-primary">email</mat-icon>
+                        </mat-form-field>
+                      </div>
+                      <div class="row">
+                        <mat-form-field class="col">
+                          <span matPrefix>+86 &nbsp;</span>
+                          <input type="tel" matInput placeholder="Phone Number" formControlName="phoneNumber">
+                          <mat-error *ngIf="contactForm.controls.phoneNumber.hasError('pattern') && !contactForm.controls.phoneNumber.hasError('required')">
+                            Please enter a valid phone number
+                          </mat-error>
+                          <mat-error *ngIf="contactForm.controls.phoneNumber.hasError('required')">
+                            Phone Number
+                            <strong>required</strong>
+                          </mat-error>
+                          <mat-icon matSuffix class="mat-primary">phone</mat-icon>
+                        </mat-form-field>
+                        <div class="tile"></div>
+                        <mat-form-field class="col">
+                          <input matInput placeholder="Emergency Contact" formControlName="emergencyContact">
+                          <mat-error *ngIf="contactForm.controls.emergencyContact.hasError('pattern') && !contactForm.controls.emergencyContact.hasError('required')">
+                              Please enter a valid emergency contact
+                            </mat-error>
+                          <mat-error *ngIf="contactForm.controls.emergencyContact.hasError('required')">
+                            Emergency Contact
+                            <strong>required</strong>
+                          </mat-error>
+                          <mat-icon matSuffix class="mat-primary">phone</mat-icon>
+                        </mat-form-field>
+                      </div>
+                      <div class="row">
+                        <mat-form-field class="col">
+                          <input matInput placeholder="Facebook">
+                          <fa-icon matSuffix class="mat-primary" [fixedWidth]="true" [icon]="['fab', 'facebook']"></fa-icon>
+                        </mat-form-field>
+                        <div class="tile"></div>
+                        <mat-form-field class="col">
+                          <input matInput placeholder="Twitter">
+                          <fa-icon matSuffix class="mat-primary" [fixedWidth]="true" [icon]="['fab', 'twitter']"></fa-icon>
+                        </mat-form-field>
+                      </div>
+                      <div class="row">
+                        <mat-form-field class="col">
+                          <input matInput placeholder="Wechat">
+                          <fa-icon matSuffix class="mat-primary" [fixedWidth]="true" [icon]="['fab', 'weixin']"></fa-icon>
+                        </mat-form-field>
+                        <div class="tile"></div>
+                        <mat-form-field class="col">
+                          <input matInput placeholder="Weibo">
+                          <fa-icon matSuffix class="mat-primary" [fixedWidth]="true" [icon]="['fab', 'weibo']"></fa-icon>
+                        </mat-form-field>
+                      </div>
                     </div>
-                    <div class="row">
-                      <mat-form-field>
-                        <input matInput placeholder="Email" [formControl]="emailFormControl">
-                        <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-                          Please enter a valid email address
-                        </mat-error>
-                        <mat-error *ngIf="emailFormControl.hasError('required')">
-                          Email is
-                          <strong>required</strong>
-                        </mat-error>
-                        <mat-icon matSuffix class="mat-primary">email</mat-icon>
-                      </mat-form-field>
-                      <div class="tile"></div>
-                      <mat-form-field>
-                        <span matPrefix>+86 &nbsp;</span>
-                        <input type="tel" matInput placeholder="Telephone">
-                        <mat-icon matSuffix class="mat-primary">phone</mat-icon>
-                      </mat-form-field>
-                    </div>
-                    <div class="row">
-                      <mat-form-field>
-                        <input matInput placeholder="Email" [formControl]="emailFormControl">
-                        <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-                          Please enter a valid email address
-                        </mat-error>
-                        <mat-error *ngIf="emailFormControl.hasError('required')">
-                          Email is
-                          <strong>required</strong>
-                        </mat-error>
-                        <mat-icon matSuffix class="mat-primary">email</mat-icon>
-                      </mat-form-field>
-                      <div class="tile"></div>
-                      <mat-form-field>
-                        <span matPrefix>+86 &nbsp;</span>
-                        <input type="tel" matInput placeholder="Telephone">
-                        <mat-icon matSuffix class="mat-primary">phone</mat-icon>
-                      </mat-form-field>
-                    </div>
-                  </div>
+                  </form>
                 </div>
               </div>
             </ng-template>

@@ -35,6 +35,10 @@ public class User extends VersionEntity implements Serializable {
 	@ApiModelProperty(hidden = true)
 	private String password;
 
+	private String avatar;
+	private String email;
+	private Integer gender;// 0:male / 1:female
+
 	@ApiModelProperty(hidden = true)
 	@ManyToMany(fetch = FetchType.EAGER)
 	private Collection<Role> roles;
@@ -128,6 +132,30 @@ public class User extends VersionEntity implements Serializable {
 
 	public void setAuthorities(Collection<SimpleGrantedAuthority> authorities) {
 		this.authorities = authorities;
+	}
+
+	public String getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Integer getGender() {
+		return gender;
+	}
+
+	public void setGender(Integer gender) {
+		this.gender = gender;
 	}
 
 }

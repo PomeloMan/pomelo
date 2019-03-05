@@ -11,6 +11,7 @@ import { UserService } from './user.service';
 import { ChModule } from 'src/middleware/ch.module';
 import { LayoutDirective } from 'src/app/common/directive/layout.directive';
 import { UserEditComponent } from './user-edit/user-edit.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
 	imports: [
@@ -19,6 +20,7 @@ import { UserEditComponent } from './user-edit/user-edit.component';
 		ReactiveFormsModule,//FormControl
 		MaterialModule,
 		ChModule,
+		FontAwesomeModule,
 		UserRoutingModule
 	],
 	declarations: [

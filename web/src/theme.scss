@@ -32,7 +32,34 @@
   }
 }
 
-@include mat-core();
+
+
+
+$config: mat-typography-config();
+@include mat-core($config);
+
+@mixin fa-icon-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  .ng-fa-icon {
+    &.mat-primary {
+      color: mat-color($primary);
+    }
+
+    &.mat-accent {
+      color: mat-color($accent);
+    }
+
+    &.mat-warn {
+      color: mat-color($warn);
+    }
+  }
+}
+
 @import 'middleware/ch.theme.scss';
 
 // Define a mixin that accepts a theme and outputs the theme-specific styles.
@@ -62,7 +89,26 @@
 @mixin angular-material-theme-custom($theme) {
   @include mat-sidenav-theme-custom($theme);
   @include mat-list-theme-custom($theme);
+  @include fa-icon-theme($theme);
 }
+
+
+// typography
+@mixin mat-form-field-typography-custom($config) {
+  $line-height: mat-line-height($config, input);
+  $prefix-suffix-icon-font-scale: 1.25;
+  $prefix-suffix-icon-font-size: $prefix-suffix-icon-font-scale * 100%;
+
+  .mat-form-field-prefix,
+  .mat-form-field-suffix {
+    .ng-fa-icon {
+      font-size: $prefix-suffix-icon-font-size;
+      line-height: $line-height;
+    }
+  }
+}
+
+@include mat-form-field-typography-custom($config);
 
 @import './theme/indigo-pink.theme.scss';
 @import './theme/deeppurple-amber.theme.scss';

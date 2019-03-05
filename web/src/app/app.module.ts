@@ -16,6 +16,11 @@ import { AuthService } from './config/security/auth.service';
 import { HTTP_INTERCEPTOR_PROVIDERS } from './http-interceptors/_index';
 import { InteractionService } from './common/service/Interaction.service';
 
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { far } from '@fortawesome/free-regular-svg-icons';// npm install @fortawesome/free-regular-svg-icons --save
+import { fab } from '@fortawesome/free-brands-svg-icons';// npm install @fortawesome/free-brands-svg-icons --save
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +44,11 @@ import { InteractionService } from './common/service/Interaction.service';
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(router: Router) {
+
+  constructor(
+    router: Router
+  ) {
     console.log('Routes: ', JSON.stringify(router.config, undefined, 2));
+    library.add(fas, far, fab);
   }
 }

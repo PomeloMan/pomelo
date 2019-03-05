@@ -5,7 +5,8 @@ import {
     animate,
     transition,
     keyframes,
-    group
+    group,
+    animation
 } from '@angular/animations';
 
 export const EXPAND_TO_LEFT = trigger('expandToLeft', [
@@ -123,3 +124,19 @@ export const FLY_IN_OUT_GROUP = trigger('flyInOut', [
         ])
     ])
 ])
+
+
+
+
+// Reusable Animation
+// {@link https://www.angular.cn/guide/reusable-animations}
+export const transAnimation = animation([
+    style({
+        width: '{{ width }}',
+        height: '{{ height }}',
+        fontSize: '{{ fontSize}}',
+        opacity: '{{ opacity }}',
+        backgroundColor: '{{ backgroundColor }}'
+    }),
+    animate('{{ time }}')
+]);

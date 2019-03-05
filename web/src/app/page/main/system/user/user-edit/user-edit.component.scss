@@ -3,6 +3,12 @@
   padding: 24px;
 }
 
+.mat-button {
+  height: inherit;
+  min-width: 48px;
+  padding: 0;
+}
+
 .figure.user-info {
   width: calc(((33.3333% - 0.666667px) * 2) + 1px); // 2/3
   margin-right: 24px;
@@ -10,31 +16,57 @@
   .mat-card {
     padding: 0;
 
-    .mat-toolbar.card-header {
+    .card-header {
       height: 120px;
       position: sticky;
       top: 0;
       z-index: 2;
+    }
+
+    .mat-toolbar {
+      height: inherit;
+      position: relative;
 
       .head-portrait {
         display: flex;
         align-items: center;
 
-        >.mat-icon,
-        .intro {
+        .upload-avatar-button {
           position: relative;
+
+          input {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            opacity: 0;
+            cursor: pointer;
+          }
         }
 
-        >.mat-icon {
+        .user-avatar {
           height: 80px;
           width: 80px;
           font-size: 80px;
+          background: none;
+          border-radius: 50%;
+          overflow: hidden;
+          position: relative;
+
+          .mat-icon,
+          img {
+            height: inherit;
+            width: inherit;
+            font-size: inherit;
+          }
         }
 
         .intro {
           display: flex;
           flex-direction: column;
           padding-left: 12px;
+          position: relative;
 
           >span:first-child {
             font-size: 18px;
@@ -62,7 +94,6 @@
         right: 24px;
         height: 48px;
         background: #fff;
-        box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
         border-radius: 100%;
         overflow: hidden;
 
@@ -70,39 +101,18 @@
           border-radius: 4px;
         }
 
-        >.mat-icon-button {
-          width: 48px;
-          height: 48px;
-          line-height: 48px;
-        }
-
         >.btn-expand {
-          background-color: #fff;
-
           .mat-icon {
             width: 32px;
+            height: 32px;
             font-size: 32px;
           }
         }
-
-        // > .mat-icon-button:hover {
-        //     box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
-        //         0px 6px 10px 0px rgba(0, 0, 0, 0.14),
-        //         0px 1px 18px 0px rgba(0, 0, 0, 0.12);
-        // }
-        // > .btn-group {
-        //     overflow: hidden;
-        //     background-color: #fff;
-        //     > .mat-icon-button {
-        //         width: 48px;
-        //         height: 48px;
-        //         line-height: 48px;
-        //     }
-        // }
       }
+
+      // .mat-toolbar
     }
 
-    // .mat-toolbar.card-header
     .mat-card-content {
       padding: 24px;
 
@@ -131,34 +141,35 @@
             display: flex;
             align-items: center;
 
+            .col {
+              flex: 1;
+            }
+
             >.tile {
               flex: none;
               width: 56px;
             }
 
-            >div {
-              flex: auto;
-            }
-
             textarea {
-              height: 80px;
               padding: 12px 0;
               resize: none;
+              line-height: 1.5;
             }
           }
         }
+
+        //.tab-content
       }
 
-      //.tab-content
+      //.mat-card-content
     }
 
-    //.mat-card-content
+    //.mat-card
   }
 
-  //.mat-card
+  //.figure.user-info
 }
 
-//.figure.user-info
 .figure.user-setting {
   width: calc(((33.3333% - 0.666667px) * 1) + 0px); // 1/3
 

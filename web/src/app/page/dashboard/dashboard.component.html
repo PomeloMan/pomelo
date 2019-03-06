@@ -29,12 +29,17 @@
   <mat-card class="card">
     <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events" [refresh]="refresh"
       [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)" (eventClicked)="handleEvent('Clicked', $event.event)"
-      (eventTimesChanged)="eventTimesChanged($event)" [cellTemplate]="cellTemplate">
+      (eventTimesChanged)="eventTimesChanged($event)" [cellTemplate]="cellTemplate" [eventTitleTemplate]="eventTitleTemplate">
       <ng-template #cellTemplate let-day="day" let-openDay="openDay" let-locale="locale" let-tooltipPlacement="tooltipPlacement"
         let-highlightDay="highlightDay" let-unhighlightDay="unhighlightDay" let-eventClicked="eventClicked"
         let-tooltipTemplate="tooltipTemplate" let-tooltipAppendToBody="tooltipAppendToBody">
-        <span class="cal-day-number" [ngClass]="{ 'cal-day-badge': day.badgeTotal > 0, 'cal-event-active': (viewDate.getTime() === day.date.getTime() && activeDayIsOpen) }">{{ day.date | calendarDate:
+        <span class="cal-day-number" [ngClass]="{ 'cal-day-badge': day.badgeTotal > 0, 'cal-event-active': (viewDate.getTime() === day.date.getTime() && activeDayIsOpen) }">{{
+          day.date | calendarDate:
           'monthViewDayNumber':locale }}</span>
+      </ng-template>
+      <ng-template #eventTitleTemplate let-event="event" let-view="view">
+        <span class="cal-event-title abc" (mouseenter)="calendarMonthView.toggleDayHighlight(event, true)" (mouseleave)="calendarMonthView.toggleDayHighlight(event, false)"
+          [innerHTML]="event.title | calendarEventTitle: view:event"></span>
       </ng-template>
     </mwl-calendar-month-view>
     <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events" [refresh]="refresh"

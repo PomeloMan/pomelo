@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FLY_IN_OUT, toggle } from '../../common/animations';
-import { CalendarView, CalendarEvent, CalendarEventTimesChangedEvent, CalendarEventAction } from 'angular-calendar';
+import { CalendarView, CalendarEvent, CalendarEventTimesChangedEvent, CalendarEventAction, CalendarMonthViewComponent } from 'angular-calendar';
 import { Subject } from 'rxjs';
 import {
 	startOfDay,
@@ -33,6 +33,8 @@ export class DashboardComponent {
 
 	active: boolean = true;
 	state: string = this.active ? 'active' : 'inactive';
+
+	@ViewChild(CalendarMonthViewComponent) calendarMonthView: CalendarMonthViewComponent;
 
 	constructor(
 	) {
@@ -138,6 +140,7 @@ export class DashboardComponent {
 		this.handleEvent('Dropped or resized', event);
 		this.refresh.next();
 	}
+
 }
 
 const colors: any = {

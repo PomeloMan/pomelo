@@ -3,10 +3,17 @@
 } */
 
 .inactive {
-    height: 0px !important;
+  height: 0px !important;
 }
+
 .active {
-    height: 10px;
-    width: 100%;
-    background-color: red;
+  height: 10px;
+  width: 100%;
+  background-color: red;
+}
+
+.calendar-wrapper {
+  width: 50%;
+  margin: auto;
+  margin-bottom: 100px;
 }

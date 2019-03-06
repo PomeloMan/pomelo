@@ -26,3 +26,6 @@ $default-theme: mat-light-theme($default-primary, $default-accent, $default-warn
 // @include mat-core-theme($default-theme);
 // @include mat-button-theme($default-theme);
 // @include mat-checkbox-theme($default-theme);
+
+// angular-calendar
+@include angular-calendar-theme($default-theme);

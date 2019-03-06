@@ -1,26 +1,91 @@
 <div (click)="toggle()" [@toggle]="state"></div>
 <mat-grid-list cols="4" rowHeight="100px">
-    <mat-grid-tile *ngFor="let tile of tiles" [@flyInOut]="'in'">
-        <div style="width:90%">
-            <mat-card class="card">
-                <p>{{tile}}</p>
-            </mat-card>
-        </div>
-    </mat-grid-tile>
+  <mat-grid-tile *ngFor="let tile of tiles" [@flyInOut]="'in'">
+    <div style="width:90%">
+      <mat-card class="card">
+        <p>{{tile}}</p>
+      </mat-card>
+    </div>
+  </mat-grid-tile>
 </mat-grid-list>
 <mat-grid-list cols="2" rowHeight="300px">
-    <mat-grid-tile>
-        <div style="width:90%">
-            <mat-card>
-                <mat-card-header>
-                    <mat-card-title>Shiba Inu</mat-card-title>
-                    <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-                </mat-card-header>
-                <mat-card-content>
-                    <p>The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small,
-                        agile dog that copes very well with mountainous terrain, the Shiba Inu was originally bred for hunting.</p>
-                </mat-card-content>
-            </mat-card>
-        </div>
-    </mat-grid-tile>
+  <mat-grid-tile>
+    <div style="width:90%">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Shiba Inu</mat-card-title>
+          <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small,
+            agile dog that copes very well with mountainous terrain, the Shiba Inu was originally bred for hunting.</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </mat-grid-tile>
 </mat-grid-list>
+
+<div class="calendar-wrapper" [ngSwitch]="view">
+  <mat-card class="card">
+    <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events" [refresh]="refresh"
+      [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)" (eventClicked)="handleEvent('Clicked', $event.event)"
+      (eventTimesChanged)="eventTimesChanged($event)" [cellTemplate]="cellTemplate">
+      <ng-template #cellTemplate let-day="day" let-openDay="openDay" let-locale="locale" let-tooltipPlacement="tooltipPlacement"
+        let-highlightDay="highlightDay" let-unhighlightDay="unhighlightDay" let-eventClicked="eventClicked"
+        let-tooltipTemplate="tooltipTemplate" let-tooltipAppendToBody="tooltipAppendToBody">
+        <span class="cal-day-number" [ngClass]="{ 'cal-day-badge': day.badgeTotal > 0, 'cal-event-active': (viewDate.getTime() === day.date.getTime() && activeDayIsOpen) }">{{ day.date | calendarDate:
+          'monthViewDayNumber':locale }}</span>
+      </ng-template>
+    </mwl-calendar-month-view>
+    <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events" [refresh]="refresh"
+      (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
+    </mwl-calendar-week-view>
+    <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="events" [refresh]="refresh"
+      (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
+    </mwl-calendar-day-view>
+  </mat-card>
+</div>
+
+<h3>
+  Edit events
+  <button class="btn btn-primary pull-right" (click)="addEvent()">
+    Add new
+  </button>
+  <div class="clearfix"></div>
+</h3>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Primary color</th>
+      <th>Secondary color</th>
+      <th>Starts at</th>
+      <th>Ends at</th>
+      <th>Remove</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let event of events; let index = index">
+      <td>
+        <input type="text" class="form-control" [(ngModel)]="event.title" (keyup)="refresh.next()" />
+      </td>
+      <td>
+        <input type="color" [(ngModel)]="event.color.primary" (change)="refresh.next()" />
+      </td>
+      <td>
+        <input type="color" [(ngModel)]="event.color.secondary" (change)="refresh.next()" />
+      </td>
+      <td>
+      </td>
+      <td>
+      </td>
+      <td>
+        <button class="btn btn-danger" (click)="events.splice(index, 1); refresh.next()">
+          Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

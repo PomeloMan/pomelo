@@ -1,0 +1,59 @@
+.cal-month-view {
+  .cal-cell-row {
+    display: flex;
+
+    &.cal-header {
+      font-weight: bolder;
+
+      .cal-cell {
+        padding: 0 0 8px 0;
+
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0px;
+          height: 1px;
+        }
+      }
+    }
+
+    .cal-cell {
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px;
+
+      .cal-day-number {
+        display: block;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        box-sizing: border-box;
+        border-width: 1px;
+        border-style: solid;
+
+        &.cal-day-badge {
+          cursor: pointer;
+        }
+      }
+
+      .cal-events {
+        position: absolute;
+        bottom: 0;
+      }
+    }
+  }
+
+  .cal-open-day-events {
+    padding: 16px;
+  }
+}

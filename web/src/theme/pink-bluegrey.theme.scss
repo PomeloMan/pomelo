@@ -11,6 +11,9 @@ $pink-bluegrey-theme: mat-dark-theme($pink-bluegrey-primary, $pink-bluegrey-acce
   @include ng-popover-theme($pink-bluegrey-theme);
   @include ch-typography();
   @include ch-theme($pink-bluegrey-theme);
+
+  // angular-calendar
+  @include angular-calendar-theme($pink-bluegrey-theme);
 }
 
 .pink-bluegrey-theme i.primary {

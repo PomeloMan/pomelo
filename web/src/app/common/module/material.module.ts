@@ -9,7 +9,7 @@ import {
 	MatButtonModule, MatButtonToggleModule, MatBadgeModule, MatChipsModule,
 	MatIconModule, MatProgressSpinnerModule, MatProgressBarModule,
 	MatBottomSheetModule, MatDialogModule, MatSnackBarModule, MatTooltipModule,
-	MatPaginatorModule, MatSortModule, MatTableModule,
+	MatPaginatorModule, MatSortModule, MatTableModule, MatNativeDateModule,
 } from '@angular/material';
 @NgModule({
 
@@ -59,6 +59,7 @@ import {
 		MatAutocompleteModule,
 		MatCheckboxModule,
 		MatDatepickerModule,
+		MatNativeDateModule,
 		MatFormFieldModule,
 		MatInputModule,
 		MatRadioModule,

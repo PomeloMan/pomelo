@@ -62,6 +62,7 @@ export class DashboardComponent {
 		}
 	];
 	CalendarView = CalendarView;
+	eventColumns = ['title', 'primaryColor', 'secondaryColor', 'starts', 'ends', 'operation'];
 	view: CalendarView = CalendarView.Month;
 	viewDate: Date = new Date();
 	events: CalendarEvent[] = [

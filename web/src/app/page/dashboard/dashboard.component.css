@@ -15,5 +15,11 @@
 .calendar-wrapper {
   width: 50%;
   margin: auto;
+  margin-bottom: 50px;
+}
+
+.calendar-event-wrapper {
+  width: 80%;
+  margin: auto;
   margin-bottom: 100px;
 }

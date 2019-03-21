@@ -1,0 +1,17 @@
+<p>
+  viser-ng works!
+</p>
+<div>
+  <v-chart [forceFit]="forceFit" [height]="height" [data]="data" [scale]="scale" [padding]="padding">
+    <v-tooltip></v-tooltip>
+    <v-axis></v-axis>
+    <v-legend [attachLast]="true"></v-legend>
+    <v-legend dataKey="predict" [show]="false"></v-legend>
+    <v-line position="time*value" shape="smooth" [color]="['type', ['#cccccc', '#2593fc']]" [size]="2" [animate]="lineAnimate"></v-line>
+    <v-guide type="line" [top]="true" [start]="['min', 60]" [end]="['max', 60]" [lineStyle]="guide1Opts.lineStyle"
+      [text]="guide1Opts.text"></v-guide>
+    <v-guide type="regionFilter" [top]="true" [start]="['min', 60]" [end]="['max', 60]" color="#F5222D" [apply]="['line']"></v-guide>
+    <v-guide type="dataMarker" [top]="true" content="当前最大峰值" [position]="this.getDataMarkerOptsposition(data)" [style]="dataMarkerOpts.style"
+      [lineLength]="50"></v-guide>
+  </v-chart>
+</div>

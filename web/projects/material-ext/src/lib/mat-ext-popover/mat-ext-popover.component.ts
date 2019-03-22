@@ -2,15 +2,11 @@ import { Component, OnInit, HostBinding, ViewChild, TemplateRef, Input, ViewCont
 import { MatButton } from '@angular/material';
 import { OverlayRef, Overlay } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
-import { EXPAND_TO_LEFT } from 'src/app/common/animations';
 
 @Component({
   selector: 'mat-ext-popover',
   templateUrl: './mat-ext-popover.component.html',
   styleUrls: ['./mat-ext-popover.component.scss'],
-  animations: [
-    EXPAND_TO_LEFT
-  ]
 })
 export class MatExtPopoverComponent implements OnInit {
 

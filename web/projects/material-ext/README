@@ -1,0 +1,2 @@
+>ng g library <library name>
+>ng build <library name>

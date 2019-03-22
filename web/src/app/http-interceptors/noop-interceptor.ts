@@ -21,7 +21,7 @@ export class NoopInterceptor implements HttpInterceptor {
 		private native: NativeService
 	) { }
 
-	intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+	intercept(req: HttpRequest<any>, next: HttpHandler): Observable<any> {// Observable<HttpEvent<any>>
 		//do nothing
 		let _this = this;
 		return next.handle(req).pipe(

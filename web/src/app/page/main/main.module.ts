@@ -7,8 +7,8 @@ import { MainRoutingModule } from './main-routing.module';
 import { MainComponent } from './main.component';
 import { FormsModule } from '@angular/forms';
 import { ProjectComponent } from './project/project.component';
-import { PomeloModule } from 'src/app/common/module/pomelo.module';
 import { MainService } from './main.service';
+import { MaterialExtModule } from 'projects/material-ext/src/public_api';
 
 @NgModule({
 	imports: [
@@ -16,7 +16,7 @@ import { MainService } from './main.service';
 		FormsModule,
 		MaterialModule,
 		MainRoutingModule,
-		PomeloModule
+		MaterialExtModule
 	],
 	declarations: [
 		MainComponent,

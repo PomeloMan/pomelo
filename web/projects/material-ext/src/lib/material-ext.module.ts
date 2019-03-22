@@ -8,7 +8,10 @@ import { MatExtPopoverModule } from './mat-ext-popover';
     MatExtButtonModule,
     MatExtPopoverModule
   ],
-  exports: []
+  exports: [
+    MatExtButtonModule,
+    MatExtPopoverModule
+  ]
 })
 export class MaterialExtModule { }
 

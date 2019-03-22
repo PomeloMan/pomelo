@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
-import { MatExtButtonModule } from './mat-ext-button';
 import { MatExtPopoverModule } from './mat-ext-popover';
+import { MatExtButtonModule } from './mat-ext-button';
 
 @NgModule({
-  declarations: [],
   imports: [
     MatExtButtonModule,
     MatExtPopoverModule
@@ -14,6 +13,3 @@ import { MatExtPopoverModule } from './mat-ext-popover';
   ]
 })
 export class MaterialExtModule { }
-
-export * from './mat-ext-button';
-export * from './mat-ext-popover';

@@ -2,8 +2,9 @@
   "name": "material-ext",
   "version": "0.0.1",
   "peerDependencies": {
-    "@angular/common": "^7.0.0",
-    "@angular/core": "^7.0.0",
-    "@angular/material": "^7.0.4"
+    "@angular/common": "^7.2.0",
+    "@angular/core": "^7.2.0",
+    "@angular/cdk": "^7.3.5",
+    "@angular/material": "^7.3.5"
   }
 }

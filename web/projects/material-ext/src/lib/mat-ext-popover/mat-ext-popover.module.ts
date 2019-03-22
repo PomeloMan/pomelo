@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MaterialModule } from 'src/app/common/module/material.module';
+import { MatButtonModule } from '@angular/material/button';
 import { MatExtPopoverComponent } from './mat-ext-popover.component';
 
 @NgModule({
@@ -8,7 +8,7 @@ import { MatExtPopoverComponent } from './mat-ext-popover.component';
   exports: [MatExtPopoverComponent],
   imports: [
     CommonModule,
-    MaterialModule
+    MatButtonModule
   ]
 })
 export class MatExtPopoverModule { }

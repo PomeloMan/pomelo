@@ -1,2 +1,5 @@
 >ng g library <library name>
 >ng build <library name>
+
+>cd dist
+>npm push

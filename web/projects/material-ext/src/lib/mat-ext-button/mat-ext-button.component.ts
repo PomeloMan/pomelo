@@ -8,19 +8,26 @@ import { ANIMATION_MODULE_TYPE } from '@angular/platform-browser/animations';
   selector: 'matx-loading-button',
   templateUrl: './mat-ext-button.component.html',
   styleUrls: ['./mat-ext-button.component.scss'],
-  host : {
-    'class' : 'mat-raised-button matx-loading-button'
-   }
+  host: {
+    'class': 'mat-raised-button matx-loading-button'
+  }
 })
 export class MatExtButtonComponent extends MatButton {
 
   @Input() loading: boolean = false;
+  @Input() diameter: number = 18;
+  @Input() timeout: number = 5000;
 
   @HostListener('click') onClick() {
     if (!this.loading) {
       this.loading = true;
       this.disabled = true;
       this._elementRef.nativeElement.setAttribute('disabled', true);
+      setTimeout(() => {
+        this.loading = false;
+        this.disabled = false;
+        this._elementRef.nativeElement.removeAttribute('disabled');
+      }, this.timeout);
     }
   }
 

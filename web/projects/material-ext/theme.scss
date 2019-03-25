@@ -1,0 +1,25 @@
+@mixin matx-loading-button-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  .mat-raised-button.matx-loading-button {
+    &[disabled] {
+      background-color: mat-color($primary, 0.24);
+      color: mat-color($background, raised-button);
+
+      .mat-progress-spinner,
+      .mat-spinner {
+        circle {
+          stroke: mat-color($background, raised-button);
+        }
+      }
+    }
+  }
+}
+
+@mixin matx-theme($theme) {
+  @include matx-loading-button-theme($theme);
+}

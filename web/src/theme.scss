@@ -1,4 +1,5 @@
 @import '~@angular/material/theming';
+@import '../projects/material-ext/theme';
 
 @mixin app-avatar-theme($theme) {
   $primary: map-get($theme, primary);

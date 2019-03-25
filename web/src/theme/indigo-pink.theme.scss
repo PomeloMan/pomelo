@@ -29,3 +29,5 @@ $default-theme: mat-light-theme($default-primary, $default-accent, $default-warn
 
 // angular-calendar
 @include angular-calendar-theme($default-theme);
+
+@include matx-theme($default-theme);

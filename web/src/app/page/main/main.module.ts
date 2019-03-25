@@ -8,7 +8,7 @@ import { MainComponent } from './main.component';
 import { FormsModule } from '@angular/forms';
 import { ProjectComponent } from './project/project.component';
 import { MainService } from './main.service';
-import { MaterialExtModule } from 'projects/material-ext/src/public_api';
+import { MaterialExtModule } from 'projects/material-ext/src/lib/material-ext.module';
 
 @NgModule({
 	imports: [

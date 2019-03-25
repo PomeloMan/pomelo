@@ -4,11 +4,11 @@ import { OverlayRef, Overlay } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 
 @Component({
-  selector: 'mat-ext-popover',
-  templateUrl: './mat-ext-popover.component.html',
-  styleUrls: ['./mat-ext-popover.component.scss'],
+  selector: 'matx-popover',
+  templateUrl: './matx-popover.component.html',
+  styleUrls: ['./matx-popover.component.scss'],
 })
-export class MatExtPopoverComponent implements OnInit {
+export class MatxPopoverComponent implements OnInit {
 
   @HostBinding('class') class = 'ng-popover';
   @ViewChild('PopoverLayout') popoverLayout: TemplateRef<any>;

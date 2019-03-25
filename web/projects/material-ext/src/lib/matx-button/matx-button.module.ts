@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCommonModule, MatRippleModule, MatProgressSpinnerModule } from '@angular/material';
-import { MatExtButtonComponent } from './mat-ext-button.component';
+import { MatxButtonComponent } from './matx-button.component';
 
 @NgModule({
   declarations: [
-    MatExtButtonComponent
+    MatxButtonComponent
   ],
   exports: [
-    MatExtButtonComponent
+    MatxButtonComponent
   ],
   imports: [
     CommonModule,
@@ -17,4 +17,4 @@ import { MatExtButtonComponent } from './mat-ext-button.component';
     MatProgressSpinnerModule
   ]
 })
-export class MatExtButtonModule { }
+export class MatxButtonModule { }

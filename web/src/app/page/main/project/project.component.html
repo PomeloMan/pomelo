@@ -7,11 +7,6 @@
           <div class="project-wrapper">
             <div class="project-item">
               1
-              <div>
-                <matx-loading-button class="mat-primary">
-                  Basic
-                </matx-loading-button>
-              </div>
             </div>
           </div>
         </mat-grid-tile>
@@ -77,6 +72,24 @@
   <mat-tab label="Second">
     <ng-template matTabContent>
       Content 2 - Loaded: {{getTimeLoaded(2) | date:'medium'}}
+
+      <matx-timeline mode="alternate">
+        <matx-timeline-item color="red">
+          Solve initial network problems 1<br>
+          Solve initial network problems 2<br>
+          Solve initial network problems 3 2015-09-01
+        </matx-timeline-item>
+        <matx-timeline-item>
+          Solve initial network problems 1<br>
+          Solve initial network problems 2<br>
+          Solve initial network problems 3 2015-09-01
+        </matx-timeline-item>
+        <matx-timeline-item [template]="Template">
+          Solve initial network problems 1<br>
+          Solve <span style="color:blue;">initial network</span> problems 2<br>
+          Solve initial network problems 3 2015-09-01
+        </matx-timeline-item>
+      </matx-timeline>
     </ng-template>
   </mat-tab>
   <mat-tab label="Third">
@@ -85,3 +98,12 @@
     </ng-template>
   </mat-tab>
 </mat-tab-group>
+
+<ng-template #Template>
+  <svg width="24px" fill="currentColor" viewBox="0 0 24 24">
+    <path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z">
+
+    </path>
+    <path d="M0 0h24v24H0z" fill="none"></path>
+  </svg>
+</ng-template>

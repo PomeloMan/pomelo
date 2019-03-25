@@ -6,13 +6,13 @@ import { ANIMATION_MODULE_TYPE } from '@angular/platform-browser/animations';
 
 @Component({
   selector: 'matx-loading-button',
-  templateUrl: './mat-ext-button.component.html',
-  styleUrls: ['./mat-ext-button.component.scss'],
+  templateUrl: './matx-button.component.html',
+  styleUrls: ['./matx-button.component.scss'],
   host: {
     'class': 'mat-raised-button matx-loading-button'
   }
 })
-export class MatExtButtonComponent extends MatButton {
+export class MatxButtonComponent extends MatButton {
 
   @Input() loading: boolean = false;
   @Input() diameter: number = 18;

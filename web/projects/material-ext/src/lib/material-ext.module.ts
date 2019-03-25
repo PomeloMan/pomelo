@@ -1,15 +1,18 @@
 import { NgModule } from '@angular/core';
-import { MatExtPopoverModule } from './mat-ext-popover';
-import { MatExtButtonModule } from './mat-ext-button';
+import { MatxPopoverModule } from './matx-popover';
+import { MatxButtonModule } from './matx-button';
+import { MatxTimelineModule } from './matx-timeline';
 
 @NgModule({
   imports: [
-    MatExtButtonModule,
-    MatExtPopoverModule
+    MatxButtonModule,
+    MatxPopoverModule,
+    MatxTimelineModule
   ],
   exports: [
-    MatExtButtonModule,
-    MatExtPopoverModule
+    MatxButtonModule,
+    MatxPopoverModule,
+    MatxTimelineModule
   ]
 })
 export class MaterialExtModule { }

@@ -1,2 +1,3 @@
-export * from './mat-ext-popover';
-export * from './mat-ext-button';
+export * from './matx-popover';
+export * from './matx-button';
+export * from './matx-timeline';

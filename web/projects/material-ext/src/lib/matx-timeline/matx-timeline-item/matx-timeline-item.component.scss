@@ -1,0 +1,61 @@
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+
+li {
+  list-style: none;
+}
+
+.matx-timeline-item {
+  position: relative;
+  padding: 0 0 20px 0;
+  margin: 0;
+
+  &.matx-timeline-item-last {
+    .matx-timeline-item-tail {
+      display: none;
+    }
+  }
+
+  .matx-timeline-item-tail {
+    position: absolute;
+    left: 4px;
+    top: .75em;
+    height: 100%;
+    border-left-width: 2px;
+    border-left-style: solid;
+  }
+
+  .matx-timeline-circle {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 100px;
+    border-width: 2px;
+    border-style: solid;
+    margin: 0;
+    padding: 0;
+  }
+
+  .matx-timeline-circle-custom {
+    position: absolute;
+    text-align: center;
+    line-height: 1;
+    border: 0;
+    border-radius: 0;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    top: 5px;
+    left: 5px;
+    height: auto;
+    width: auto;
+  }
+
+  .matx-timeline-content {
+    margin: 0;
+    position: relative;
+    top: -6px;
+  }
+}

@@ -1,0 +1,12 @@
+<li #li class="matx-timeline-item">
+  <!-- timeline vertical line -->
+  <div class="matx-timeline-item-tail"></div>
+  <!-- timeline icon -->
+  <div class="matx-timeline-circle" [ngClass]="{'matx-timeline-circle-custom': template}" [ngStyle]="{'color': color, 'borderColor': color}">
+    <ng-template [ngTemplateOutlet]="template"></ng-template>
+  </div>
+  <!-- timeline content text -->
+  <div class="matx-timeline-content">
+    <ng-content></ng-content>
+  </div>
+</li>

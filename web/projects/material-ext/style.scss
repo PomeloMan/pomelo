@@ -1,0 +1,67 @@
+// mode alternate
+.matx-timeline.matx-timeline-alternate {
+  matx-timeline-item .matx-timeline-item-alternate {
+    .matx-timeline-item-tail {
+      left: 50%;
+    }
+
+    .matx-timeline-circle {
+      left: 50%;
+      margin-left: -4px;
+    }
+
+    .matx-timeline-circle-custom {
+      margin-left: 1px;
+    }
+  }
+
+  matx-timeline-item:nth-child(odd) .matx-timeline-item-alternate {
+    .matx-timeline-content {
+      left: 50%;
+      width: calc(50% - 18px);
+      text-align: left;
+      margin-left: 18px;
+    }
+  }
+
+  matx-timeline-item:nth-child(even) .matx-timeline-item-alternate {
+    .matx-timeline-content {
+      width: calc(50% - 18px);
+      text-align: right;
+      margin: 0;
+    }
+  }
+}
+
+// mode left
+.matx-timeline.matx-timeline-left {
+  .matx-timeline-item.matx-timeline-item-left {
+    .matx-timeline-content {
+      margin-left: 18px;
+      text-align: left;
+    }
+  }
+}
+
+// mode right
+.matx-timeline.matx-timeline-right {
+  .matx-timeline-item.matx-timeline-item-right {
+    .matx-timeline-item-tail {
+      left: 100%;
+    }
+
+    .matx-timeline-circle {
+      left: 100%;
+      margin-left: -4px;
+    }
+
+    .matx-timeline-circle-custom {
+      margin-left: 1px;
+    }
+
+    .matx-timeline-content {
+      margin-right: 18px;
+      text-align: right;
+    }
+  }
+}

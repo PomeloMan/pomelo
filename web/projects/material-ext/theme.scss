@@ -20,6 +20,25 @@
   }
 }
 
+@mixin matx-timeline-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  .matx-timeline-item-tail {
+    border-left-color: mat-color($foreground, divider);
+  }
+
+  .matx-timeline-circle {
+    background-color: white;
+    border-color: mat-color($primary);
+    color: mat-color($primary);
+  }
+}
+
 @mixin matx-theme($theme) {
   @include matx-loading-button-theme($theme);
+  @include matx-timeline-theme($theme);
 }

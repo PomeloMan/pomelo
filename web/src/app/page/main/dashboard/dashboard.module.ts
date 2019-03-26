@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ViserModule } from 'viser-ng';
 import { NgxEchartsModule } from 'ngx-echarts';
+import { MaterialModule } from 'src/app/common/module/material.module';
+import { CountUpModule } from 'countup.js-angular2';
 
 import { DashboardComponent } from './dashboard.component';
 import { AntvG2Component } from './antv-g2/antv-g2.component';
@@ -37,6 +39,8 @@ const routes = [{
     CommonModule,
     ViserModule,
     NgxEchartsModule,
+    MaterialModule,
+    CountUpModule,
     RouterModule.forChild(routes)
   ]
 })

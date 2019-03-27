@@ -10,6 +10,7 @@ import { DashboardComponent } from './dashboard.component';
 import { AntvG2Component } from './antv-g2/antv-g2.component';
 import { ViserNgComponent } from './viser-ng/viser-ng.component';
 import { EchartsComponent } from './echarts/echarts.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 const routes = [{
   path: '',
@@ -41,6 +42,7 @@ const routes = [{
     NgxEchartsModule,
     MaterialModule,
     CountUpModule,
+    DragDropModule,
     RouterModule.forChild(routes)
   ]
 })

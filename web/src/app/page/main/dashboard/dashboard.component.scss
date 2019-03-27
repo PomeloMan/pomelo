@@ -9,5 +9,13 @@
     &:not(:last-child) {
       margin-right: 16px;
     }
+
+    .calc {
+      flex: 1;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
   }
 }

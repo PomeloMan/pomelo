@@ -9,7 +9,7 @@ const routes: Routes = [
 		path: '',
 		component: UserComponent
 	}, {
-		path: ':id',
+		path: 'detail/:id',
 		component: UserDetailComponent
 	}, {
 		path: 'edit/:id',

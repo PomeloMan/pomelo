@@ -7,10 +7,12 @@ import { BaseComponent } from 'src/app/common/component/base.component';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from "@angular/common";
 
-import page from '../../../../../assets/mock/user/page.json';
 import { ChButton } from 'src/middleware/ch-button-group/ch-button-group.component';
 import { MainService } from '../../main.service';
 import { LayoutDirective } from 'src/app/common/directive/layout.directive';
+
+import page from '../../../../../assets/mock/user/page.json';
+import { useMockData } from 'src/app/config/app.constant';
 
 @Component({
 	selector: 'app-user',
@@ -24,7 +26,6 @@ export class UserComponent extends BaseComponent implements OnInit, OnDestroy {
 
 	displayedColumns: string[] = ['number', 'username', 'displayName', 'email', 'role', 'createDate', 'operation'];
 	dataSource: any;
-	useMockData: boolean = true;
 
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	@ViewChild(MatSort) sort: MatSort;
@@ -66,7 +67,7 @@ export class UserComponent extends BaseComponent implements OnInit, OnDestroy {
 	}
 
 	getUsers() {
-		if (this.useMockData) {
+		if (useMockData) {
 			this.dataSource = new MatTableDataSource<User>(page.content);
 			this.dataSource.paginator = this.paginator;
 			this.dataSource.sort = this.sort;
@@ -84,7 +85,7 @@ export class UserComponent extends BaseComponent implements OnInit, OnDestroy {
 	 * @param filterValue 
 	 */
 	applyFilter(filterValue: string) {
-		if (this.useMockData) {
+		if (useMockData) {
 			this.dataSource.filter = filterValue.trim().toLowerCase();
 		}
 	}

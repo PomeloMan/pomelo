@@ -8,7 +8,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from "@angular/common";
 
 import page from '../../../../../assets/mock/user/page.json';
-import { of } from 'rxjs';
 import { ChButton } from 'src/middleware/ch-button-group/ch-button-group.component';
 import { MainService } from '../../main.service';
 import { LayoutDirective } from 'src/app/common/directive/layout.directive';
@@ -23,8 +22,6 @@ import { LayoutDirective } from 'src/app/common/directive/layout.directive';
 })
 export class UserComponent extends BaseComponent implements OnInit, OnDestroy {
 
-	_current: CurrentPageData = {}
-
 	displayedColumns: string[] = ['number', 'username', 'displayName', 'email', 'role', 'createDate', 'operation'];
 	dataSource: any;
 	useMockData: boolean = true;
@@ -35,18 +32,7 @@ export class UserComponent extends BaseComponent implements OnInit, OnDestroy {
 	@ViewChildren(LayoutDirective) layouts: QueryList<LayoutDirective>;
 
 	layout: TemplateRef<ElementRef>;
-	layoutButtons: ChButton[] = [
-		{
-			id: 'ListLayout',
-			icon: 'view_list',
-			text: 'List'
-		}, {
-			id: 'GridLayout',
-			icon: 'view_module',
-			text: 'Grid',
-			// disabled: true
-		}
-	]
+	layoutButtons: ChButton[] = LAYOUT_BUTTONS;
 
 	constructor(
 		protected router: Router,
@@ -60,14 +46,6 @@ export class UserComponent extends BaseComponent implements OnInit, OnDestroy {
 
 	ngOnInit() {
 		this.mainService.change({ hasChildToolbar: true });
-		if (this.useMockData) {
-			this.dataSource = new MatTableDataSource<User>();
-			this.dataSource.paginator = this.paginator;
-			this.dataSource.sort = this.sort;
-		} else {
-			this.dataSource = [];
-		}
-		this.page({ pageIndex: this.pageIndex, pageSize: this.pageSize, length: this.length });
 	}
 
 	ngAfterViewInit(): void {
@@ -89,10 +67,11 @@ export class UserComponent extends BaseComponent implements OnInit, OnDestroy {
 
 	getUsers() {
 		if (this.useMockData) {
-			return of(page).subscribe((res: Page) => {
-				this.dataSource.data = res.content;
-			});
+			this.dataSource = new MatTableDataSource<User>(page.content);
+			this.dataSource.paginator = this.paginator;
+			this.dataSource.sort = this.sort;
 		} else {
+			this.dataSource = [];
 			this.service.page(null).subscribe((res: Page) => {
 				this.dataSource = res.content;
 				this.length = res.totalElements;
@@ -117,12 +96,23 @@ export class UserComponent extends BaseComponent implements OnInit, OnDestroy {
 	changeLayout(event: ChButton) {
 		let layoutDirective = this.layouts.toArray().find(l => l.layoutId == event.id);
 		if (layoutDirective) {
+			this.layout = layoutDirective.template;
 			setTimeout(() => {
-				this.layout = layoutDirective.template;
+				this.page();
 			}, 0);
 		}
 	}
 }
 
-interface CurrentPageData {
-}
+const LAYOUT_BUTTONS: ChButton[] = [
+	{
+		id: 'ListLayout',
+		icon: 'view_list',
+		text: 'List'
+	}, {
+		id: 'GridLayout',
+		icon: 'view_module',
+		text: 'Grid',
+		// disabled: true
+	}
+]

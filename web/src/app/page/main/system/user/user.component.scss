@@ -28,31 +28,37 @@ mat-toolbar {
   height: calc(100% - 88px); // mat-toolbar(height:40px) + padding(top:24px + bottom:24px)
 }
 
-.grid-layout-wrapper {
+.mat-form-field {
+  width: 100%;
+}
+
+ul.grid-layout-wrapper {
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-around;
+  list-style: none;
+  padding: 0;
 
-  .mat-form-field {
-    width: 100%;
+  li.grid-item {
+    width: 25%;
   }
 
   .user-card {
-    max-width: 280px;
     margin-bottom: 24px;
-  }
+    margin-right: 6px;
+    margin-left: 6px;
 
-  .user-avatar {
-    display: inline-block;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: 2px solid transparent;
-    overflow: hidden;
+    .user-avatar {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      overflow: hidden;
 
-    img {
-      width: inherit;
-      height: inherit;
+      img {
+        width: inherit;
+        height: inherit;
+      }
     }
   }
 }

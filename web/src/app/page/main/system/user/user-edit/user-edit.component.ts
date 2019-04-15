@@ -1,12 +1,14 @@
 import { Component, OnInit, HostListener, ViewChild, ElementRef, AfterViewInit, NgZone } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { trigger, style, transition, animate, keyframes, state, animateChild, query, group } from '@angular/animations';
-import { MatAutocompleteSelectedEvent, MatChipInputEvent, MatAutocomplete, MatToolbar } from '@angular/material';
+import { MatAutocompleteSelectedEvent, MatToolbar } from '@angular/material';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { ScrollDispatcher, CdkScrollable } from '@angular/cdk/overlay';
 import { User } from '../user.service';
 import { isNullOrUndefined } from 'util';
+import { Router } from '@angular/router';
+import { MainService, Language } from '../../../main.service';
 
 export const EASE = trigger('easeInOut', [
   state('active', style({ borderRadius: '4px', width: 'auto' })),
@@ -60,6 +62,7 @@ export const TRANS_CHILD_ANIMATION = trigger('toolbarAvatarAni', [
 })
 export class UserEditComponent implements OnInit, AfterViewInit {
 
+  languages: Language[];
   user: User = {};
 
   @HostListener('document:click', ['$event'])
@@ -68,20 +71,18 @@ export class UserEditComponent implements OnInit, AfterViewInit {
   }
 
   contactForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    secondaryEmail: new FormControl('', [Validators.email]),
-    phoneNumber: new FormControl('', [Validators.required, Validators.pattern('[1-9]*')]),
-    emergencyContact: new FormControl('', [Validators.required, Validators.pattern('[1-9]*')])
+    emailFormCtrl: new FormControl('', [Validators.required, Validators.email]),
+    secondaryEmailFormCtrl: new FormControl('', [Validators.email]),
+    phoneNumberFormCtrl: new FormControl('', [Validators.required, Validators.pattern('[0-9]*')]),
+    emergencyContactFormCtrl: new FormControl('', [Validators.required, Validators.pattern('[0-9]*')])
   });
 
   constructor(
     private scrollDispatcher: ScrollDispatcher,
-    private zone: NgZone
-  ) {
-    this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
-      startWith(null),
-      map((fruit: string | null) => fruit ? this._filter(fruit) : this.allFruits.slice()));
-  }
+    private router: Router,
+    private zone: NgZone,
+    private mainService: MainService
+  ) { }
 
   ngOnInit() {
     this.user = {
@@ -89,13 +90,27 @@ export class UserEditComponent implements OnInit, AfterViewInit {
       displayName: 'administrator',
       position: 'Software engineer',
       email: 'fengchao.z@outlook.com',
-      phoneNumber: 13861800672,
       address: '江苏省无锡市梁溪区清一村东塘89号',
       selfIntroduction: 'Germanium (Ge) is a chemical element with atomic number 32. It is a lustrous, hard, greyish-white metalloid in the carbon group, chemically similar to silicon (Si) and tin (Sn). In 1869, Dmitri Mendeleev predicted the existence of germanium (and later some of its properties) based on its position in his periodic table (extract pictured). In 1886, Clemens Winkler discovered the element in a rare mineral called argyrodite.',
       gender: 0,
       avatar: '',
       role: '',
+      languages: [{
+        code: 'zh_CN',
+        name: 'Chinese'
+      }],
+      contact: {
+        email: 'fengchao.z@outlook.com',
+        secondaryEmail: '13861800672@163.com',
+        phoneNumber: 13861800672,
+        emergencyContact: 13861800672,
+        facebook: '--',
+        twitter: '',
+        wechat: '13861800672',
+        weibo: ''
+      }
     }
+    this.initLanguages()
   }
 
   // material cdkScrollable cdk
@@ -143,6 +158,9 @@ export class UserEditComponent implements OnInit, AfterViewInit {
     debugger
   }
 
+  delete() {
+    debugger
+  }
 
 
   uploadAvatar(event) {
@@ -157,54 +175,27 @@ export class UserEditComponent implements OnInit, AfterViewInit {
   }
 
 
+  /** Language Chips */
+  languageCtrl = new FormControl();
+  filteredLanguages: Observable<Language[]>;
+  @ViewChild('languageInput') languageInput: ElementRef<HTMLInputElement>;
 
-
-  allFruits: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
-  fruits: string[] = ['Lemon'];
-  fruitCtrl = new FormControl();
-  filteredFruits: Observable<string[]>;
-  @ViewChild('fruitInput') fruitInput: ElementRef<HTMLInputElement>;
-  @ViewChild('auto') matAutocomplete: MatAutocomplete;
-
-  add(event: MatChipInputEvent): void {
-    // Add fruit only when MatAutocomplete is not open
-    // To make sure this does not conflict with OptionSelected Event
-    if (!this.matAutocomplete.isOpen) {
-      const input = event.input;
-      const value = event.value;
-
-      // Add our fruit
-      if ((value || '').trim()) {
-        this.fruits.push(value.trim());
-      }
-
-      // Reset the input value
-      if (input) {
-        input.value = '';
-      }
-
-      this.fruitCtrl.setValue(null);
-    }
-  }
-
-  remove(fruit: string): void {
-    const index = this.fruits.indexOf(fruit);
+  removeChip(language: Language): void {
+    const index = this.user.languages.findIndex(l => l.code == language.code);
 
     if (index >= 0) {
-      this.fruits.splice(index, 1);
+      this.user.languages.splice(index, 1);
     }
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    this.fruits.push(event.option.viewValue);
-    this.fruitInput.nativeElement.value = '';
-    this.fruitCtrl.setValue(null);
+    this.user.languages.push(event.option.value);
+    this.languageInput.nativeElement.value = '';
+    this.languageCtrl.setValue(null);
   }
 
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-
-    return this.allFruits.filter(fruit => fruit.toLowerCase().indexOf(filterValue) === 0);
+  private _filter(value: string): Language[] {
+    return this.languages.filter(language => language.code.toLocaleLowerCase().indexOf(value.toLocaleLowerCase()) > -1 || language.name.toLocaleLowerCase().indexOf(value.toLocaleLowerCase()) > -1);
   }
 
 
@@ -218,5 +209,23 @@ export class UserEditComponent implements OnInit, AfterViewInit {
     }
 
     return this.tabLoadTimes[index];
+  }
+
+
+
+
+
+  // private method
+  /**
+   * init languages
+   */
+  private initLanguages() {
+    this.mainService.listLanguages().subscribe(res => {
+      this.languages = res;
+      this.filteredLanguages = this.languageCtrl.valueChanges.pipe(
+        startWith(null),
+        map((value: any | null) => typeof value == 'string' ? this._filter(value) : this.languages.slice())
+      );
+    })
   }
 }

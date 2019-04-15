@@ -2,19 +2,32 @@ import { Injectable } from '@angular/core';
 import { ApiService } from 'src/app/config/api.service';
 import { of } from 'rxjs';
 import { API } from 'src/app/config/api';
+import { Language } from '../../main.service';
 
 export interface User {
     username?: string;
     displayName?: string;
     position?: string;
     email?: string;
-    phoneNumber?: number;
     address?: string;
     selfIntroduction?: string;
     gender?: number;// 0:male / 1:female
     avatar?: any;
     role?: string;
     createdDate?: number;
+    languages?: Language[];
+    contact?: UserContact
+}
+
+export interface UserContact {
+    email?: string;
+    secondaryEmail?: string;
+    phoneNumber?: number;
+    emergencyContact?: number;
+    facebook?: string;
+    twitter?: string;
+    wechat?: string;
+    weibo?: string;
 }
 
 @Injectable()

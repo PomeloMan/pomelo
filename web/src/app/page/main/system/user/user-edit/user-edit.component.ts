@@ -5,7 +5,7 @@ import { MatAutocompleteSelectedEvent, MatToolbar } from '@angular/material';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { ScrollDispatcher, CdkScrollable } from '@angular/cdk/overlay';
-import { User } from '../user.service';
+import { User, TodoEvent } from '../user.service';
 import { isNullOrUndefined } from 'util';
 import { Router } from '@angular/router';
 import { MainService, Language } from '../../../main.service';
@@ -70,11 +70,13 @@ export class UserEditComponent implements OnInit, AfterViewInit {
     if (this.showOperation) this.showOperation = false;
   }
 
-  contactForm = new FormGroup({
-    emailFormCtrl: new FormControl('', [Validators.required, Validators.email]),
-    secondaryEmailFormCtrl: new FormControl('', [Validators.email]),
-    phoneNumberFormCtrl: new FormControl('', [Validators.required, Validators.pattern('[0-9]*')]),
-    emergencyContactFormCtrl: new FormControl('', [Validators.required, Validators.pattern('[0-9]*')])
+  basicForm = new FormGroup({
+    usernameFormCtrl: new FormControl(null, [Validators.required]),
+    userPositionFormCtrl: new FormControl(null, [Validators.required]),
+    emailFormCtrl: new FormControl(null, [Validators.required, Validators.email]),
+    secondaryEmailFormCtrl: new FormControl(null, [Validators.email]),
+    phoneNumberFormCtrl: new FormControl(null, [Validators.required, Validators.pattern('[0-9]*')]),
+    emergencyContactFormCtrl: new FormControl(null, [Validators.required, Validators.pattern('[0-9]*')])
   });
 
   constructor(
@@ -215,7 +217,6 @@ export class UserEditComponent implements OnInit, AfterViewInit {
 
 
 
-  // private method
   /**
    * init languages
    */
@@ -227,5 +228,24 @@ export class UserEditComponent implements OnInit, AfterViewInit {
         map((value: any | null) => typeof value == 'string' ? this._filter(value) : this.languages.slice())
       );
     })
+  }
+
+
+
+
+  todos: TodoEvent[] = [{
+    name: 'hello world',
+    complete: true
+  }, {
+    name: 'to be continued',
+    complete: false
+  }];
+  /** TODO */
+  saveTodo(event) {
+    this.todos.unshift({ name: event.target.value, complete: false });
+    event.target.value = '';
+  }
+  clearTodos() {
+    this.todos = this.todos.filter(t => !t.complete);
   }
 }

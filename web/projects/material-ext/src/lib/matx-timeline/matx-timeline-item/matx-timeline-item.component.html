@@ -7,6 +7,14 @@
   </div>
   <!-- timeline content text -->
   <div class="matx-timeline-content">
-    <ng-content></ng-content>
+    <ng-container *ngIf="date">
+      <div class="date">
+        <span>{{date | date:'dd'}}</span>
+        <span>{{date | date:'MMM'}}</span>
+      </div>
+    </ng-container>
+    <div>
+      <ng-content></ng-content>
+    </div>
   </div>
 </li>

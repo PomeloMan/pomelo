@@ -76,10 +76,20 @@
 
 @mixin mat-list-theme-custom($theme) {
   $primary: map-get($theme, primary);
+  $foreground: map-get($theme, foreground);
 
   .mat-list-item {
     i {
       background-color: mat-color($primary);
+    }
+  }
+
+  .mat-list-item.mat-list-option {
+    color: mat-color($foreground, text);
+
+    &.mat-list-option-disabled {
+      text-decoration: line-through;
+      color: mat-color($foreground, disabled-text);
     }
   }
 }

@@ -1,155 +1,100 @@
-<div class="user-detail" (click)="onClick($event)">
+<div class="user-detail">
   <div class="figure user-info">
     <mat-card>
       <!-- Custom theming component @link ~src/theme.scss -->
       <mat-toolbar class="card-header" color="primary">
         <div class="head-portrait">
-          <mat-icon>account_circle</mat-icon>
+          <div class="user-avatar">
+            <mat-icon>account_circle</mat-icon>
+          </div>
           <div class="intro">
             <span>PomeloMan(Admin)</span>
-            <button mat-icon-button class="mat-elevation-z6">
-              <mat-icon class="mat-primary">publish</mat-icon>
-            </button>
             <span>13861800672</span>
           </div>
-        </div>
-        <div class="settings" [@expand]="!expanded?'in':'active'">
-          <button mat-icon-button *ngIf="!expanded" (click)="expand($event)" class="btn-expand mat-elevation-z2">
-            <mat-icon class="mat-primary">settings_ethernet</mat-icon>
+        </div><!-- head-portrait -->
+        <div class="settings mat-elevation-z2" hoverClass="mat-elevation-z6">
+          <button mat-icon-button class="btn-expand">
+            <mat-icon class="mat-primary">edit</mat-icon>
           </button>
-          <button mat-icon-button *ngIf="expanded" matTooltip="Save" matTooltipPosition="below">
-            <mat-icon class="mat-primary">save</mat-icon>
-          </button>
-          <button mat-icon-button *ngIf="expanded" matTooltip="Delete" matTooltipPosition="below">
-            <mat-icon class="mat-primary">delete</mat-icon>
-          </button>
-
-          <!-- <div class="btn-group mat-elevation-z2" *ngIf="expanded">
-            <button mat-icon-button matTooltip="Save" matTooltipPosition="below">
-              <mat-icon class="mat-primary">save</mat-icon>
-            </button>
-            <button mat-icon-button matTooltip="Delete" matTooltipPosition="below">
-              <mat-icon class="mat-primary">delete</mat-icon>
-            </button>
-          </div> -->
         </div>
       </mat-toolbar>
       <mat-card-content>
         <mat-tab-group [disableRipple]="true">
-          <mat-tab label="BASIC">
+          <mat-tab label="ABOUT">
             <ng-template matTabContent>
-              <div class="tab-content">
-                <div class="basic-general">
-                  <mat-toolbar>General info</mat-toolbar>
-                  <div class="basic-general-content">
-                    <div class="row">
-                      <div>
-                        <mat-form-field>
-                          <input matInput placeholder="Username">
-                        </mat-form-field>
-                      </div>
-                      <div class="tile"></div>
-                      <div>
-                        <mat-form-field>
-                          <input matInput placeholder="Address">
-                        </mat-form-field>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <mat-form-field>
-                        <textarea matInput placeholder="About"></textarea>
-                      </mat-form-field>
-                    </div>
-                  </div>
+              <div class="about-tab tab-content">
+                <p>Et sequi sit sit in eius officia est corrupti illo amet expedita labore sed sunt iusto numquam quod
+                  sapiente iusto laboriosam debitis qui sapiente dolorem alias vel aut explicabo iure culpa inventore ut
+                  debitis voluptate non libero autem voluptas ad ipsa nisi enim voluptatem qui nihil omnis ut voluptas
+                  numquam qui vel voluptatum commodi earum aut quibusdam impedit voluptatem exercitationem odio dolores
+                  ab reprehenderit nesciunt exercitationem vero libero ut ad aperiam laboriosam aut animi voluptatem
+                  perspiciatis voluptas unde id delectus omnis sint laboriosam sit enim tempore recusandae distinctio
+                  sequi et eveniet.
+                </p>
+                <div>
+                  <h3>Contact Info</h3>
+                  <mat-list>
+                    <mat-list-item>
+                      <mat-icon matListIcon class="mat-primary">email</mat-icon>
+                      <h4 matLine>{{user.contact.email || '--'}}</h4>
+                      <p matLine>Secondary: {{user.contact.secondaryEmail || '--'}}</p>
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>
+                        <mat-icon matListIcon class="mat-primary">phone</mat-icon>
+                      <h4 matLine>{{user.contact.phoneNumber || '--'}}</h4>
+                      <p matLine>Emergency: {{user.contact.emergencyContact || '--'}}</p>
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>
+                      <fa-icon matListIcon class="mat-primary" [fixedWidth]="true" [icon]="['fab', 'facebook']"></fa-icon>
+                      <h4 matLine> {{user.contact.facebook || '--'}} </h4>
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>
+                      <fa-icon matListIcon class="mat-primary" [fixedWidth]="true" [icon]="['fab', 'twitter']"></fa-icon>
+                      <h4 matLine> {{user.contact.twitter || '--'}} </h4>
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>
+                      <fa-icon matListIcon class="mat-primary" [fixedWidth]="true" [icon]="['fab', 'weixin']"></fa-icon>
+                      <h4 matLine> {{user.contact.wechat || '--'}} </h4>
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>
+                      <fa-icon matListIcon class="mat-primary" [fixedWidth]="true" [icon]="['fab', 'weibo']"></fa-icon>
+                      <h4 matLine> {{user.contact.weibo || '--'}} </h4>
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
+                  </mat-list>
                 </div>
-                <div class="basic-languages">
-                  <mat-toolbar>Languages</mat-toolbar>
-                  <div class="basic-languages-content">
-                    <div class="row">
-                      <mat-form-field>
-                        <mat-select placeholder="Toppings" multiple>
-                          <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                    </div>
-                  </div>
-                </div>
-                <div class="basic-contact">
-                  <mat-toolbar>Contact info</mat-toolbar>
-                  <div class="basic-contact-content">
-                    <div class="row">
-                      <mat-form-field>
-                        <input matInput placeholder="Email" [formControl]="emailFormControl">
-                        <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-                          Please enter a valid email address
-                        </mat-error>
-                        <mat-error *ngIf="emailFormControl.hasError('required')">
-                          Email is
-                          <strong>required</strong>
-                        </mat-error>
-                        <mat-icon matSuffix class="mat-primary">email</mat-icon>
-                      </mat-form-field>
-                      <div class="tile"></div>
-                      <mat-form-field>
-                        <span matPrefix>+86 &nbsp;</span>
-                        <input type="tel" matInput placeholder="Telephone">
-                        <mat-icon matSuffix class="mat-primary">phone</mat-icon>
-                      </mat-form-field>
-                    </div>
-                    <div class="row">
-                      <mat-form-field>
-                        <input matInput placeholder="Email" [formControl]="emailFormControl">
-                        <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-                          Please enter a valid email address
-                        </mat-error>
-                        <mat-error *ngIf="emailFormControl.hasError('required')">
-                          Email is
-                          <strong>required</strong>
-                        </mat-error>
-                        <mat-icon matSuffix class="mat-primary">email</mat-icon>
-                      </mat-form-field>
-                      <div class="tile"></div>
-                      <mat-form-field>
-                        <span matPrefix>+86 &nbsp;</span>
-                        <input type="tel" matInput placeholder="Telephone">
-                        <mat-icon matSuffix class="mat-primary">phone</mat-icon>
-                      </mat-form-field>
-                    </div>
-                    <div class="row">
-                      <mat-form-field>
-                        <input matInput placeholder="Email" [formControl]="emailFormControl">
-                        <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-                          Please enter a valid email address
-                        </mat-error>
-                        <mat-error *ngIf="emailFormControl.hasError('required')">
-                          Email is
-                          <strong>required</strong>
-                        </mat-error>
-                        <mat-icon matSuffix class="mat-primary">email</mat-icon>
-                      </mat-form-field>
-                      <div class="tile"></div>
-                      <mat-form-field>
-                        <span matPrefix>+86 &nbsp;</span>
-                        <input type="tel" matInput placeholder="Telephone">
-                        <mat-icon matSuffix class="mat-primary">phone</mat-icon>
-                      </mat-form-field>
-                    </div>
-                  </div>
+                <div>
+                  <h3>Timeline</h3>
+                  <matx-timeline mode="alternate">
+                    <matx-timeline-item color="red" [date]="'2015-10-01'">
+                      Solve initial network problems 1<br>
+                      Solve initial network problems 2<br>
+                      Solve initial network problems 3
+                    </matx-timeline-item>
+                    <matx-timeline-item date="2015-09-01">
+                      Solve initial network problems 1<br>
+                      Solve initial network problems 2<br>
+                      Solve initial network problems 3
+                    </matx-timeline-item>
+                    <matx-timeline-item [template]="Template" date="2015-08-01">
+                      Solve initial network problems 1<br>
+                      Solve <span style="color:blue;">initial network</span> problems 2<br>
+                      Solve initial network problems 3
+                    </matx-timeline-item>
+                  </matx-timeline>
                 </div>
               </div>
             </ng-template>
           </mat-tab>
-          <mat-tab label="GROUPS">
+          <mat-tab label="POSTS">
             <ng-template matTabContent>
               <div class="tab-content">
-                Content 2 - Loaded: {{getTimeLoaded(2) | date:'medium'}}
-              </div>
-            </ng-template>
-          </mat-tab>
-          <mat-tab label="TODO">
-            <ng-template matTabContent>
-              <div class="tab-content">
-                Content 3 - Loaded: {{getTimeLoaded(3) | date:'medium'}}
+                Content 2 - Loaded: {{getTimeLoaded(3) | date:'medium'}}
               </div>
             </ng-template>
           </mat-tab>
@@ -160,20 +105,11 @@
   <div class="figure user-setting">
     <mat-card>
       <mat-card-header>
-        <mat-card-title>Other settings</mat-card-title>
+        <!-- <mat-card-title>Other settings</mat-card-title> -->
+        Other settings
       </mat-card-header>
       <mat-card-content>
-        <div class="setting-group">
-          <mat-slide-toggle class="mat-primary">User Active</mat-slide-toggle>
-        </div>
-        <mat-divider></mat-divider>
-        <div class="setting-group">
-          <mat-form-field>
-            <mat-select placeholder="User Role" multiple>
-              <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
+
       </mat-card-content>
     </mat-card>
   </div>

@@ -30,6 +30,12 @@ export interface UserContact {
     weibo?: string;
 }
 
+export interface TodoEvent {
+    name?: string;
+    complete?: boolean;
+    createdDate?: number;
+}
+
 @Injectable()
 export class UserService {
 

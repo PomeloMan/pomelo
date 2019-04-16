@@ -7,8 +7,11 @@ import { Component, Input, TemplateRef, ElementRef, ViewChild } from '@angular/c
 })
 export class MatxTimelineItemComponent {
 
+  @Input() date: number | string;
   @Input() color: string;
   @Input() template: string | TemplateRef<void>;
 
   @ViewChild('li') li: ElementRef;
+
+  constructor() { }
 }

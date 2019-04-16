@@ -78,7 +78,7 @@
 
           .mat-icon-button {
             position: absolute;
-            top: -8px;
+            top: -16px;
             left: -28px;
             width: 32px;
             height: 32px;
@@ -103,9 +103,9 @@
 
         >.btn-expand {
           .mat-icon {
-            width: 32px;
-            height: 32px;
-            font-size: 32px;
+            width: 28px;
+            height: 28px;
+            font-size: 28px;
           }
         }
       }
@@ -114,10 +114,10 @@
     }
 
     .mat-card-content {
-      padding: 24px;
+      padding: 12px 24px;
 
       .tab-content {
-        padding: 24px 0;
+        padding: 12px 0;
         overflow: hidden;
 
         .mat-toolbar {
@@ -160,6 +160,23 @@
         }
 
         //.tab-content
+      }
+
+      .todo-tab {
+        .todo-footer {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          font-size: 12px;
+          padding: 6px 0;
+
+          mat-chip {
+            height: auto;
+            min-height: auto;
+            font-size: 12px;
+            padding: 2px 8px;
+          }
+        }
       }
 
       //.mat-card-content

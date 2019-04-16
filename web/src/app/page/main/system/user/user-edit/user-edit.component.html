@@ -14,25 +14,25 @@
             </div> <!-- user-avatar -->
             <div class="intro">
               <span>PomeloMan(Admin)</span>
-              <button mat-icon-button class="upload-avatar-button mat-elevation-z2" [class.mat-elevation-z6]="hoverUploadAvatarBtn" (mouseover)="hoverUploadAvatarBtn = true" (mouseleave)="hoverUploadAvatarBtn = false">
+              <button mat-icon-button class="upload-avatar-button mat-elevation-z2" hoverClass="mat-elevation-z6">
                 <mat-icon class="mat-primary">publish</mat-icon>
                 <input type="file" (change)="uploadAvatar($event)">
               </button>
               <span>{{user.phoneNumber}}</span>
             </div> <!-- intro -->
           </div> <!-- head-portrait -->
-          <div class="settings mat-elevation-z2" [ngClass]="{'active': showOperation, 'mat-elevation-z6': hoverAdditionalBtn}" [@easeInOut]="showOperation? 'active': 'inactive'">
+          <div class="settings mat-elevation-z2" hoverClass="mat-elevation-z6" [ngClass]="{'active': showOperation}" [@easeInOut]="showOperation? 'active': 'inactive'">
             <ng-container *ngIf="!showOperation">
-              <button mat-button class="btn-expand" (click)="toggleOperationMenu($event); hoverAdditionalBtn = false;" (mouseover)="hoverAdditionalBtn = true" (mouseleave)="hoverAdditionalBtn = false">
+              <button mat-button class="btn-expand" (click)="toggleOperationMenu($event)">
                 <mat-icon class="mat-primary">settings_ethernet</mat-icon>
               </button>
             </ng-container>
             <ng-container *ngIf="showOperation">
-              <button mat-button matTooltip="Save" matTooltipPosition="below" [disabled]="!contactForm.valid" (click)="save()">
-                <mat-icon class="mat-primary">save</mat-icon>
+              <button mat-button class="mat-primary" matTooltip="Save" matTooltipPosition="below" [disabled]="!basicForm.valid" (click)="save()">
+                <mat-icon>save</mat-icon>
               </button>
-              <button mat-button matTooltip="Delete" matTooltipPosition="below" (click)="delete()">
-                <mat-icon class="mat-primary">delete</mat-icon>
+              <button mat-button class="mat-primary" matTooltip="Delete" matTooltipPosition="below" (click)="delete()">
+                <mat-icon>delete</mat-icon>
               </button>
             </ng-container>
           </div> <!-- settings -->
@@ -42,61 +42,69 @@
         <mat-tab-group [disableRipple]="true">
           <mat-tab label="BASIC">
             <ng-template matTabContent>
-              <div class="tab-content">
-                <div class="basic-general">
-                  <mat-toolbar>General info</mat-toolbar>
-                  <div class="basic-general-content">
-                    <div class="row">
-                      <mat-form-field class="col">
-                        <input matInput placeholder="User name" [(ngModel)]="user.displayName">
-                      </mat-form-field>
-                      <div class="tile"></div>
-                      <mat-form-field class="col">
-                        <input matInput placeholder="User position" [(ngModel)]="user.position">
-                      </mat-form-field>
+              <form [formGroup]="basicForm">
+                <div class="basic-tab tab-content">
+                  <div class="basic-general">
+                    <mat-toolbar>General info</mat-toolbar>
+                    <div class="basic-general-content">
+                      <div class="row">
+                        <mat-form-field class="col">
+                          <input matInput placeholder="User name" formControlName="usernameFormCtrl" [(ngModel)]="user.displayName">
+                          <mat-error *ngIf="basicForm.controls.usernameFormCtrl.hasError('required')">
+                            User name is
+                            <strong>required</strong>
+                          </mat-error>
+                        </mat-form-field>
+                        <div class="tile"></div>
+                        <mat-form-field class="col">
+                          <input matInput placeholder="User position" formControlName="userPositionFormCtrl" [(ngModel)]="user.position">
+                          <mat-error *ngIf="basicForm.controls.userPositionFormCtrl.hasError('required')">
+                            User position is
+                            <strong>required</strong>
+                          </mat-error>
+                        </mat-form-field>
+                      </div>
+                      <div class="row">
+                        <mat-form-field class="col">
+                          <input matInput placeholder="Address" [ngModelOptions]="{standalone: true}" [(ngModel)]="user.address">
+                        </mat-form-field>
+                      </div>
+                      <div class="row">
+                        <mat-form-field>
+                          <textarea matInput placeholder="About" [ngModelOptions]="{standalone: true}" [(ngModel)]="user.selfIntroduction"></textarea>
+                        </mat-form-field>
+                      </div>
                     </div>
-                    <div class="row">
-                      <mat-form-field class="col">
-                        <input matInput placeholder="Address" [(ngModel)]="user.address">
-                      </mat-form-field>
-                    </div>
-                    <div class="row">
-                      <mat-form-field>
-                        <textarea matInput placeholder="About" [(ngModel)]="user.selfIntroduction"></textarea>
+                  </div>
+                  <div class="basic-languages">
+                    <mat-toolbar>Languages</mat-toolbar>
+                    <div class="basic-languages-content">
+                      <mat-form-field class="example-chip-list">
+                        <mat-chip-list #chipList>
+                          <mat-chip *ngFor="let language of user.languages" [selectable]="true" [removable]="true" (removed)="removeChip(language)">
+                            {{language.name}}
+                            <mat-icon matChipRemove>cancel</mat-icon>
+                          </mat-chip>
+                          <input #languageInput [formControl]="languageCtrl" [matAutocomplete]="auto" [matChipInputFor]="chipList">
+                        </mat-chip-list>
+                        <mat-autocomplete #auto (optionSelected)="selected($event)">
+                          <mat-option *ngFor="let language of filteredLanguages | async" [value]="language">
+                            {{language.name}}
+                          </mat-option>
+                        </mat-autocomplete>
                       </mat-form-field>
                     </div>
                   </div>
-                </div>
-                <div class="basic-languages">
-                  <mat-toolbar>Languages</mat-toolbar>
-                  <div class="basic-languages-content">
-                    <mat-form-field class="example-chip-list">
-                      <mat-chip-list #chipList>
-                        <mat-chip *ngFor="let language of user.languages" [selectable]="true" [removable]="true" (removed)="removeChip(language)">
-                          {{language.name}}
-                          <mat-icon matChipRemove>cancel</mat-icon>
-                        </mat-chip>
-                        <input #languageInput [formControl]="languageCtrl" [matAutocomplete]="auto" [matChipInputFor]="chipList">
-                      </mat-chip-list>
-                      <mat-autocomplete #auto (optionSelected)="selected($event)">
-                        <mat-option *ngFor="let language of filteredLanguages | async" [value]="language">
-                          {{language.name}}
-                        </mat-option>
-                      </mat-autocomplete>
-                    </mat-form-field>
-                  </div>
-                </div>
-                <div class="basic-contact">
-                  <mat-toolbar>Contact info</mat-toolbar>
-                  <form [formGroup]="contactForm">
+                  <div class="basic-contact">
+                    <mat-toolbar>Contact info</mat-toolbar>
                     <div class="basic-contact-content">
                       <div class="row">
                         <mat-form-field class="col">
                           <input matInput name="email" placeholder="Email" formControlName="emailFormCtrl" [(ngModel)]="user.contact.email">
-                          <mat-error *ngIf="contactForm.controls.emailFormCtrl.hasError('email') && !contactForm.controls.emailFormCtrl.hasError('required')">
+                          <mat-error *ngIf="basicForm.controls.emailFormCtrl.hasError('email') && !basicForm.controls.emailFormCtrl.hasError('required')">
                             Please enter a valid email address
                           </mat-error>
-                          <mat-error *ngIf="contactForm.controls.emailFormCtrl.hasError('required')">
+                          <mat-error *ngIf="basicForm.controls.emailFormCtrl.hasError('required')">
                             Email is
                             <strong>required</strong>
                           </mat-error>
@@ -105,10 +113,10 @@
                         <div class="tile"></div>
                         <mat-form-field class="col">
                           <input matInput name="secondary-email" placeholder="Secondary Email" formControlName="secondaryEmailFormCtrl" [(ngModel)]="user.contact.secondaryEmail">
-                          <mat-error *ngIf="contactForm.controls.secondaryEmailFormCtrl.hasError('email') && !contactForm.controls.secondaryEmailFormCtrl.hasError('required')">
+                          <mat-error *ngIf="basicForm.controls.secondaryEmailFormCtrl.hasError('email') && !basicForm.controls.secondaryEmailFormCtrl.hasError('required')">
                             Please enter a valid email address
                           </mat-error>
-                          <mat-error *ngIf="contactForm.controls.secondaryEmailFormCtrl.hasError('required')">
+                          <mat-error *ngIf="basicForm.controls.secondaryEmailFormCtrl.hasError('required')">
                             Email is
                             <strong>required</strong>
                           </mat-error>
@@ -119,10 +127,10 @@
                         <mat-form-field class="col">
                           <span matPrefix>+86 &nbsp;</span>
                           <input type="tel" matInput placeholder="Phone Number" formControlName="phoneNumberFormCtrl" [(ngModel)]="user.contact.phoneNumber">
-                          <mat-error *ngIf="contactForm.controls.phoneNumberFormCtrl.hasError('pattern') && !contactForm.controls.phoneNumberFormCtrl.hasError('required')">
+                          <mat-error *ngIf="basicForm.controls.phoneNumberFormCtrl.hasError('pattern') && !basicForm.controls.phoneNumberFormCtrl.hasError('required')">
                             Please enter a valid phone number
                           </mat-error>
-                          <mat-error *ngIf="contactForm.controls.phoneNumberFormCtrl.hasError('required')">
+                          <mat-error *ngIf="basicForm.controls.phoneNumberFormCtrl.hasError('required')">
                             Phone Number
                             <strong>required</strong>
                           </mat-error>
@@ -131,10 +139,10 @@
                         <div class="tile"></div>
                         <mat-form-field class="col">
                           <input matInput placeholder="Emergency Contact" formControlName="emergencyContactFormCtrl" [(ngModel)]="user.contact.emergencyContact">
-                          <mat-error *ngIf="contactForm.controls.emergencyContactFormCtrl.hasError('pattern') && !contactForm.controls.emergencyContactFormCtrl.hasError('required')">
+                          <mat-error *ngIf="basicForm.controls.emergencyContactFormCtrl.hasError('pattern') && !basicForm.controls.emergencyContactFormCtrl.hasError('required')">
                               Please enter a valid emergency contact
                             </mat-error>
-                          <mat-error *ngIf="contactForm.controls.emergencyContactFormCtrl.hasError('required')">
+                          <mat-error *ngIf="basicForm.controls.emergencyContactFormCtrl.hasError('required')">
                             Emergency Contact
                             <strong>required</strong>
                           </mat-error>
@@ -164,22 +172,32 @@
                         </mat-form-field>
                       </div>
                     </div>
-                  </form>
-                </div>
-              </div>
-            </ng-template>
-          </mat-tab>
-          <mat-tab label="GROUPS">
-            <ng-template matTabContent>
-              <div class="tab-content">
-                Content 2 - Loaded: {{getTimeLoaded(2) | date:'medium'}}
-              </div>
+                  </div><!-- basic-contact -->
+                </div><!-- tab-content -->
+              </form>
             </ng-template>
           </mat-tab>
           <mat-tab label="TODO">
             <ng-template matTabContent>
-              <div class="tab-content">
-                Content 3 - Loaded: {{getTimeLoaded(3) | date:'medium'}}
+              <div class="todo-tab tab-content">
+                <!-- Content 2 - Loaded: {{getTimeLoaded(3) | date:'medium'}} -->
+                <mat-form-field style="width: 100%;">
+                  <input matInput placeholder="What needs to be done?" (keyup.enter)="saveTodo($event)">
+                </mat-form-field>
+                <mat-selection-list #todolist disableRipple="true">
+                  <ng-container *ngFor="let todo of todos">
+                    <mat-list-option [selected]="todo.complete" checkboxPosition="before" (click)="todo.complete = !todo.complete" [ngClass]="{'mat-list-option-disabled': todo.complete}">
+                      {{todo.name}}
+                    </mat-list-option>
+                    <mat-divider></mat-divider>
+                  </ng-container>
+                </mat-selection-list>
+                <div class="todo-footer">
+                  <p *ngIf="todos.length > 0">
+                    {{todos.length - todolist.selectedOptions.selected.length}} items left
+                  </p>
+                  <mat-chip (click)="clearTodos()">Clear all complete items</mat-chip>
+                </div>
               </div>
             </ng-template>
           </mat-tab>

@@ -46,10 +46,11 @@
               <mat-icon class="mat-primary">{{menu.icon}}</mat-icon>
               <span>{{menu.name}}</span>
             </div>
-            <mat-icon class="md-18 mat-primary forward">chevron_right</mat-icon>
+            <mat-icon *ngIf="!menu.active" class="md-18 mat-primary forward">chevron_right</mat-icon>
+            <mat-icon *ngIf="menu.active" class="md-18 mat-primary forward">expand_more</mat-icon>
           </mat-list-item>
         </a>
-        <mat-nav-list class="submenu-list" *ngIf="menu.active && _current_style == SidenavStyle.Default">
+        <mat-nav-list class="submenu-list" *ngIf="menu.active && _current_style == SidenavStyle.Default" [@accordion]="menu.active? 'active': 'inactive'">
           <a [routerLink]="submenu.link" *ngFor="let submenu of menu.children" (click)="navigate(submenu, menu)">
             <mat-list-item [ngClass]="{'active': submenu.active}">
               <i class="primary" *ngIf="submenu.active"></i>

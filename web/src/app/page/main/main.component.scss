@@ -91,6 +91,8 @@ mat-toolbar.navbar-header.flex {
 
       mat-nav-list.submenu-list {
         padding: 0;
+        overflow: hidden;
+        max-height: 0px;
 
         mat-list-item {
           height: 40px;

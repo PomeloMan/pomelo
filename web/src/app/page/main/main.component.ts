@@ -3,6 +3,7 @@ import { OverlayContainer } from '@angular/cdk/overlay';
 import { MatSidenav, MatSidenavContainer, MatMenu } from '@angular/material';
 import { SidenavStyle } from './sidenav';
 import { Router } from '@angular/router';
+import { trigger, style, state, transition, animate } from '@angular/animations';
 
 import { STORAGE_SETTING_THEME, STORAGE_SETTING_STYLE } from 'src/app/config/app.constant';
 
@@ -12,10 +13,20 @@ import { MainService, SettingMenu } from './main.service';
 
 class Theme { color: string; class: string; }
 
+export const ACCORDION = trigger('accordion', [
+	state('active', style({ maxHeight: '400px' })),
+	transition('void => active', [
+		animate('1s 0s ease')
+	])
+])
+
 @Component({
 	selector: 'app-main',
 	templateUrl: './main.component.html',
-	styleUrls: ['./main.component.scss']
+	styleUrls: ['./main.component.scss'],
+	animations: [
+		ACCORDION
+	]
 })
 export class MainComponent implements OnInit {
 
@@ -171,10 +182,11 @@ export class MainComponent implements OnInit {
 		}
 		this.getMenu(undefined, this.menus).forEach(item => { item.active = false });
 		if (pmenu) pmenu.active = true;
-		if (menu)
+		if (menu) {
 			menu.active = true;
-		else
+		} else {
 			this.router.navigate(['/main/project']);
+		}
 	}
 
 

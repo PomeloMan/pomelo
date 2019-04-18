@@ -71,6 +71,11 @@ export interface Role {
     name?: string;
 }
 
+export interface Theme {
+    color?: string;
+    class?: string;
+}
+
 export interface SettingMenu {
     id?: string;
     name?: string;

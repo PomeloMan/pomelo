@@ -8,11 +8,9 @@ import { STORAGE_SETTING_THEME, STORAGE_SETTING_STYLE } from 'src/app/config/app
 
 import { StorageService } from 'src/app/common/service/storage.service';
 import { InteractionService } from 'src/app/common/service/Interaction.service';
-import { SidenavStyle, MainService, SettingMenu } from './main.service';
+import { Theme, SidenavStyle, MainService, SettingMenu } from './main.service';
 import { AuthService } from 'src/app/config/security/auth.service';
 import { User } from './system/user/user.service';
-
-class Theme { color: string; class: string; }
 
 export const ACCORDION = trigger('accordion', [
 	state('active', style({ maxHeight: '400px' })),

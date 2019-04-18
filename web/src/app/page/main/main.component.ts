@@ -211,7 +211,7 @@ export class MainComponent implements OnInit {
 			},
 			'profile': {
 				fns: () => {
-					$this.router.navigate(['/main/user/detail', 1]);
+					$this.router.navigate(['/main/system/user/detail', $this._current_user.username]);
 				}
 			},
 			'signout': {

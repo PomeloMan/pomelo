@@ -10,6 +10,8 @@ import { STORAGE_SETTING_THEME, STORAGE_SETTING_STYLE } from 'src/app/config/app
 import { StorageService } from 'src/app/common/service/storage.service';
 import { InteractionService } from 'src/app/common/service/Interaction.service';
 import { MainService, SettingMenu } from './main.service';
+import { AuthService } from 'src/app/config/security/auth.service';
+import { User } from './system/user/user.service';
 
 class Theme { color: string; class: string; }
 
@@ -55,6 +57,7 @@ export class MainComponent implements OnInit {
 
 	// settings
 	_current_style: SidenavStyle;
+	_current_user: User;
 	_settings_menus: any[] = SETTINGS_MENUS;
 	private _settings_menus_map;
 	private _current_theme: Theme;
@@ -65,11 +68,13 @@ export class MainComponent implements OnInit {
 		public router: Router,
 		private overlayContainer: OverlayContainer,
 		private service: MainService,
+		private authService: AuthService,
 		private storage: StorageService,
 		private interactionService: InteractionService
 	) {
 		this._current_theme = this.storage.getItem(STORAGE_SETTING_THEME) || this.themes[0];
 		this._current_style = this.storage.getItem(STORAGE_SETTING_STYLE) || SidenavStyle.Default;
+		this._current_user = this.authService.getCurrentUser();
 		this.SidenavStyleArray = Object.keys(this.SidenavStyle).filter((v, i, arr) => i >= arr.length / 2);
 	}
 
@@ -190,13 +195,37 @@ export class MainComponent implements OnInit {
 	}
 
 
+	private signout() {
+		this.authService.clear();
+		this.router.navigate(['/login']);
+	}
+
 	private initSettingMenus() {
+		let $this = this;
 		this._settings_menus_map = {
-			'ThemeMenu': this.themeMenu,
-			'SidenavStyleMenu': this.sidenavStyleMenu
+			'theme': {
+				ref: this.themeMenu
+			},
+			'style': {
+				ref: this.sidenavStyleMenu
+			},
+			'profile': {
+				fns: () => {
+					$this.router.navigate(['/main/user/detail', 1]);
+				}
+			},
+			'signout': {
+				fns: () => {
+					$this.signout();
+				}
+			}
 		}
 		this._settings_menus.forEach(menu => {
-			menu.ref = this._settings_menus_map[menu.link]
+			if (menu.type === 'button') {
+				menu.fns = this._settings_menus_map[menu.id].fns;
+			} else if (menu.type === 'link') {
+				menu.ref = this._settings_menus_map[menu.id].ref;
+			}
 		})
 	}
 }
@@ -211,10 +240,11 @@ const menus = [
 		]
 	},
 	{
-		name: 'User Management', link: '', icon: 'supervisor_account',
+		name: 'Charts', link: '', icon: 'bubble_chart',
 		children: [
-			{ name: 'Dashboard', link: '/main/system/user1', icon: 'account_circle' },
-			{ name: 'User ProfileUser Profile', link: '/main/dashboard2', icon: 'face' }
+			{ name: 'AntV-G2', link: '/main/dashboard/antv-g2', icon: 'show_chart' },
+			{ name: 'ECharts', link: '/main/dashboard/echarts', icon: 'insert_chart' },
+			{ name: 'Viser', link: '/main/dashboard/viser-ng', icon: 'pie_chart' }
 		]
 	},
 	{ name: 'User Profile', link: '/main/dashboard3', icon: 'face' },

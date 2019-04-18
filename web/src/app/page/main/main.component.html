@@ -131,7 +131,7 @@
         <mat-icon color="primary">{{item.icon}}</mat-icon>
         {{item.name}}
       </button>
-      <button mat-menu-item *ngSwitchDefault>
+      <button mat-menu-item *ngSwitchDefault (click)="item.fns()">
         <mat-icon color="primary">{{item.icon}}</mat-icon>
         {{item.name}}
       </button>

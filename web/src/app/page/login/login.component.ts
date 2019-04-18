@@ -3,10 +3,12 @@ import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { API } from '../../config/api';
-import { TOKEN } from '../../config/security/auth.service';
+import { AuthService } from '../../config/security/auth.service';
 import { ApiService } from '../../config/api.service';
-import { StorageService } from '../../common/service/storage.service';
 import { useMockData } from 'src/app/config/app.constant';
+import { User } from '../main/system/user/user.service';
+
+import user from 'src/assets/mock/user/info.json';
 
 @Component({
 	selector: 'app-login',
@@ -19,7 +21,7 @@ export class LoginComponent {
 	constructor(
 		private router: Router,
 		private api: ApiService,
-		private storage: StorageService
+		private authService: AuthService
 	) {
 	}
 
@@ -40,7 +42,8 @@ export class LoginComponent {
 
 	login() {
 		if (useMockData) {
-			this.storage.setItem(TOKEN, 'guest');
+			this.authService.setAuthorizationToken('guest');
+			this.authService.setCurrentUser(user);
 			this.router.navigate(['/main']);
 			return;
 		}
@@ -50,8 +53,11 @@ export class LoginComponent {
 			{ observe: 'response' })// show full response e.g. '{ body: {code: 10007, msg: "验证码不正确", data: null}, headers: HttpHeaders { normalizedNames: Map(0), lazyUpdate: null, lazyInit: ƒ }, ok: true, status: 200, statusText: "OK", type: 4, url: "http://localhost:8000/login"}'
 			.subscribe(
 				res => {
-					this.storage.setItem(TOKEN, res.headers.get('Authorization'));
-					this.router.navigate(['/main']);
+					this.authService.setAuthorizationToken(res.headers.get('Authorization'));
+					this.api.get(API.USER_INFO_URL).subscribe((user: User) => {
+						this.authService.setCurrentUser(user);
+						this.router.navigate(['/main']);
+					})
 				},
 				error => {
 					console.log(error);

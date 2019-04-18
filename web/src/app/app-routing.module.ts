@@ -20,7 +20,7 @@ const routes: Routes = [
 	{
 		path: 'main',
 		loadChildren: './page/main/main.module#MainModule',
-		// canLoad: [AuthGuard],
+		canLoad: [AuthGuard],
 		data: { preload: true }
 	},
 	{

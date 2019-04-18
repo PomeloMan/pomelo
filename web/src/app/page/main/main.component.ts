@@ -40,6 +40,9 @@ export class MainComponent implements OnInit {
 	@ViewChild('ThemeMenu') themeMenu: MatMenu;
 	@ViewChild('SidenavStyleMenu') sidenavStyleMenu: MatMenu;
 
+
+	isFullscreen: boolean = false;
+
 	menus: any[] = [];// 菜单列表
 	projects: any[] = [];
 

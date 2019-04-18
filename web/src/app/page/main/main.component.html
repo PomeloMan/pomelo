@@ -12,7 +12,7 @@
   <!-- This fills the remaining space of the current row -->
   <span class="flex-spacer"></span>
   <div class="navbar-list">
-    <button mat-icon-button disableRipple="true" toggleFullscreen (click)="enableFullscreen = !enableFullscreen">
+    <button mat-icon-button disableRipple="true" toggleFullscreen (click)="isFullscreen = !isFullscreen">
       <mat-icon *ngIf="!isFullscreen">fullscreen</mat-icon>
       <mat-icon *ngIf="isFullscreen">fullscreen_exit</mat-icon>
     </button>

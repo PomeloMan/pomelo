@@ -8,6 +8,11 @@ import { API } from 'src/app/config/api.js';
 
 import languages from '../../../assets/mock/main/languages.json'
 
+export enum SidenavStyle {
+    /** 0 */Default,
+    /** 1 */Mini
+}
+
 @Injectable()
 export class MainService {
 

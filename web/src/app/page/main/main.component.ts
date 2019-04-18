@@ -1,7 +1,6 @@
 import { Component, OnInit, HostBinding, ViewChild } from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { MatSidenav, MatSidenavContainer, MatMenu } from '@angular/material';
-import { SidenavStyle } from './sidenav';
 import { Router } from '@angular/router';
 import { trigger, style, state, transition, animate } from '@angular/animations';
 
@@ -9,7 +8,7 @@ import { STORAGE_SETTING_THEME, STORAGE_SETTING_STYLE } from 'src/app/config/app
 
 import { StorageService } from 'src/app/common/service/storage.service';
 import { InteractionService } from 'src/app/common/service/Interaction.service';
-import { MainService, SettingMenu } from './main.service';
+import { SidenavStyle, MainService, SettingMenu } from './main.service';
 import { AuthService } from 'src/app/config/security/auth.service';
 import { User } from './system/user/user.service';
 

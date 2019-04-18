@@ -1,8 +1,12 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from 'src/app/config/api.service';
-import { of } from 'rxjs';
-import { API } from 'src/app/config/api';
+import { of, Observable } from 'rxjs';
+import { API, Page } from 'src/app/config/api';
 import { Language } from '../../main.service';
+
+import { useMockData } from 'src/app/config/app.constant';
+import info from '../../../../../assets/mock/user/info.json';
+import page from '../../../../../assets/mock/user/page.json';
 
 export interface User {
     username?: string;
@@ -39,18 +43,29 @@ export interface TodoEvent {
 @Injectable()
 export class UserService {
 
-    constructor(private service: ApiService) { }
+    constructor(
+        private service: ApiService
+    ) { }
 
-    list() {
-        return of({ success: 'true', data: USER_LIST })
+    list(): Observable<User[]> {
+        return of(USER_LIST)
+        // return this.service.post(API.USER_LIST_URL, {});
     }
 
     page(params) {
-        return this.service.post(API.USER_PAGE_URL, {});
+        if (useMockData) {
+            return of<Page<User>>(page);
+        } else {
+            return this.service.post(API.USER_PAGE_URL, {});
+        }
     }
 
-    info(id) {
-        return of<User>();
+    info(id): Observable<User> {
+        if (useMockData) {
+            return of<User>(info);
+        } else {
+            return this.service.get(API.USER_INFO_URL);
+        }
     }
 }
 

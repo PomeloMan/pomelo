@@ -18,7 +18,7 @@
                 <mat-icon class="mat-primary">publish</mat-icon>
                 <input type="file" (change)="uploadAvatar($event)">
               </button>
-              <span>{{user.phoneNumber}}</span>
+              <span>{{user.contact.phoneNumber}}</span>
             </div> <!-- intro -->
           </div> <!-- head-portrait -->
           <div class="settings mat-elevation-z2" hoverClass="mat-elevation-z6" [ngClass]="{'active': showOperation}" [@easeInOut]="showOperation? 'active': 'inactive'">
@@ -218,7 +218,7 @@
         <div class="setting-group">
           <mat-form-field>
             <mat-select placeholder="User Role" multiple>
-              <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+              <!-- <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option> -->
             </mat-select>
           </mat-form-field>
         </div>

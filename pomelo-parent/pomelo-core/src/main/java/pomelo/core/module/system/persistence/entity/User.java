@@ -12,6 +12,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -115,7 +116,11 @@ public class User extends VersionEntity implements Serializable {
 	}
 
 	public void setPassword(String password) throws NoSuchAlgorithmException, UnsupportedEncodingException {
-		this.password = PasswordEncoderImpl.encode(password, username);
+		if (StringUtils.isNotEmpty(password)) {
+			this.password = PasswordEncoderImpl.encode(password, username);
+		} else {
+			this.password = password;
+		}
 	}
 
 	public Collection<Role> getRoles() {

@@ -1,12 +1,14 @@
 import { Component, OnInit, HostBinding, ViewChild } from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
-import { MatSidenav, MatSidenavContainer } from '@angular/material';
+import { MatSidenav, MatSidenavContainer, MatMenu } from '@angular/material';
 import { SidenavStyle } from './sidenav';
 import { Router } from '@angular/router';
-import { StorageService } from 'src/app/common/service/storage.service';
+
 import { STORAGE_SETTING_THEME, STORAGE_SETTING_STYLE } from 'src/app/config/app.constant';
+
+import { StorageService } from 'src/app/common/service/storage.service';
 import { InteractionService } from 'src/app/common/service/Interaction.service';
-import { MainService } from './main.service';
+import { MainService, SettingMenu } from './main.service';
 
 class Theme { color: string; class: string; }
 
@@ -24,6 +26,10 @@ export class MainComponent implements OnInit {
 	@ViewChild(MatSidenav) matSidenav: MatSidenav;
 	@ViewChild(MatSidenavContainer) sidenavContainer: MatSidenavContainer;
 
+
+	@ViewChild('ThemeMenu') themeMenu: MatMenu;
+	@ViewChild('SidenavStyleMenu') sidenavStyleMenu: MatMenu;
+
 	menus: any[] = [];// 菜单列表
 	projects: any[] = [];
 
@@ -37,15 +43,16 @@ export class MainComponent implements OnInit {
 	];
 
 	// settings
-	private _settings: any[] = SETTINGS_MENUS;
+	_current_style: SidenavStyle;
+	_settings_menus: any[] = SETTINGS_MENUS;
+	private _settings_menus_map;
 	private _current_theme: Theme;
-	private _current_style: SidenavStyle;
 	// data
 	private _current_project: any;
 
 	constructor(
+		public router: Router,
 		private overlayContainer: OverlayContainer,
-		private router: Router,
 		private service: MainService,
 		private storage: StorageService,
 		private interactionService: InteractionService
@@ -57,6 +64,8 @@ export class MainComponent implements OnInit {
 
 	hasChildToolbar: boolean = false;
 	ngOnInit(): void {
+		this.initSettingMenus();
+
 		let _this = this;
 		this.service.change$.subscribe((res: any) => {
 			setTimeout(() => {
@@ -156,6 +165,10 @@ export class MainComponent implements OnInit {
 	}
 
 	navigate(menu, pmenu?) {
+		if (menu.active) {
+			menu.active = !menu.active;
+			return;
+		}
 		this.getMenu(undefined, this.menus).forEach(item => { item.active = false });
 		if (pmenu) pmenu.active = true;
 		if (menu)
@@ -164,6 +177,16 @@ export class MainComponent implements OnInit {
 			this.router.navigate(['/main/project']);
 	}
 
+
+	private initSettingMenus() {
+		this._settings_menus_map = {
+			'ThemeMenu': this.themeMenu,
+			'SidenavStyleMenu': this.sidenavStyleMenu
+		}
+		this._settings_menus.forEach(menu => {
+			menu.ref = this._settings_menus_map[menu.link]
+		})
+	}
 }
 
 const menus = [
@@ -184,8 +207,10 @@ const menus = [
 	},
 	{ name: 'User Profile', link: '/main/dashboard3', icon: 'face' },
 ]
-const SETTINGS_MENUS = [
-	{ name: 'User Profile', link: '', icon: 'assignment_ind' },
-	{ name: 'Theme', link: 'ThemeMenu', icon: 'format_color_fill' },
-	{ name: 'Sidebar Style', link: 'SidenavStyleMenu', icon: 'style' }
+
+const SETTINGS_MENUS: SettingMenu[] = [
+	{ id: 'profile', name: 'User Profile', type: 'button', link: '', icon: 'assignment_ind' },
+	{ id: 'theme', name: 'Theme', type: 'link', link: 'ThemeMenu', icon: 'format_color_fill' },
+	{ id: 'style', name: 'Sidebar Style', type: 'link', link: 'SidenavStyleMenu', icon: 'style' },
+	{ id: 'signout', name: 'Sign out', type: 'button', link: '', icon: 'directions_run' }
 ]

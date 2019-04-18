@@ -6,8 +6,6 @@ import {
 } from '@angular/common/http';
 
 import { AuthService } from '../config/security/auth.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { AuthGuard } from '../config/security/auth-guard.service';
 
 /**
  * This interceptor is used to add a request header to each request
@@ -16,8 +14,7 @@ import { AuthGuard } from '../config/security/auth-guard.service';
 export class AuthInterceptor implements HttpInterceptor {
 
 	constructor(
-		private auth: AuthService,
-		private guard: AuthGuard
+		private auth: AuthService
 	) { }
 
 	intercept(req: HttpRequest<any>, next: HttpHandler) {

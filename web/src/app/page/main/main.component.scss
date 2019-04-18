@@ -92,6 +92,10 @@ mat-toolbar.navbar-header.flex {
       mat-nav-list.submenu-list {
         padding: 0;
 
+        mat-list-item {
+          height: 40px;
+        }
+
         .submenu-item {
           flex: 1;
           display: flex;

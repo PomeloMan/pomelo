@@ -7,7 +7,7 @@
       <i class="material-icons">menu</i>
     </button>
     <!-- <button mat-button class="navbar-item" routerLink="/main">Application Title</button> -->
-    <button mat-button class="navbar-item" (click)="navigate()">Application Title</button>
+    <button mat-button class="navbar-item" (click)="router.navigate(['/main'])">Application Title</button>
   </div>
   <!-- This fills the remaining space of the current row -->
   <span class="flex-spacer"></span>
@@ -61,7 +61,8 @@
           </a>
         </mat-nav-list>
         <!-- Mini Style -->
-        <a [matMenuTriggerFor]="Submenu" [matMenuTriggerData]="{'menu': menu}" *ngIf="menu.children && _current_style == SidenavStyle.Mini">
+        <a [matMenuTriggerFor]="Submenu" [matMenuTriggerData]="{'menu': menu}"
+          *ngIf="menu.children && _current_style == SidenavStyle.Mini">
           <mat-list-item [ngClass]="{'active': menu.active}" [matTooltip]="menu.name" matTooltipPosition="after">
             <i class="primary" *ngIf="menu.active"></i>
             <mat-icon class="mat-primary">{{menu.icon}}</mat-icon>
@@ -100,7 +101,8 @@
 <!-- Sidenav submenu list -->
 <mat-menu #Submenu [overlapTrigger]="true" xPosition="before" class="menu-wrapper submenu-wrapper">
   <ng-template matMenuContent let-menu="menu">
-    <a mat-menu-item [routerLink]="submenu.link" *ngFor="let submenu of menu.children" (click)="navigate(submenu, menu)">
+    <a mat-menu-item [routerLink]="submenu.link" *ngFor="let submenu of menu.children"
+      (click)="navigate(submenu, menu)">
       <mat-icon color="primary">{{submenu.icon}}</mat-icon>
       <span>{{submenu.name}}</span>
     </a>
@@ -118,12 +120,8 @@
       </div>
     </div>
     <mat-divider></mat-divider>
-    <span *ngFor="let item of _settings" [ngSwitch]="item.link">
-      <button mat-menu-item *ngSwitchCase="'ThemeMenu'" [matMenuTriggerFor]="ThemeMenu">
-        <mat-icon color="primary">{{item.icon}}</mat-icon>
-        {{item.name}}
-      </button>
-      <button mat-menu-item *ngSwitchCase="'SidenavStyleMenu'" [matMenuTriggerFor]="SidenavStyleMenu">
+    <ng-container *ngFor="let item of _settings_menus" [ngSwitch]="item.type">
+      <button mat-menu-item *ngSwitchCase="'link'" [matMenuTriggerFor]="item.ref">
         <mat-icon color="primary">{{item.icon}}</mat-icon>
         {{item.name}}
       </button>
@@ -131,7 +129,7 @@
         <mat-icon color="primary">{{item.icon}}</mat-icon>
         {{item.name}}
       </button>
-    </span>
+    </ng-container>
   </ng-template>
 </mat-menu>
 

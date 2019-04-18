@@ -2,12 +2,12 @@ import { Component, OnInit, HostListener, ViewChild, ElementRef, AfterViewInit, 
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { trigger, style, transition, animate, keyframes, state, animateChild, query, group } from '@angular/animations';
 import { MatAutocompleteSelectedEvent, MatToolbar } from '@angular/material';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { ScrollDispatcher, CdkScrollable } from '@angular/cdk/overlay';
-import { User, TodoEvent } from '../user.service';
+import { User, TodoEvent, UserService } from '../user.service';
 import { isNullOrUndefined } from 'util';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MainService, Language } from '../../../main.service';
 
 export const EASE = trigger('easeInOut', [
@@ -62,8 +62,9 @@ export const TRANS_CHILD_ANIMATION = trigger('toolbarAvatarAni', [
 })
 export class UserEditComponent implements OnInit, AfterViewInit {
 
-  languages: Language[];
+  id: any;
   user: User = {};
+  languages: Language[];
 
   @HostListener('document:click', ['$event'])
   handleClickEvent(event: MouseEvent) {
@@ -79,40 +80,43 @@ export class UserEditComponent implements OnInit, AfterViewInit {
     emergencyContactFormCtrl: new FormControl(null, [Validators.required, Validators.pattern('[0-9]*')])
   });
 
+  userSubscribe: Observable<User>;
+  languageSubscribe: Observable<Language[]>;
+
   constructor(
     private scrollDispatcher: ScrollDispatcher,
-    private router: Router,
+    protected router: Router,
+    protected route: ActivatedRoute,
     private zone: NgZone,
+    private service: UserService,
     private mainService: MainService
   ) { }
 
   ngOnInit() {
-    this.user = {
-      username: 'admin',
-      displayName: 'administrator',
-      position: 'Software engineer',
-      email: 'fengchao.z@outlook.com',
-      address: '江苏省无锡市梁溪区清一村东塘89号',
-      selfIntroduction: 'Germanium (Ge) is a chemical element with atomic number 32. It is a lustrous, hard, greyish-white metalloid in the carbon group, chemically similar to silicon (Si) and tin (Sn). In 1869, Dmitri Mendeleev predicted the existence of germanium (and later some of its properties) based on its position in his periodic table (extract pictured). In 1886, Clemens Winkler discovered the element in a rare mineral called argyrodite.',
-      gender: 0,
-      avatar: '',
-      role: '',
-      languages: [{
-        code: 'zh_CN',
-        name: 'Chinese'
-      }],
-      contact: {
-        email: 'fengchao.z@outlook.com',
-        secondaryEmail: '13861800672@163.com',
-        phoneNumber: 13861800672,
-        emergencyContact: 13861800672,
-        facebook: '--',
-        twitter: '',
-        wechat: '13861800672',
-        weibo: ''
-      }
-    }
-    this.initLanguages()
+    this.id = this.route.snapshot.paramMap.get('id');
+
+    this.userSubscribe = this.service.info(this.id);
+    this.languageSubscribe = this.mainService.listLanguages();
+
+    this.initData();
+  }
+
+  initData() {
+    let subs = forkJoin(this.userSubscribe, this.languageSubscribe);
+    subs.subscribe(([user, languages]: [User, Language[]]) => {
+      // user response
+      this.user = user || {};
+
+      // language response
+      this.languages = languages;
+      this.filteredLanguages = this.languageCtrl.valueChanges.pipe(
+        startWith(null),
+        map((value: any | null) => typeof value == 'string' ? this._filter(value) : this.languages.slice())
+      );
+    })
+
+    // this.initUser();
+    // this.initLanguages();
   }
 
   // material cdkScrollable cdk
@@ -217,12 +221,14 @@ export class UserEditComponent implements OnInit, AfterViewInit {
 
 
 
-  /**
-   * init languages
-   */
+  private initUser() {
+    this.userSubscribe.subscribe((user: User) => {
+      this.user = user || {};
+    })
+  }
   private initLanguages() {
-    this.mainService.listLanguages().subscribe(res => {
-      this.languages = res;
+    this.languageSubscribe.subscribe((languages: Language[]) => {
+      this.languages = languages;
       this.filteredLanguages = this.languageCtrl.valueChanges.pipe(
         startWith(null),
         map((value: any | null) => typeof value == 'string' ? this._filter(value) : this.languages.slice())

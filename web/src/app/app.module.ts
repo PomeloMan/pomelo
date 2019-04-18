@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { MatProgressBarModule } from '@angular/material';
+import { MatProgressBarModule, MatSnackBarModule } from '@angular/material';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
@@ -20,6 +20,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';// npm install @fortawesome/free-regular-svg-icons --save
 import { fab } from '@fortawesome/free-brands-svg-icons';// npm install @fortawesome/free-brands-svg-icons --save
+import { NativeService } from './common/service/native.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { fab } from '@fortawesome/free-brands-svg-icons';// npm install @fortawe
     BrowserAnimationsModule,//animation
     HttpClientModule,//http
     MatProgressBarModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatSnackBarModule
   ],
   providers: [
     StorageService,
@@ -39,6 +41,7 @@ import { fab } from '@fortawesome/free-brands-svg-icons';// npm install @fortawe
     AuthService,
     AuthGuard,
     InteractionService,
+    NativeService,
     HTTP_INTERCEPTOR_PROVIDERS//http拦截器
   ],
   bootstrap: [AppComponent]

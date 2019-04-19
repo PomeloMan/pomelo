@@ -1,6 +1,42 @@
 @import '~@angular/material/theming';
 @import '../projects/material-ext/theme';
 
+
+@function _get-text-umbra-map($color, $opacity) {
+  @return (
+    0: '0px 0px 0px #{rgba($color, $opacity * 0.2)}',
+    1: '0px 2px 1px #{rgba($color, $opacity * 0.2)}',
+    2: '0px 3px 1px #{rgba($color, $opacity * 0.2)}',
+    3: '0px 3px 3px #{rgba($color, $opacity * 0.4)}',
+    4: '0px 2px 4px #{rgba($color, $opacity * 0.4)}',
+    5: '0px 3px 5px #{rgba($color, $opacity * 0.4)}',
+    6: '0px 3px 5px #{rgba($color, $opacity * 0.6)}',
+    7: '0px 4px 5px #{rgba($color, $opacity * 0.6)}',
+    8: '0px 5px 5px #{rgba($color, $opacity * 0.6)}',
+    9: '0px 5px 6px #{rgba($color, $opacity * 0.8)}',
+    10: '0px 6px 6px #{rgba($color, $opacity * 0.8)}',
+    11: '0px 6px 7px #{rgba($color, $opacity * 0.8)}',
+    12: '0px 7px 8px #{rgba($color, $opacity * 1)}'
+  );
+}
+
+$_matx-elevation-prefix: 'matx-elevation-z';
+
+@mixin matx-elevation($zValue, $color: $mat-elevation-color, $opacity: $mat-elevation-opacity) {
+  @if type-of($zValue) !=number or not unitless($zValue) {
+    @error '$zValue must be a unitless number';
+  }
+
+  @if $zValue < 0 or $zValue > 12 {
+    @error '$zValue must be between 0 and 12';
+  }
+
+  text-shadow: #{map-get(_get-text-umbra-map($color, $opacity), $zValue)};
+}
+
+
+
+
 @mixin app-avatar-theme($theme) {
   $primary: map-get($theme, primary);
   $background: map-get($theme, background);
@@ -190,8 +226,22 @@
   }
 }
 
+
+
+
+@mixin matx-core($typography-config: null) {
+  @for $zValue from 0 through 12 {
+    .#{$_matx-elevation-prefix}#{$zValue} {
+      @include matx-elevation($zValue);
+    }
+  }
+
+  @include mat-core($typography-config);
+}
+
+
 $config: mat-typography-config();
-@include mat-core($config);
+@include matx-core($config);
 @include ch-typography($config);
 @include mat-form-field-typography-custom($config);
 @include angular-calendar-typography($config);

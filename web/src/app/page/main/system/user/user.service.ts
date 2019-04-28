@@ -67,6 +67,10 @@ export class UserService {
             return this.service.get(API.USER_INFO_URL);
         }
     }
+
+    save(): Observable<User> {
+        return of<User>(info);
+    }
 }
 
 const USER_LIST: User[] = [

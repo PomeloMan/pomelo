@@ -3,12 +3,14 @@ import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { trigger, style, transition, animate, keyframes, state, animateChild, query, group } from '@angular/animations';
 import { MatAutocompleteSelectedEvent, MatToolbar } from '@angular/material';
 import { Observable, forkJoin } from 'rxjs';
-import { startWith, map } from 'rxjs/operators';
+import { startWith, map, debounceTime } from 'rxjs/operators';
 import { ScrollDispatcher, CdkScrollable } from '@angular/cdk/overlay';
 import { User, TodoEvent, UserService } from '../user.service';
 import { isNullOrUndefined } from 'util';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MainService, Language } from '../../../main.service';
+
+import * as _ from 'lodash';
 
 export const EASE = trigger('easeInOut', [
   state('active', style({ borderRadius: '4px', width: 'auto' })),
@@ -68,7 +70,7 @@ export class UserEditComponent implements OnInit, AfterViewInit {
 
   @HostListener('document:click', ['$event'])
   handleClickEvent(event: MouseEvent) {
-    if (this.showOperation) this.showOperation = false;
+    // if (this.showOperation) this.showOperation = false;
   }
 
   basicForm = new FormGroup({
@@ -161,7 +163,14 @@ export class UserEditComponent implements OnInit, AfterViewInit {
   }
 
   save() {
-    debugger
+    _.debounce(() => {
+      this.service.save().subscribe(res => { })
+    }, 1000, { 'leading': true, 'trailing': false })()
+
+    // this.service.save().pipe(
+    //   debounceTime(1000)
+    // ).subscribe(res=>{
+    // })
   }
 
   delete() {
